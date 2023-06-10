@@ -16,6 +16,7 @@
 		09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361CE2A341C7A005979C8 /* PostViewController.swift */; };
 		09B361D12A342982005979C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361D02A342982005979C8 /* Post.swift */; };
 		09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361D22A3433D2005979C8 /* InfoViewController.swift */; };
+		09B361D52A3437E9005979C8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361D42A3437E9005979C8 /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		09B361CE2A341C7A005979C8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		09B361D02A342982005979C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		09B361D22A3433D2005979C8 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		09B361D42A3437E9005979C8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				09B361C02A336E8B005979C8 /* LaunchScreen.storyboard */,
 				09B361C32A336E8B005979C8 /* Info.plist */,
 				09B361D02A342982005979C8 /* Post.swift */,
+				09B361D42A3437E9005979C8 /* Alert.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */,
 				09B361D12A342982005979C8 /* Post.swift in Sources */,
 				09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */,
+				09B361D52A3437E9005979C8 /* Alert.swift in Sources */,
 				09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
