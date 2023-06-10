@@ -13,6 +13,7 @@
 		09B361C22A336E8B005979C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09B361C02A336E8B005979C8 /* LaunchScreen.storyboard */; };
 		09B361CA2A337411005979C8 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361C92A337411005979C8 /* FeedViewController.swift */; };
 		09B361CD2A337445005979C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361CC2A337445005979C8 /* ProfileViewController.swift */; };
+		09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361CE2A341C7A005979C8 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		09B361C32A336E8B005979C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09B361C92A337411005979C8 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		09B361CC2A337445005979C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		09B361CE2A341C7A005979C8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			children = (
 				09B361C92A337411005979C8 /* FeedViewController.swift */,
 				09B361CC2A337445005979C8 /* ProfileViewController.swift */,
+				09B361CE2A341C7A005979C8 /* PostViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 				09B361CA2A337411005979C8 /* FeedViewController.swift in Sources */,
 				09B361CD2A337445005979C8 /* ProfileViewController.swift in Sources */,
 				09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */,
+				09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

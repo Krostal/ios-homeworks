@@ -1,18 +1,18 @@
 //
-//  ProfileViewController.swift
+//  PostViewController.swift
 //  Navigation
 //
-//  Created by Konstantin Tarasov on 09.06.2023.
+//  Created by Konstantin Tarasov on 10.06.2023.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGreen
-
+        view.backgroundColor = .systemIndigo
+        self.navigationItem.title = "My post"
     }
     
 
