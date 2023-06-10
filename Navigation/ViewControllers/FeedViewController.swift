@@ -18,6 +18,8 @@ class FeedViewController: UIViewController {
         return activeButton
     }()
     
+    var post: Post = Post(title: "My post")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPurple
@@ -48,7 +50,7 @@ class FeedViewController: UIViewController {
     @objc func buttonPressed(_ sender: UIButton) {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
-        
+        postViewController.titlePost = post.title
     }
     
 
