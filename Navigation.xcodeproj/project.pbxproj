@@ -17,6 +17,7 @@
 		09B361D12A342982005979C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361D02A342982005979C8 /* Post.swift */; };
 		09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361D22A3433D2005979C8 /* InfoViewController.swift */; };
 		09B361D52A3437E9005979C8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361D42A3437E9005979C8 /* Alert.swift */; };
+		09E98EB22A3852D000DE6940 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98EB12A3852D000DE6940 /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		09B361D02A342982005979C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		09B361D22A3433D2005979C8 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		09B361D42A3437E9005979C8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		09E98EB12A3852D000DE6940 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 		09B361B42A336E8A005979C8 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				09E98EB02A3852A200DE6940 /* Profile */,
 				09B361CB2A337422005979C8 /* ViewControllers */,
 				09B361B52A336E8A005979C8 /* AppDelegate.swift */,
 				09B361B72A336E8A005979C8 /* SceneDelegate.swift */,
@@ -80,11 +83,19 @@
 			isa = PBXGroup;
 			children = (
 				09B361C92A337411005979C8 /* FeedViewController.swift */,
-				09B361CC2A337445005979C8 /* ProfileViewController.swift */,
 				09B361CE2A341C7A005979C8 /* PostViewController.swift */,
 				09B361D22A3433D2005979C8 /* InfoViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		09E98EB02A3852A200DE6940 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				09E98EB12A3852D000DE6940 /* ProfileHeaderView.swift */,
+				09B361CC2A337445005979C8 /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +172,7 @@
 				09B361CA2A337411005979C8 /* FeedViewController.swift in Sources */,
 				09B361CD2A337445005979C8 /* ProfileViewController.swift in Sources */,
 				09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */,
+				09E98EB22A3852D000DE6940 /* ProfileHeaderView.swift in Sources */,
 				09B361D12A342982005979C8 /* Post.swift in Sources */,
 				09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */,
 				09B361D52A3437E9005979C8 /* Alert.swift in Sources */,
