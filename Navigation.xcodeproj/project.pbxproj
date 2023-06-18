@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090C227D2A3EE21B00C55A2D /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090C227C2A3EE21B00C55A2D /* TextFieldWithPadding.swift */; };
 		09B361B62A336E8A005979C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361B52A336E8A005979C8 /* AppDelegate.swift */; };
 		09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361B72A336E8A005979C8 /* SceneDelegate.swift */; };
 		09B361BF2A336E8B005979C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09B361BE2A336E8B005979C8 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		090C227C2A3EE21B00C55A2D /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
 		09B361B22A336E8A005979C8 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09B361B52A336E8A005979C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09B361B72A336E8A005979C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				09B361C32A336E8B005979C8 /* Info.plist */,
 				09B361D02A342982005979C8 /* Post.swift */,
 				09B361D42A3437E9005979C8 /* Alert.swift */,
+				090C227C2A3EE21B00C55A2D /* TextFieldWithPadding.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				09E98EB22A3852D000DE6940 /* ProfileHeaderView.swift in Sources */,
 				09B361D12A342982005979C8 /* Post.swift in Sources */,
 				09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */,
+				090C227D2A3EE21B00C55A2D /* TextFieldWithPadding.swift in Sources */,
 				09B361D52A3437E9005979C8 /* Alert.swift in Sources */,
 				09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */,
 			);

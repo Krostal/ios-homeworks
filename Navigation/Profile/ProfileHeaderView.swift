@@ -6,7 +6,7 @@ class ProfileHeaderView: UIView {
     
     lazy var profilePhoto = UIImageView()
     
-    lazy var profileStatus = UITextField()
+    lazy var profileStatus = UILabel()
     
     lazy var statusButton: UIButton = {
         let showStatusButton = UIButton()
@@ -21,6 +21,8 @@ class ProfileHeaderView: UIView {
         showStatusButton.layer.shadowColor = UIColor.black.cgColor
         return showStatusButton
     }()
+    
+    lazy var setStatusField = TextFieldWithPadding()
     
     func setupUI() {
         
@@ -91,7 +93,7 @@ class ProfileHeaderView: UIView {
     
         addSubview(profileStatus)
         profileStatus.translatesAutoresizingMaskIntoConstraints = false
-        profileStatus.placeholder = "Waiting for something..."
+        profileStatus.text = "Waiting for something..."
         profileStatus.font = .systemFont(ofSize: 14, weight: .regular)
         profileStatus.textColor = .gray
         NSLayoutConstraint.activate([
@@ -104,6 +106,34 @@ class ProfileHeaderView: UIView {
             ),
             profileStatus.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
+        
+        addSubview(setStatusField)
+        
+        setStatusField.translatesAutoresizingMaskIntoConstraints = false
+        setStatusField.font = .systemFont(ofSize: 15, weight: .regular)
+        setStatusField.layer.backgroundColor = UIColor.white.cgColor
+        setStatusField.layer.cornerRadius = 12
+        setStatusField.layer.borderWidth = 1
+        setStatusField.layer.borderColor = UIColor.black.cgColor
+        
+        NSLayoutConstraint.activate([
+            setStatusField.topAnchor.constraint(
+                equalTo: profileStatus.bottomAnchor,
+                constant: 1
+            ),
+            setStatusField.bottomAnchor.constraint(
+                equalTo: statusButton.topAnchor,
+                constant: -5
+            ),
+            setStatusField.leadingAnchor.constraint(
+                equalTo: profileName.leadingAnchor
+            ),
+            setStatusField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        ])
+        
+        
     }
+    
+    
 
 }
