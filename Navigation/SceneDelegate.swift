@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarController = UITabBarController()
         tabBarController.view.tintColor = .black
-        tabBarController.tabBar.backgroundColor = .white
         
         tabBarController.viewControllers = [feedViewController, profileViewController]
         
