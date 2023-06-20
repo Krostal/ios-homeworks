@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(profileHeaderView)
         profileHeaderView.backgroundColor = .lightGray
         self.navigationItem.title = "Profile"
-        profileHeaderView.setupUI()
+        profileHeaderView.setupConstraints()
         profileHeaderView.statusButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         profileHeaderView.setStatusField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
     }
