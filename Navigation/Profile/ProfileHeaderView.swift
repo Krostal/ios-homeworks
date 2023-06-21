@@ -2,7 +2,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    lazy var profileName: UILabel = {
+    private lazy var profileName: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
         name.text = "Cool Monkey"
@@ -11,10 +11,10 @@ class ProfileHeaderView: UIView {
         return name
     }()
     
-    lazy var profilePhoto: UIImageView = {
+    private lazy var profilePhoto: UIImageView = {
         let photo = UIImageView()
         photo.translatesAutoresizingMaskIntoConstraints = false
-        photo.image = UIImage(named: "Cool Monkey")
+        photo.image = UIImage(named: "Cool monkey")
         photo.frame.size = CGSize(width: 100, height: 100)
         photo.layer.cornerRadius = 50
         photo.clipsToBounds = true
@@ -23,7 +23,7 @@ class ProfileHeaderView: UIView {
         return photo
     }()
     
-    lazy var profileStatus: UILabel = {
+    private lazy var profileStatus: UILabel = {
         let status = UILabel()
         status.translatesAutoresizingMaskIntoConstraints = false
         status.text = "Waiting for something..."
@@ -32,19 +32,20 @@ class ProfileHeaderView: UIView {
         return status
     }()
     
-    lazy var setStatusField: TextFieldWithPadding = {
+    private lazy var setStatusField: TextFieldWithPadding = {
         let setStatus = TextFieldWithPadding()
         setStatus.translatesAutoresizingMaskIntoConstraints = false
-        setStatus.placeholder = "type something..."
+        setStatus.placeholder = "Type something..."
         setStatus.font = .systemFont(ofSize: 15, weight: .regular)
         setStatus.layer.backgroundColor = UIColor.white.cgColor
         setStatus.layer.cornerRadius = 12
         setStatus.layer.borderWidth = 1
         setStatus.layer.borderColor = UIColor.black.cgColor
+        setStatus.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         return setStatus
     }()
     
-    lazy var statusButton: UIButton = {
+    private lazy var statusButton: UIButton = {
         let showStatusButton = UIButton()
         showStatusButton.setTitle("Show status", for: .normal)
         showStatusButton.setTitleColor(.white, for: .normal)
@@ -55,10 +56,15 @@ class ProfileHeaderView: UIView {
         showStatusButton.layer.shadowRadius = 4
         showStatusButton.layer.shadowOpacity = 0.7
         showStatusButton.layer.shadowColor = UIColor.black.cgColor
+        showStatusButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         return showStatusButton
     }()
     
-    func setupConstraints() {
+    private lazy var actualStatus: String = ""
+    
+    private lazy var statusText: String = ""
+    
+    private func setupConstraints() {
         
         addSubview(profilePhoto)
         addSubview(profileName)
@@ -109,7 +115,7 @@ class ProfileHeaderView: UIView {
             ),
             statusButton.topAnchor.constraint(
                 equalTo: profilePhoto.bottomAnchor,
-                constant: 16
+                constant: 36
             ),
             statusButton.heightAnchor.constraint(
                 equalToConstant: 50
@@ -118,7 +124,7 @@ class ProfileHeaderView: UIView {
   
             profileStatus.bottomAnchor.constraint(
                 equalTo: statusButton.topAnchor,
-                constant: -34
+                constant: -54
             ),
             profileStatus.leadingAnchor.constraint(
                 equalTo: profileName.leadingAnchor
@@ -130,11 +136,10 @@ class ProfileHeaderView: UIView {
 
             setStatusField.topAnchor.constraint(
                 equalTo: profileStatus.bottomAnchor,
-                constant: 1
+                constant: 2
             ),
-            setStatusField.bottomAnchor.constraint(
-                equalTo: statusButton.topAnchor,
-                constant: -5
+            setStatusField.heightAnchor.constraint(
+                equalToConstant: 40
             ),
             setStatusField.leadingAnchor.constraint(
                 equalTo: profileName.leadingAnchor
@@ -147,6 +152,38 @@ class ProfileHeaderView: UIView {
         
     }
     
+    @objc func buttonPressed(_ sender: UIButton) {
+        if statusButton.currentTitle == "Set status" {
+            profileStatus.text = statusText
+        }
+        else {
+            if profileStatus.text != nil {
+                actualStatus = profileStatus.text!
+                print(actualStatus)
+            }
+        }
+    }
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
+        if setStatusField.text != nil {
+            statusText = setStatusField.text!
+            if statusText != "" {
+                statusButton.setTitle("Set status", for: .normal)
+            } else {
+                statusButton.setTitle("Show status", for: .normal)
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 
 }
