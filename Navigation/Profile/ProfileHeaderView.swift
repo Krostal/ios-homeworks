@@ -1,10 +1,8 @@
-
-
 import UIKit
 
 class ProfileHeaderView: UIView {
     
-    lazy var avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let avatar = UIImageView(image: UIImage(named: "Groot"))
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.layer.borderWidth = 3
@@ -14,7 +12,7 @@ class ProfileHeaderView: UIView {
         return avatar
     }()
     
-    lazy var fullNameLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let fullName = UILabel()
         fullName.translatesAutoresizingMaskIntoConstraints = false
         fullName.text = "Groot"
@@ -23,7 +21,7 @@ class ProfileHeaderView: UIView {
         return fullName
     }()
     
-    lazy var statusLabel: UILabel = {
+    private lazy var statusLabel: UILabel = {
         let status = UILabel()
         status.translatesAutoresizingMaskIntoConstraints = false
         status.text = "Happy :)"
@@ -32,7 +30,7 @@ class ProfileHeaderView: UIView {
         return status
     }()
     
-    lazy var statusTextField: UITextField = {
+    private lazy var statusTextField: UITextField = {
         let statusText = TextFieldWithPadding()
         statusText.translatesAutoresizingMaskIntoConstraints = false
         statusText.text = "Enter new status"
@@ -42,11 +40,11 @@ class ProfileHeaderView: UIView {
         statusText.font = .systemFont(ofSize: 15, weight: .regular)
         statusText.textColor = .black
         statusText.layer.cornerRadius = 12
-        
+        statusText.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         return statusText
     }()
     
-    lazy var setStatusButton: UIButton = {
+    private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Set status", for: .normal)
@@ -57,10 +55,13 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
+        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         return button
     }()
     
-    func setupConstraints() {
+    private lazy var newStatus = ""
+    
+    private func setupConstraints() {
         
         let safeAreaGuide = safeAreaLayoutGuide
         
@@ -97,6 +98,27 @@ class ProfileHeaderView: UIView {
             setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
+    }
+    
+    @objc func buttonPressed(_ sender: UIButton) {
+        if statusTextField.text != nil {
+            statusLabel.text = newStatus
+        }
+    }
+
+    @objc func statusTextChanged(_ textField: UITextField) {
+        if statusTextField.text != nil {
+            newStatus = statusTextField.text!
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }

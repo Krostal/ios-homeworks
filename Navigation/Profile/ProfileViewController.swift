@@ -5,8 +5,6 @@ class ProfileViewController: UIViewController {
 
     let profileHeaderView = ProfileHeaderView()
 
-    private var newStatus = ""
-    
     private lazy var newButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -24,23 +22,8 @@ class ProfileViewController: UIViewController {
         self.navigationItem.title = "Profile"
         profileHeaderView.backgroundColor = .lightGray
         view.safeAreaLayoutGuide.owningView?.backgroundColor = .white
-        profileHeaderView.setupConstraints()
-        profileHeaderView.setStatusButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        profileHeaderView.statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
     }
-    
-    @objc func buttonPressed(_ sender: UIButton) {
-        if profileHeaderView.statusTextField.text != nil {
-            profileHeaderView.statusLabel.text = newStatus
-        }
-    }
-
-    @objc func statusTextChanged(_ textField: UITextField) {
-        if profileHeaderView.statusTextField.text != nil {
-            newStatus = profileHeaderView.statusTextField.text!
-        }
-    }
-    
+        
     private func setupView() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         

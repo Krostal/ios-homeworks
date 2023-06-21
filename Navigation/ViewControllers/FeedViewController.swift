@@ -14,6 +14,7 @@ class FeedViewController: UIViewController {
         firstButton.layer.cornerRadius = 10
         firstButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         firstButton.configuration = UIButton.Configuration.plain()
+        firstButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         return firstButton
     }()
     
@@ -26,6 +27,7 @@ class FeedViewController: UIViewController {
         secondButton.layer.cornerRadius = 10
         secondButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         secondButton.configuration = UIButton.Configuration.plain()
+        secondButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         return secondButton
     }()
     
@@ -35,11 +37,8 @@ class FeedViewController: UIViewController {
         stackView.clipsToBounds = true
         stackView.axis = .vertical
         stackView.spacing = 10
-        
         stackView.addArrangedSubview(firstButton)
         stackView.addArrangedSubview(secondButton)
-        
-        
         return stackView
     }()
     
@@ -47,8 +46,6 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.safeAreaLayoutGuide.owningView?.backgroundColor = .lightGray
         setupConstraints()
-        firstButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        secondButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
     }
     
     private func setupConstraints() {
