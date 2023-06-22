@@ -15,7 +15,6 @@ class ProfileHeaderView: UIView {
         let photo = UIImageView()
         photo.translatesAutoresizingMaskIntoConstraints = false
         photo.image = UIImage(named: "Cool monkey")
-        photo.frame.size = CGSize(width: 100, height: 100)
         photo.layer.cornerRadius = 50
         photo.clipsToBounds = true
         photo.layer.borderColor = UIColor.white.cgColor
