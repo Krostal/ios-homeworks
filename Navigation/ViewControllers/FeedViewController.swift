@@ -3,42 +3,59 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    private lazy var button: UIButton = {
-        let activeButton = UIButton()
-        activeButton.setTitle("Open the post", for: .normal)
-        activeButton.setTitleColor(.darkText, for: .normal)
-        activeButton.backgroundColor = .systemIndigo
-        activeButton.translatesAutoresizingMaskIntoConstraints = false
-        return activeButton
+    var post: Post = Post(title: "My post")
+    
+    private lazy var firstButton: UIButton = {
+        let firstButton = UIButton()
+        firstButton.setTitle("Open the post", for: .normal)
+        firstButton.backgroundColor = .systemBlue
+        firstButton.tintColor = .white
+        firstButton.clipsToBounds = true
+        firstButton.layer.cornerRadius = 10
+        firstButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        firstButton.configuration = UIButton.Configuration.plain()
+        firstButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+        return firstButton
     }()
     
-    var post: Post = Post(title: "My post")
+    private lazy var secondButton: UIButton = {
+        let secondButton = UIButton()
+        secondButton.setTitle("Show the post", for: .normal)
+        secondButton.backgroundColor = .systemBlue
+        secondButton.tintColor = .white
+        secondButton.clipsToBounds = true
+        secondButton.layer.cornerRadius = 10
+        secondButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        secondButton.configuration = UIButton.Configuration.plain()
+        secondButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+        return secondButton
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.clipsToBounds = true
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.addArrangedSubview(firstButton)
+        stackView.addArrangedSubview(secondButton)
+        return stackView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPurple
-        setupUI()
-        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+        view.safeAreaLayoutGuide.owningView?.backgroundColor = .lightGray
+        setupConstraints()
     }
     
-    private func setupUI() {
-        view.addSubview(button)
+    private func setupConstraints() {
+        let safeAreaGuide = view.safeAreaLayoutGuide
+        view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                constant: 30
-            ),
-            button.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                constant: -30
-            ),
-            button.centerYAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.centerYAnchor
-            ),
-            button.heightAnchor.constraint(equalToConstant: 40)
+            stackView.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: safeAreaGuide.centerYAnchor),
         ])
-
     }
     
     @objc func buttonPressed(_ sender: UIButton) {
