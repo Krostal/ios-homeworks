@@ -15,10 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
         feedViewController.view.tintColor = .black
         
-        
         let profileViewController = UINavigationController(rootViewController: ProfileViewController())
         profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
-        feedViewController.view.tintColor = .black
+        profileViewController.view.tintColor = .black
         
         let tabBarController = UITabBarController()
         tabBarController.view.tintColor = .black

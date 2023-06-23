@@ -2,6 +2,9 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    let profileHeaderView = ProfileHeaderView()
+    
 
     let profileHeaderView = ProfileHeaderView()
 
@@ -41,5 +44,12 @@ class ProfileViewController: UIViewController {
             newButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        profileHeaderView.frame = view.safeAreaLayoutGuide.layoutFrame
+    }
+    
 
+    
 }
