@@ -5,9 +5,6 @@ class ProfileViewController: UIViewController {
     
     let profileHeaderView = ProfileHeaderView()
     
-
-    let profileHeaderView = ProfileHeaderView()
-
     private lazy var newButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
