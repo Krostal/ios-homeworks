@@ -33,7 +33,7 @@ class ProfileHeaderView: UIView {
     private lazy var statusTextField: UITextField = {
         let statusText = TextFieldWithPadding()
         statusText.translatesAutoresizingMaskIntoConstraints = false
-        statusText.text = "Enter new status"
+        statusText.placeholder = "Enter new status"
         statusText.backgroundColor = .white
         statusText.layer.borderWidth = 1
         statusText.layer.borderColor = UIColor.black.cgColor
@@ -101,14 +101,14 @@ class ProfileHeaderView: UIView {
     }
     
     @objc func buttonPressed(_ sender: UIButton) {
-        if statusTextField.text != nil {
+        if statusTextField.placeholder != nil {
             statusLabel.text = newStatus
         }
     }
 
     @objc func statusTextChanged(_ textField: UITextField) {
-        if statusTextField.text != nil {
-            newStatus = statusTextField.text!
+        if statusTextField.placeholder != nil {
+            newStatus = statusTextField.placeholder!
         }
     }
     
