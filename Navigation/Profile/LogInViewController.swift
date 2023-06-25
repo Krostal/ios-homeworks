@@ -30,6 +30,7 @@ class LogInViewController: UIViewController {
         registerField.spacing = 0
         registerField.axis = .vertical
         registerField.backgroundColor = .systemGray6
+        registerField.tintColor = UIColor(named: "AccentColor")
         registerField.clipsToBounds = true
         registerField.layer.cornerRadius = 10
         registerField.layer.borderWidth = 0.5
