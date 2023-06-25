@@ -44,7 +44,7 @@ class LogInViewController: UIViewController {
         emailOrPhone.translatesAutoresizingMaskIntoConstraints = false
         emailOrPhone.placeholder = "Email or phone"
         emailOrPhone.textColor = .black
-        emailOrPhone.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        emailOrPhone.font = .systemFont(ofSize: 16, weight: .regular)
         emailOrPhone.autocapitalizationType = .none
         emailOrPhone.layer.borderWidth = 0.25
         emailOrPhone.layer.borderColor = UIColor.lightGray.cgColor
@@ -79,12 +79,22 @@ class LogInViewController: UIViewController {
     private lazy var logInButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration = UIButton.Configuration.plain()
         button.setTitle("Log In", for: .normal)
-        button.setBackgroundImage(UIImage(named: "bluePixel"), for: .normal)
-        button.automaticallyUpdatesConfiguration = true
-        button.clipsToBounds = true
+        button.tintColor = .white
+        button.configurationUpdateHandler = { button in
+            switch button.state {
+            case .highlighted, .disabled, .selected:
+                button.configuration?.background.image = UIImage(named: "bluePixel")
+                button.alpha = 0.8
+            default:
+                button.configuration?.background.image = UIImage(named: "bluePixel")
+                button.alpha = 1
+            }
+        }
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+        
         return button
     }()
     
