@@ -3,50 +3,66 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    let profileHeaderView = ProfileHeaderView()
+    fileprivate let dataSource = Post.make()
     
-    private lazy var newButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("New button", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.tintColor = .white
-        return button
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(profileHeaderView)
-        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        setupView()
-        self.navigationItem.title = "Profile"
-        profileHeaderView.backgroundColor = .lightGray
         view.safeAreaLayoutGuide.owningView?.backgroundColor = .white
+        setupTableView()
+        setupConstraints()
+    
     }
+    
+    private func setupTableView() {
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
+
         
-    private func setupView() {
+        // Как закрепить в качестве HeaderForSection для нулевой секции не разобрался, просьба помочь
+        let headerView = ProfileTableHeaderView()
+        headerView.backgroundColor = .lightGray
+        tableView.setAndLayout(headerView: headerView)
+        tableView.tableFooterView = UIView()
+        
+    }
+    
+    private func setupConstraints() {
+        view.addSubview(tableView)
+        
         let safeAreaGuide = view.safeAreaLayoutGuide
         
-        view.addSubview(newButton)
-        
         NSLayoutConstraint.activate([
-            profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            profileHeaderView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-            
-            newButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            newButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            newButton.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
-            newButton.heightAnchor.constraint(equalToConstant: 50)
+            tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor)
         ])
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        profileHeaderView.frame = view.safeAreaLayoutGuide.layoutFrame
+}
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dataSource.count
     }
     
-
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.configure(dataSource[indexPath.row])
+        
+        return cell
+    }
     
 }

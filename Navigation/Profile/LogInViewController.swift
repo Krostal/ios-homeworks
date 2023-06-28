@@ -36,8 +36,16 @@ class LogInViewController: UIViewController {
         registerField.layer.borderWidth = 0.5
         registerField.layer.borderColor = UIColor.lightGray.cgColor
         registerField.addArrangedSubview(emailOrPhoneField)
+        registerField.addArrangedSubview(separator)
         registerField.addArrangedSubview(passwordField)
         return registerField
+    }()
+    
+    private lazy var separator: UIView = {
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor = .lightGray
+        return separator
     }()
     
     private lazy var emailOrPhoneField: UITextField = {
@@ -47,8 +55,6 @@ class LogInViewController: UIViewController {
         emailOrPhone.textColor = .black
         emailOrPhone.font = .systemFont(ofSize: 16, weight: .regular)
         emailOrPhone.autocapitalizationType = .none
-        emailOrPhone.layer.borderWidth = 0.25
-        emailOrPhone.layer.borderColor = UIColor.lightGray.cgColor
         emailOrPhone.autocorrectionType = UITextAutocorrectionType.no
         emailOrPhone.keyboardType = UIKeyboardType.default
         emailOrPhone.returnKeyType = UIReturnKeyType.done
@@ -66,8 +72,6 @@ class LogInViewController: UIViewController {
         password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         password.autocapitalizationType = .none
         password.isSecureTextEntry = true
-        password.layer.borderWidth = 0.25
-        password.layer.borderColor = UIColor.lightGray.cgColor
         password.autocorrectionType = UITextAutocorrectionType.no
         password.keyboardType = UIKeyboardType.default
         password.returnKeyType = UIReturnKeyType.done
@@ -150,8 +154,6 @@ class LogInViewController: UIViewController {
     
     private func setupContentOfScrollView() {
         
-        registerField.addSubview(emailOrPhoneField)
-        registerField.addSubview(passwordField)
         contentView.addSubview(logo)
         contentView.addSubview(registerField)
         contentView.addSubview(logInButton)
@@ -168,12 +170,20 @@ class LogInViewController: UIViewController {
             registerField.heightAnchor.constraint(equalToConstant: 100),
             
             emailOrPhoneField.topAnchor.constraint(equalTo: registerField.topAnchor),
-            emailOrPhoneField.heightAnchor.constraint(equalToConstant: 50),
+            emailOrPhoneField.heightAnchor.constraint(equalToConstant: 49.75),
             emailOrPhoneField.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             
-            passwordField.topAnchor.constraint(equalTo: emailOrPhoneField.bottomAnchor),
-            passwordField.heightAnchor.constraint(equalToConstant: 50),
+            separator.topAnchor.constraint(equalTo: emailOrPhoneField.bottomAnchor),
+            separator.widthAnchor.constraint(equalTo: registerField.widthAnchor),
+            separator.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            passwordField.topAnchor.constraint(equalTo: separator.bottomAnchor),
+            passwordField.heightAnchor.constraint(equalToConstant: 49.75),
             passwordField.widthAnchor.constraint(equalTo: registerField.widthAnchor),
+            
+            separator.topAnchor.constraint(equalTo: emailOrPhoneField.bottomAnchor),
+            separator.bottomAnchor.constraint(equalTo: passwordField.topAnchor),
+            separator.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             
             logInButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 16),
             logInButton.leadingAnchor.constraint(equalTo: registerField.leadingAnchor),

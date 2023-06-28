@@ -1,6 +1,6 @@
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileTableHeaderView: UIView {
     
     private lazy var avatarImageView: UIImageView = {
         let avatar = UIImageView(image: UIImage(named: "Groot"))
@@ -119,6 +119,13 @@ class ProfileHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: 220.0
+        )
     }
     
 }

@@ -3,12 +3,12 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    var titlePost: String = ""
+    var titleNews: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemIndigo
-        self.navigationItem.title = titlePost
+        self.navigationItem.title = titleNews
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
         self.navigationController?.navigationBar.tintColor = .black
         

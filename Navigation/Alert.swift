@@ -3,12 +3,12 @@ import UIKit
 
 struct Alert {
     static let titleAlert = "Attention!"
-    static let messageAlert = "Are you sure you want to delete this post?"
+    static let messageAlert = "Are you sure you want to delete this new?"
     
     private static func showAlert(on vc: UIViewController, with title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
-            print("Post successfully deleted")
+            print("The new successfully deleted")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {action in
             print("Deletion canceled")
