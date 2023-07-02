@@ -5,22 +5,6 @@ class PostTableViewCell: UITableViewCell {
     
     static let id = "PostTableViewCell"
     
-    override init(
-        style: UITableViewCell.CellStyle,
-        reuseIdentifier: String?
-    ) {
-        super.init(
-            style: style,
-            reuseIdentifier: reuseIdentifier
-        )
-        addSubviews()
-        setupConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private lazy var postAuthor: UILabel = {
         let postAuthor = UILabel()
         postAuthor.translatesAutoresizingMaskIntoConstraints = false
@@ -74,13 +58,29 @@ class PostTableViewCell: UITableViewCell {
         return postViews
     }()
     
+    override init(
+        style: UITableViewCell.CellStyle,
+        reuseIdentifier: String?
+    ) {
+        super.init(
+            style: style,
+            reuseIdentifier: reuseIdentifier
+        )
+        addSubviews()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func addSubviews() {
         addSubview(postAuthor)
         addSubview(postDescription)
         addSubview(postImage)
         addSubview(postPopularity)
     }
-//    
+   
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([

@@ -20,22 +20,16 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupTableView() {
+        view.addSubview(tableView)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
-
-        
-        // Как закрепить в качестве HeaderForSection для нулевой секции не разобрался, просьба помочь
-        let headerView = ProfileTableHeaderView()
-        headerView.backgroundColor = .lightGray
-        tableView.setAndLayout(headerView: headerView)
-        tableView.tableFooterView = UIView()
-        
+        tableView.sectionHeaderTopPadding = 0
     }
     
+    
     private func setupConstraints() {
-        view.addSubview(tableView)
         
         let safeAreaGuide = view.safeAreaLayoutGuide
         
@@ -43,26 +37,42 @@ class ProfileViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor)
+            tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            
         ])
     }
     
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-        
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSource.count
+        return dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else {
             return UITableViewCell()
         }
-        
         cell.configure(dataSource[indexPath.row])
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionHeader = ProfileTableHeaderView()
+        sectionHeader.translatesAutoresizingMaskIntoConstraints = false
+        sectionHeader.backgroundColor = .lightGray
+        
+        if section == 0 {
+            return sectionHeader
+        } else {
+            return nil
+        }
     }
     
 }
