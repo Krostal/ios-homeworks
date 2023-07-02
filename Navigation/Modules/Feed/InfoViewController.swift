@@ -5,7 +5,7 @@ class InfoViewController: UIViewController {
 
     private lazy var buttonDelete: UIButton = {
         let deleteButton = UIButton()
-        deleteButton.setTitle("Delete this post", for: .normal)
+        deleteButton.setTitle("Delete this new", for: .normal)
         deleteButton.setTitleColor(.darkText, for: .normal)
         deleteButton.backgroundColor = .systemCyan
         deleteButton.translatesAutoresizingMaskIntoConstraints = false

@@ -3,11 +3,11 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var post: Post = Post(title: "My post")
+    var new: News = News(title: "My post")
     
     private lazy var firstButton: UIButton = {
         let firstButton = UIButton()
-        firstButton.setTitle("Open the post", for: .normal)
+        firstButton.setTitle("Open the news", for: .normal)
         firstButton.backgroundColor = .systemBlue
         firstButton.tintColor = .white
         firstButton.clipsToBounds = true
@@ -20,7 +20,7 @@ class FeedViewController: UIViewController {
     
     private lazy var secondButton: UIButton = {
         let secondButton = UIButton()
-        secondButton.setTitle("Show the post", for: .normal)
+        secondButton.setTitle("Show the news", for: .normal)
         secondButton.backgroundColor = .systemBlue
         secondButton.tintColor = .white
         secondButton.clipsToBounds = true
@@ -61,7 +61,7 @@ class FeedViewController: UIViewController {
     @objc func buttonPressed(_ sender: UIButton) {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
-        postViewController.titlePost = post.title
+        postViewController.titleNews = new.title
     }
     
 }
