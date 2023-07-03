@@ -19,6 +19,16 @@ class ProfileViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.delegate = self
@@ -45,7 +55,7 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,28 +66,29 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             return UITableViewCell()
         } else if indexPath.row == 1 {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.id, for: indexPath) as? PhotosTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.id, for: indexPath) as? PhotosTableViewCell else {
                 return UITableViewCell()
             }
             cell.onLabelTapped = { [weak self] in
-                let feed = FeedViewController()
-                self?.navigationController?.pushViewController(feed, animated: true)
+                let photoGallery = PhotosViewController()
+                photoGallery.title = "Photo Gallery"
+                self?.navigationController?.pushViewController(photoGallery, animated: true)
             }
             return cell
         }
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else {
             return UITableViewCell()
-            
         }
         cell.configure(dataSource[indexPath.row-2])
         return cell
     }
     
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 0
         } else if indexPath.row == 1 {
-            return 150
+            return 150    // Не удалось настроить автоматическую высоту данной секции по содержимому ячейки, просьба подсказать
         }
         return UITableView.automaticDimension
     }

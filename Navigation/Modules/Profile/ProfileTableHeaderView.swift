@@ -62,10 +62,7 @@ class ProfileTableHeaderView: UIView {
     private lazy var newStatus = ""
     
     override var intrinsicContentSize: CGSize {
-        CGSize(
-            width: frame.width,
-            height: 220.0
-        )
+        CGSize(width: frame.width, height: 220.0)
     }
 
     override init(frame: CGRect) {
@@ -128,8 +125,6 @@ class ProfileTableHeaderView: UIView {
             newStatus = statusTextField.text!
         }
     }
-    
-    
-    
+
 }
                                    

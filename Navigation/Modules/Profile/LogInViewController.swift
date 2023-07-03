@@ -99,7 +99,6 @@ class LogInViewController: UIViewController {
         }
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        
         return button
     }()
     
@@ -237,11 +236,8 @@ class LogInViewController: UIViewController {
 
 extension LogInViewController: UITextFieldDelegate {
 
-    func textFieldShouldReturn(
-        _ textField: UITextField
-    ) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-
         return false
     }
 }
