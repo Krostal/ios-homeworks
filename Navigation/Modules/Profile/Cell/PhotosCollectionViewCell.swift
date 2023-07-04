@@ -5,8 +5,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     private lazy var photos: UIImageView = {
         let photos = UIImageView(frame: .zero)
         photos.translatesAutoresizingMaskIntoConstraints = false
-        
-        photos.contentMode = .scaleToFill
+        photos.backgroundColor = .black
+        photos.contentMode = .scaleAspectFit
         return photos
     }()
     
@@ -23,7 +23,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
             photos.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             photos.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             photos.topAnchor.constraint(equalTo: contentView.topAnchor),
-            photos.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            photos.heightAnchor.constraint(equalTo: contentView.widthAnchor)
         ])
     }
     
