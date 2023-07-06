@@ -5,10 +5,12 @@ class ProfileViewController: UIViewController {
     
     fileprivate let dataSource = Post.make()
     
-    private lazy var tableView: UITableView = {
+    static let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .lightGray
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
         return tableView
     }()
     
@@ -30,11 +32,11 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
+        view.addSubview(Self.tableView)
+        Self.tableView.delegate = self
+        Self.tableView.dataSource = self
+//        Self.tableView.refreshControl = UIRefreshControl()
+//        Self.tableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
     }
     
     
@@ -43,12 +45,17 @@ class ProfileViewController: UIViewController {
         let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            Self.tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            Self.tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+            Self.tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            Self.tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
         ])
     }
+    
+//    @objc func reloadTableView() {
+//        Self.tableView.reloadData()
+//        Self.tableView.refreshControl?.endRefreshing()
+//    }
     
 }
 
