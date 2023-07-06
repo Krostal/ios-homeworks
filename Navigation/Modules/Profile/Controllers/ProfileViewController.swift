@@ -35,8 +35,8 @@ class ProfileViewController: UIViewController {
         view.addSubview(Self.tableView)
         Self.tableView.delegate = self
         Self.tableView.dataSource = self
-//        Self.tableView.refreshControl = UIRefreshControl()
-//        Self.tableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+        Self.tableView.refreshControl = UIRefreshControl()
+        Self.tableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
     }
     
     
@@ -52,10 +52,10 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-//    @objc func reloadTableView() {
-//        Self.tableView.reloadData()
-//        Self.tableView.refreshControl?.endRefreshing()
-//    }
+    @objc func reloadTableView() {
+        Self.tableView.reloadData()
+        Self.tableView.refreshControl?.endRefreshing()
+    }
     
 }
 
@@ -95,7 +95,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             return 0
         } else if indexPath.row == 1 {
-            return 150    // Не удалось настроить автоматическую высоту данной секции по содержимому ячейки, просьба подсказать
+            return 150    // Для регулировки высоты секции указываю конкретное значение, а нужно указать вычислимое свойство
         }
         return UITableView.automaticDimension
     }
