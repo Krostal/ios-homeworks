@@ -95,7 +95,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             return 0
         } else if indexPath.row == 1 {
-            return 150    // Не удалось настроить автоматическую высоту данной секции по содержимому ячейки, просьба подсказать
+            return 150    // Для регулировки высоты секции указываю конкретное значение, а нужно указать вычислимое свойство
         }
         return UITableView.automaticDimension
     }
