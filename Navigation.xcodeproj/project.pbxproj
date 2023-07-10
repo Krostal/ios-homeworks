@@ -65,6 +65,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09789B542A557B5200B98821 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				09E677412A45EF8000A36ED1 /* LogInViewController.swift */,
+				09B361CC2A337445005979C8 /* ProfileViewController.swift */,
+				09D6C0792A530145003C6DFB /* PhotosViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		09789B552A557B6D00B98821 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		09789B562A557B9300B98821 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				09B361C92A337411005979C8 /* FeedViewController.swift */,
+				09B361CE2A341C7A005979C8 /* PostViewController.swift */,
+				09B361D22A3433D2005979C8 /* InfoViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		09B361A92A336E8A005979C8 = {
 			isa = PBXGroup;
 			children = (
@@ -115,14 +143,12 @@
 		09D6C06D2A51D54C003C6DFB /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				09B361C92A337411005979C8 /* FeedViewController.swift */,
-				09B361CE2A341C7A005979C8 /* PostViewController.swift */,
-				09B361D22A3433D2005979C8 /* InfoViewController.swift */,
+				09789B562A557B9300B98821 /* Controllers */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
 		};
-		09D6C06E2A51D5FC003C6DFB /* Cell */ = {
+		09D6C06E2A51D5FC003C6DFB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */,
@@ -130,7 +156,7 @@
 				09D6C0722A52A153003C6DFB /* FirstFourPhotosCell.swift */,
 				09D6C07B2A5303F7003C6DFB /* PhotosCollectionViewCell.swift */,
 			);
-			path = Cell;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		09D6C06F2A51D63B003C6DFB /* Common */ = {
@@ -148,11 +174,9 @@
 		09E98EB02A3852A200DE6940 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				09D6C06E2A51D5FC003C6DFB /* Cell */,
-				09E677412A45EF8000A36ED1 /* LogInViewController.swift */,
-				09B361CC2A337445005979C8 /* ProfileViewController.swift */,
-				09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */,
-				09D6C0792A530145003C6DFB /* PhotosViewController.swift */,
+				09789B542A557B5200B98821 /* Controllers */,
+				09789B552A557B6D00B98821 /* Views */,
+				09D6C06E2A51D5FC003C6DFB /* Cells */,
 			);
 			path = Profile;
 			sourceTree = "<group>";

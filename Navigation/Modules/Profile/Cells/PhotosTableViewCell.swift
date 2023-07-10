@@ -73,17 +73,16 @@ class PhotosTableViewCell: UITableViewCell {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            
-            arrowClickLabel.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
 
-            titlePhotoSectionView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            titlePhotoSectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            titlePhotoSectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            titlePhotoSectionView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -12),
-            
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            titlePhotoSectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            titlePhotoSectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            titlePhotoSectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+                        
+            collectionView.topAnchor.constraint(equalTo: titlePhotoSectionView.bottomAnchor, constant: 12),
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            collectionView.heightAnchor.constraint(equalToConstant: frame.width / 4 + 8)
         ])
     }
     
@@ -134,7 +133,7 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 12, bottom: 12, right: 12)
+        UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
     }
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

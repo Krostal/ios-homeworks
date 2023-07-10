@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         loginViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
         
         let tabBarController = UITabBarController()
-        tabBarController.view.tintColor = .black
+        tabBarController.view.tintColor = .systemBlue
         tabBarController.viewControllers = [feedViewController, loginViewController]
         
         window.rootViewController = tabBarController

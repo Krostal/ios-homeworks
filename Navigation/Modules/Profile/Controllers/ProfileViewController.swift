@@ -5,16 +5,18 @@ class ProfileViewController: UIViewController {
     
     fileprivate let dataSource = Post.make()
     
-    private lazy var tableView: UITableView = {
+    static let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .lightGray
+        tableView.backgroundColor = .clear
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.safeAreaLayoutGuide.owningView?.backgroundColor = .white
+        view.safeAreaLayoutGuide.owningView?.backgroundColor = .lightGray
         setupTableView()
         setupConstraints()
     }
@@ -30,11 +32,17 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
+        view.addSubview(Self.tableView)
+        Self.tableView.delegate = self
+        Self.tableView.dataSource = self
+        Self.tableView.refreshControl = UIRefreshControl()
+        Self.tableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+        Self.tableView.separatorInset = UIEdgeInsets(
+            top: 12,
+            left: 12,
+            bottom: 12,
+            right: 12
+        )
     }
     
     
@@ -43,11 +51,16 @@ class ProfileViewController: UIViewController {
         let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            Self.tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            Self.tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+            Self.tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            Self.tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
         ])
+    }
+    
+    @objc func reloadTableView() {
+        Self.tableView.reloadData()
+        Self.tableView.refreshControl?.endRefreshing()
     }
     
 }
@@ -87,21 +100,22 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 0
-        } else if indexPath.row == 1 {
-            return 150    // Не удалось настроить автоматическую высоту данной секции по содержимому ячейки, просьба подсказать
+        } else {
+            return UITableView.automaticDimension
         }
-        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionZeroHeader = ProfileTableHeaderView()
         sectionZeroHeader.translatesAutoresizingMaskIntoConstraints = false
+        sectionZeroHeader.backgroundColor = .lightGray
         
         if section == 0 {
             return sectionZeroHeader
         } else {
             return nil
         }
+        
     }
     
 }
