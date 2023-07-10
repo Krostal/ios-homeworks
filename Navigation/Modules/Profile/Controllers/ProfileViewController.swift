@@ -8,7 +8,7 @@ class ProfileViewController: UIViewController {
     static let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .lightGray
+        tableView.backgroundColor = .clear
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
         return tableView
@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.safeAreaLayoutGuide.owningView?.backgroundColor = .white
+        view.safeAreaLayoutGuide.owningView?.backgroundColor = .lightGray
         setupTableView()
         setupConstraints()
     }
@@ -37,6 +37,12 @@ class ProfileViewController: UIViewController {
         Self.tableView.dataSource = self
         Self.tableView.refreshControl = UIRefreshControl()
         Self.tableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+        Self.tableView.separatorInset = UIEdgeInsets(
+            top: 12,
+            left: 12,
+            bottom: 12,
+            right: 12
+        )
     }
     
     
@@ -94,21 +100,22 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 0
-        } else if indexPath.row == 1 {
-            return 150    // Для регулировки высоты секции указываю конкретное значение, а нужно указать вычислимое свойство
+        } else {
+            return UITableView.automaticDimension
         }
-        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionZeroHeader = ProfileTableHeaderView()
         sectionZeroHeader.translatesAutoresizingMaskIntoConstraints = false
+        sectionZeroHeader.backgroundColor = .lightGray
         
         if section == 0 {
             return sectionZeroHeader
         } else {
             return nil
         }
+        
     }
     
 }

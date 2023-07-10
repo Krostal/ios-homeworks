@@ -34,10 +34,10 @@ final class FirstFourPhotosCell: UICollectionViewCell {
     
     private func setupLayouts() {
         NSLayoutConstraint.activate([
-            firstFourPhotos.leadingAnchor.constraint(equalTo: leadingAnchor),
-            firstFourPhotos.trailingAnchor.constraint(equalTo: trailingAnchor),
-            firstFourPhotos.topAnchor.constraint(equalTo: topAnchor),
-            firstFourPhotos.bottomAnchor.constraint(equalTo: bottomAnchor)
+            firstFourPhotos.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            firstFourPhotos.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            firstFourPhotos.topAnchor.constraint(equalTo: contentView.topAnchor),
+            firstFourPhotos.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
     
