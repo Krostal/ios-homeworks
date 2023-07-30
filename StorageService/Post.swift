@@ -1,21 +1,15 @@
-
 import UIKit
 
-struct News {
-    let title: String
-    
-}
-
-struct Post {
-    var author: String
-    var description: String
-    var image: String
-    var likes: Int
-    var views: Int
+public struct Post {
+    public var author: String
+    public var description: String
+    public var image: String
+    public var likes: Int
+    public var views: Int
 }
 
 extension Post {
-    static func make() -> [Post] {
+    public static func make() -> [Post] {
         [
             Post(
                 author: "marvel.official",

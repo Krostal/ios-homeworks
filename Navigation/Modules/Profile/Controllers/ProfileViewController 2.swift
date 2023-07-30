@@ -1,6 +1,5 @@
 
 import UIKit
-import StorageService
 
 class ProfileViewController: UIViewController {
     
@@ -17,14 +16,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.safeAreaLayoutGuide.owningView?.backgroundColor = .lightGray
         setupTableView()
         setupConstraints()
-        
-        #if DEBUG
-        view.backgroundColor = .lightGray
-        #else
-        view.backgroundColor = .white
-        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,7 +108,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionZeroHeader = ProfileTableHeaderView()
         sectionZeroHeader.translatesAutoresizingMaskIntoConstraints = false
-        sectionZeroHeader.backgroundColor = .clear
+        sectionZeroHeader.backgroundColor = .lightGray
         
         if section == 0 {
             return sectionZeroHeader
