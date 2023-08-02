@@ -114,17 +114,15 @@ class PostTableViewCell: UITableViewCell {
      
     func configure(_ post: Post) {
         postAuthor.text = post.author
-        postImage.image = UIImage(named: post.image)
+        postDescription.text = post.description
+        postLikes.text = "Likes: \(post.likes)"
+        postViews.text = "Views: \(post.views)"
     
         ImageProcessor().processImage(sourceImage: UIImage(named: post.image) ?? UIImage(),
                                       filter: .sepia(intensity: 1.5),
                                       completion: { [weak self] filteredImage in
             self?.postImage.image = filteredImage
         })
-            
-        postDescription.text = post.description
-        postLikes.text = "Likes: \(post.likes)"
-        postViews.text = "Views: \(post.views)"
     }
     
 }
