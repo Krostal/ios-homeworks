@@ -11,8 +11,6 @@ class PostTableViewCell: UITableViewCell {
     
     static let id = "PostTableViewCell"
     
-//    private let imageProcessor = ImageProcessor()
-    
     private lazy var postAuthor: UILabel = {
         let postAuthor = UILabel()
         postAuthor.translatesAutoresizingMaskIntoConstraints = false
