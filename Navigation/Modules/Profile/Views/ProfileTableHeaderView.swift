@@ -2,6 +2,12 @@ import UIKit
 
 class ProfileTableHeaderView: UIView {
     
+    private enum Constants {
+            static let horizontalPadding: CGFloat = 16.0
+            static let avatarWidth: CGFloat = 130.0
+            static let returnButtonpadding: CGFloat = 16.0
+        }
+    
     private lazy var avatarImageView: UIImageView = {
         let avatar = UIImageView(image: UIImage(named: "Groot"))
         avatar.translatesAutoresizingMaskIntoConstraints = false
@@ -92,14 +98,14 @@ class ProfileTableHeaderView: UIView {
         
         NSLayoutConstraint.activate([
             
-            avatarImageView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 130),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 130),
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: Constants.horizontalPadding),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: Constants.horizontalPadding),
+            avatarImageView.heightAnchor.constraint(equalToConstant: Constants.avatarWidth),
+            avatarImageView.widthAnchor.constraint(equalToConstant: Constants.avatarWidth),
     
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: Constants.horizontalPadding),
+            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
             fullNameLabel.heightAnchor.constraint(equalToConstant: 18),
             
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
@@ -107,13 +113,13 @@ class ProfileTableHeaderView: UIView {
             statusLabel.heightAnchor.constraint(equalToConstant: 14),
             
             statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            statusTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
+            statusTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 8),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
-            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: Constants.horizontalPadding),
+            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: Constants.horizontalPadding),
+            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
@@ -146,8 +152,8 @@ class ProfileTableHeaderView: UIView {
         
         NSLayoutConstraint.activate([
             
-            returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Constants.returnButtonpadding),
+            returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -Constants.returnButtonpadding),
         ])
         
     }
