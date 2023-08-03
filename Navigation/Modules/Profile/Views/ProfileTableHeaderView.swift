@@ -92,39 +92,33 @@ class ProfileTableHeaderView: UIView {
         addSubview(statusLabel)
         addSubview(statusTextField)
         
-        avatarImageView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(safeAreaGuide.top).offset(Constants.horizontalPadding)
-            make.left.equalTo(safeAreaGuide.left).offset(Constants.horizontalPadding)
-            make.height.width.equalTo(Constants.avatarWidth)
-        }
-        
-        fullNameLabel.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(safeAreaGuide.top).offset(27)
-            make.height.equalTo(18)
-            make.left.equalTo(avatarImageView.snp.right).offset(Constants.horizontalPadding)
-            make.right.equalTo(safeAreaGuide.right).offset(-Constants.horizontalPadding)
-        }
-        
-        statusLabel.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(14)
-            make.bottom.equalTo(setStatusButton.snp.top).offset(-54)
-            make.left.equalTo(fullNameLabel)
-        }
-        
-        statusTextField.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(statusLabel.snp.bottom).offset(8)
-            make.height.equalTo(40)
-            make.left.equalTo(fullNameLabel.snp.left)
-            make.right.equalTo(safeAreaGuide.right).offset(-Constants.horizontalPadding)
-        }
-        
-        setStatusButton.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(avatarImageView.snp.bottom).offset(Constants.horizontalPadding)
-            make.height.equalTo(50)
-            make.right.equalTo(safeAreaGuide.right).offset(-Constants.horizontalPadding)
-            make.left.equalTo(safeAreaGuide.left).offset(Constants.horizontalPadding)
-        }
-        
+        NSLayoutConstraint.activate([
+            
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: Constants.horizontalPadding),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: Constants.horizontalPadding),
+            avatarImageView.heightAnchor.constraint(equalToConstant: Constants.avatarWidth),
+            avatarImageView.widthAnchor.constraint(equalToConstant: Constants.avatarWidth),
+    
+            fullNameLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: Constants.horizontalPadding),
+            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
+            fullNameLabel.heightAnchor.constraint(equalToConstant: 18),
+            
+            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -54),
+            statusLabel.heightAnchor.constraint(equalToConstant: 14),
+            
+            statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
+            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 8),
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: Constants.horizontalPadding),
+            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: Constants.horizontalPadding),
+            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+
     }
     
     private func clickAvatarImage() {
@@ -151,11 +145,12 @@ class ProfileTableHeaderView: UIView {
         addSubview(avatarImageView)
         addSubview(returnAvatarButton)
         
-        returnAvatarButton.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(Constants.returnButtonpadding)
-            make.right.equalTo(safeAreaLayoutGuide.snp.right).offset(-Constants.returnButtonpadding)
-        }
-        
+        NSLayoutConstraint.activate([
+            
+            returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Constants.returnButtonpadding),
+            returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -Constants.returnButtonpadding),
+        ])
+
     }
     
     @objc func buttonPressed(_ sender: UIButton) {
