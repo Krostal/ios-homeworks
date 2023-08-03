@@ -1,8 +1,13 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
+    
+    private enum Constants {
+        static let padding: CGFloat = 16.0
+    }
     
     static let id = "PostTableViewCell"
     
@@ -81,36 +86,41 @@ class PostTableViewCell: UITableViewCell {
         addSubview(postImage)
         addSubview(postPopularity)
     }
-   
+    
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
             
-            postAuthor.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            postAuthor.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            postAuthor.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            postAuthor.topAnchor.constraint(equalTo: topAnchor, constant: Constants.padding),
+            postAuthor.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),
+            postAuthor.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.padding),
             
-            postImage.topAnchor.constraint(equalTo: postAuthor.bottomAnchor, constant: 16),
+            postImage.topAnchor.constraint(equalTo: postAuthor.bottomAnchor, constant: Constants.padding),
             postImage.widthAnchor.constraint(equalTo: widthAnchor),
             postImage.heightAnchor.constraint(equalTo: widthAnchor),
             
-            postDescription.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: 16),
-            postDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            postDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            postDescription.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: Constants.padding),
+            postDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),
+            postDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.padding),
             
-            postPopularity.topAnchor.constraint(equalTo: postDescription.bottomAnchor, constant: 16),
-            postPopularity.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            postPopularity.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            postPopularity.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            postPopularity.topAnchor.constraint(equalTo: postDescription.bottomAnchor, constant: Constants.padding),
+            postPopularity.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),
+            postPopularity.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.padding),
+            postPopularity.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.padding)
         ])
     }
-        
+     
     func configure(_ post: Post) {
         postAuthor.text = post.author
-        postImage.image = UIImage(named: post.image)
         postDescription.text = post.description
         postLikes.text = "Likes: \(post.likes)"
         postViews.text = "Views: \(post.views)"
+    
+        ImageProcessor().processImage(sourceImage: UIImage(named: post.image) ?? UIImage(),
+                                      filter: .sepia(intensity: 1.5),
+                                      completion: { [weak self] filteredImage in
+            self?.postImage.image = filteredImage
+        })
     }
     
 }

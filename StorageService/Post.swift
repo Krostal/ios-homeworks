@@ -30,7 +30,8 @@ extension Post {
                 description: "After saving Xandar from Ronan's wrath, the Guardians are now recognized as heroes. Now the team must help their leader, Star Lord, uncover the truth behind his true heritage. Along the way, old foes turn to allies and betrayal is blooming. And the Guardians find they are up against a devastating new menace who is out to rule the galaxy",
                 image: "GuardiansOfTheGalaxy_2",
                 likes: 6364,
-                views: 1193),
+                views: 1193
+            ),
             Post(
                 author: "Walt Disney Studios Motion Pictures_official",
                 description: "Still reeling from the loss of Gamora, Peter Quill rallies his team to defend the universe and one of their own - a mission that could mean the end of the Guardians if not successful.",
@@ -41,4 +42,3 @@ extension Post {
         ]
     }
 }
-

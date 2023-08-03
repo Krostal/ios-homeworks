@@ -1,16 +1,16 @@
 import UIKit
+import SnapKit
 
 class ProfileTableHeaderView: UIView {
     
     private enum Constants {
-            static let horizontalPadding: CGFloat = 16.0
-            static let avatarWidth: CGFloat = 130.0
-            static let returnButtonpadding: CGFloat = 16.0
-        }
+        static let horizontalPadding: CGFloat = 16.0
+        static let avatarWidth: CGFloat = 130.0
+        static let returnButtonpadding: CGFloat = 16.0
+    }
     
     private lazy var avatarImageView: UIImageView = {
         let avatar = UIImageView(image: UIImage(named: "Groot"))
-        avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.layer.borderWidth = 3
         avatar.layer.borderColor = UIColor.white.cgColor
         avatar.layer.cornerRadius = 65
@@ -20,7 +20,6 @@ class ProfileTableHeaderView: UIView {
     
     private lazy var fullNameLabel: UILabel = {
         let fullName = UILabel()
-        fullName.translatesAutoresizingMaskIntoConstraints = false
         fullName.text = "Groot"
         fullName.textColor = .black
         fullName.font = .systemFont(ofSize: 18, weight: .bold)
@@ -29,7 +28,6 @@ class ProfileTableHeaderView: UIView {
     
     private lazy var statusLabel: UILabel = {
         let status = UILabel()
-        status.translatesAutoresizingMaskIntoConstraints = false
         status.text = "Happy :)"
         status.textColor = .gray
         status.font = .systemFont(ofSize: 14, weight: .regular)
@@ -38,7 +36,6 @@ class ProfileTableHeaderView: UIView {
     
     private lazy var statusTextField: UITextField = {
         let statusText = TextFieldWithPadding()
-        statusText.translatesAutoresizingMaskIntoConstraints = false
         statusText.placeholder = "Set your status"
         statusText.backgroundColor = .white
         statusText.layer.borderWidth = 1
@@ -52,7 +49,6 @@ class ProfileTableHeaderView: UIView {
     
     private lazy var setStatusButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Set status", for: .normal)
         button.backgroundColor = .systemBlue
         button.tintColor = .white
@@ -88,7 +84,7 @@ class ProfileTableHeaderView: UIView {
     
     private func setupConstraints() {
         
-        let safeAreaGuide = safeAreaLayoutGuide
+        let safeAreaGuide = safeAreaLayoutGuide.snp
         
         addSubview(avatarImageView)
         addSubview(fullNameLabel)
@@ -122,7 +118,7 @@ class ProfileTableHeaderView: UIView {
             setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
+
     }
     
     private func clickAvatarImage() {
@@ -133,7 +129,6 @@ class ProfileTableHeaderView: UIView {
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapGesture)
         
-        returnAvatarButton.translatesAutoresizingMaskIntoConstraints = false
         returnAvatarButton.alpha = 0
         returnAvatarButton.backgroundColor = .clear
         returnAvatarButton.contentMode = .scaleToFill
@@ -155,7 +150,7 @@ class ProfileTableHeaderView: UIView {
             returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Constants.returnButtonpadding),
             returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -Constants.returnButtonpadding),
         ])
-        
+
     }
     
     @objc func buttonPressed(_ sender: UIButton) {
