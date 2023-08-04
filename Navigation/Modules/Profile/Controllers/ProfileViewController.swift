@@ -4,6 +4,8 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
+    var currentUser: User?
+    
     fileprivate let dataSource = Post.make()
     
     static let tableView: UITableView = {
@@ -25,6 +27,7 @@ class ProfileViewController: UIViewController {
         #else
         view.backgroundColor = .white
         #endif
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,6 +120,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         sectionZeroHeader.backgroundColor = .clear
         
         if section == 0 {
+            sectionZeroHeader.user = currentUser
             return sectionZeroHeader
         } else {
             return nil
