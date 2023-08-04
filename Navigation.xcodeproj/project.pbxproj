@@ -34,6 +34,8 @@
 		09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E677412A45EF8000A36ED1 /* LogInViewController.swift */; };
 		09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */; };
 		09E98EB22A3852D000DE6940 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */; };
+		09F402702A7C8F4F009DCD7F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F4026F2A7C8F4F009DCD7F /* User.swift */; };
+		09F402722A7CBC3A009DCD7F /* TestUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F402712A7CBC3A009DCD7F /* TestUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		09E677412A45EF8000A36ED1 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
+		09F4026F2A7C8F4F009DCD7F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		09F402712A7CBC3A009DCD7F /* TestUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +260,8 @@
 				097E87992A40A50800B75D9C /* TextFieldWithPadding.swift */,
 				09D6C0632A4C854A003C6DFB /* PhotoGallery.swift */,
 				09D6C0772A52CA17003C6DFB /* Reusable.swift */,
+				09F4026F2A7C8F4F009DCD7F /* User.swift */,
+				09F402712A7CBC3A009DCD7F /* TestUser.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -438,6 +444,7 @@
 				09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */,
 				09AA931B2A6BE8A1005896DB /* News.swift in Sources */,
 				09B361CD2A337445005979C8 /* ProfileViewController.swift in Sources */,
+				09F402722A7CBC3A009DCD7F /* TestUser.swift in Sources */,
 				09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */,
 				09E98EB22A3852D000DE6940 /* ProfileTableHeaderView.swift in Sources */,
 				09D6C07A2A530145003C6DFB /* PhotosViewController.swift in Sources */,
@@ -448,6 +455,7 @@
 				09B361D52A3437E9005979C8 /* Alert.swift in Sources */,
 				09D6C07C2A5303F7003C6DFB /* PhotosCollectionViewCell.swift in Sources */,
 				09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */,
+				09F402702A7C8F4F009DCD7F /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

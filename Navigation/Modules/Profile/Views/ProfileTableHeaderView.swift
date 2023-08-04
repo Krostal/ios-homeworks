@@ -2,6 +2,16 @@ import UIKit
 
 class ProfileTableHeaderView: UIView {
     
+    var user: User? {
+        didSet {
+            if let currentUser = user {
+                fullNameLabel.text = currentUser.fullName
+                statusLabel.text = currentUser.status
+                avatarImageView.image = currentUser.avatar
+            }
+        }
+    }
+    
     private enum Constants {
         static let horizontalPadding: CGFloat = 16.0
         static let avatarWidth: CGFloat = 130.0
@@ -9,19 +19,19 @@ class ProfileTableHeaderView: UIView {
     }
     
     private lazy var avatarImageView: UIImageView = {
-        let avatar = UIImageView(image: UIImage(named: "Groot"))
+        let avatar = UIImageView()
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.layer.borderWidth = 3
         avatar.layer.borderColor = UIColor.white.cgColor
         avatar.layer.cornerRadius = 65
         avatar.clipsToBounds = true
+        avatar.contentMode = .scaleAspectFit
         return avatar
     }()
     
     private lazy var fullNameLabel: UILabel = {
         let fullName = UILabel()
         fullName.translatesAutoresizingMaskIntoConstraints = false
-        fullName.text = "Groot"
         fullName.textColor = .black
         fullName.font = .systemFont(ofSize: 18, weight: .bold)
         return fullName
@@ -30,7 +40,6 @@ class ProfileTableHeaderView: UIView {
     private lazy var statusLabel: UILabel = {
         let status = UILabel()
         status.translatesAutoresizingMaskIntoConstraints = false
-        status.text = "Happy :)"
         status.textColor = .gray
         status.font = .systemFont(ofSize: 14, weight: .regular)
         return status
@@ -156,6 +165,14 @@ class ProfileTableHeaderView: UIView {
             returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -Constants.returnButtonPadding),
         ])
         
+    }
+    
+    func updateUserInfo(_ user: User) {
+        if self.user != nil {
+            fullNameLabel.text = user.fullName
+            statusLabel.text = user.status
+            avatarImageView.image = user.avatar
+        }
     }
     
     @objc func buttonPressed(_ sender: UIButton) {
