@@ -20,19 +20,18 @@ class ProfileTableHeaderView: UIView {
     
     private lazy var avatarImageView: UIImageView = {
         let avatar = UIImageView()
-//        let avatar = UIImageView(image: UIImage(named: "Groot"))
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.layer.borderWidth = 3
         avatar.layer.borderColor = UIColor.white.cgColor
         avatar.layer.cornerRadius = 65
         avatar.clipsToBounds = true
+        avatar.contentMode = .scaleAspectFit
         return avatar
     }()
     
     private lazy var fullNameLabel: UILabel = {
         let fullName = UILabel()
         fullName.translatesAutoresizingMaskIntoConstraints = false
-//        fullName.text = "Groot"
         fullName.textColor = .black
         fullName.font = .systemFont(ofSize: 18, weight: .bold)
         return fullName
@@ -41,7 +40,6 @@ class ProfileTableHeaderView: UIView {
     private lazy var statusLabel: UILabel = {
         let status = UILabel()
         status.translatesAutoresizingMaskIntoConstraints = false
-//        status.text = "Happy :)"
         status.textColor = .gray
         status.font = .systemFont(ofSize: 14, weight: .regular)
         return status

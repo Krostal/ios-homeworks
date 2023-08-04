@@ -2,7 +2,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -10,15 +10,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
-        let currentUser = User(login: "I_am_Groot", fullName: "Groot", avatar: UIImage(named: "Groot"), status: "Happy :)")
-        let currentUserService = CurrentUserService(currentUser: currentUser)
         
         let feedViewController = UINavigationController(rootViewController: FeedViewController())
         feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
         feedViewController.view.tintColor = .black
         
         
+    #if DEBUG
+        let testUserService = TestUserService(testUser: testUser)
+        let loginViewController = UINavigationController(rootViewController: LogInViewController.init(userService: testUserService))
+    #else
+        let currentUserService = CurrentUserService(currentUser: groot)
         let loginViewController = UINavigationController(rootViewController: LogInViewController.init(userService: currentUserService))
+    #endif
+    
         loginViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
         
         let tabBarController = UITabBarController()

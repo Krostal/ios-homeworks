@@ -18,6 +18,9 @@ public final class User {
     }
 }
 
+let groot = User(login: "Groot", fullName: "I am Groot", avatar: UIImage(named: "Groot"), status: "Happy :)")
+
+
 public final class CurrentUserService: UserService {
     
     private var currentUser: User?
@@ -34,6 +37,10 @@ public final class CurrentUserService: UserService {
         }
     }
 }
+
+
+
+
 
 
 
