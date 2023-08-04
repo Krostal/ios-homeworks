@@ -15,15 +15,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
         feedViewController.view.tintColor = .black
         
+        let userService: UserService
         
     #if DEBUG
         let testUserService = TestUserService(testUser: testUser)
-        let loginViewController = UINavigationController(rootViewController: LogInViewController.init(userService: testUserService))
+        userService = testUserService
     #else
         let currentUserService = CurrentUserService(currentUser: groot)
-        let loginViewController = UINavigationController(rootViewController: LogInViewController.init(userService: currentUserService))
+        userService = currentUserService
     #endif
-    
+        
+        let loginViewController = UINavigationController(rootViewController: LogInViewController.init(userService: userService))
         loginViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
         
         let tabBarController = UITabBarController()
