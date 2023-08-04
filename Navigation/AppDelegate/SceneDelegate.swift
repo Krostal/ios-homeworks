@@ -10,13 +10,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
+        let currentUser = User(login: "I_am_Groot", fullName: "Groot", avatar: UIImage(named: "Groot"), status: "Happy :)")
+        let currentUserService = CurrentUserService(currentUser: currentUser)
         
         let feedViewController = UINavigationController(rootViewController: FeedViewController())
         feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
         feedViewController.view.tintColor = .black
         
         
-        let loginViewController = UINavigationController(rootViewController: LogInViewController())
+        let loginViewController = UINavigationController(rootViewController: LogInViewController.init(userService: currentUserService))
         loginViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
         
         let tabBarController = UITabBarController()

@@ -3,6 +3,8 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    private let userService: UserService
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
@@ -101,6 +103,15 @@ class LogInViewController: UIViewController {
         button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         return button
     }()
+    
+    init(userService: UserService) {
+            self.userService = userService
+            super.init(nibName: nil, bundle: nil)
+        }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -217,6 +228,12 @@ class LogInViewController: UIViewController {
         notificationCenter.removeObserver(self)
     }
     
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc func willShowKeyboard(_ notification: NSNotification) {
         let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
         scrollView.contentInset.bottom += keyboardHeight ?? 0.0
@@ -228,8 +245,17 @@ class LogInViewController: UIViewController {
     }
     
     @objc func buttonPressed(_ sender: UIButton) {
-        let profileViewController = ProfileViewController()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+        guard let login = emailOrPhoneField.text, !login.isEmpty else {
+            showAlert(title: "Error", message: "Please enter a valid login.")
+            return
+        }
+        if let user = userService.authorizeUser(login: login) {
+            let profileViewController = ProfileViewController()
+            profileViewController.currentUser = user
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            showAlert(title: "Error", message: "Invalid login or user not found.")
+        }
     }
     
 }
@@ -241,3 +267,4 @@ extension LogInViewController: UITextFieldDelegate {
         return false
     }
 }
+
