@@ -131,6 +131,7 @@ class LoginViewController: UIViewController {
         addSubviews()
         setupConstraints()
         setupContentOfScrollView()
+        defaultLoginAndPassword()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -215,6 +216,16 @@ class LoginViewController: UIViewController {
         
     logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
+    }
+    
+    private func defaultLoginAndPassword() {
+    #if DEBUG
+        emailOrPhoneField.text = "TestUser"
+        passwordField.text = "UserTest"
+    #else
+        emailOrPhoneField.text = "Groot"
+        passwordField.text = "g18o15T"
+    #endif
     }
 
     private func setupKeyboardObservers() {
