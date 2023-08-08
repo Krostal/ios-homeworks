@@ -17,7 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let userService: UserService
         
-        let loginInspector = LoginInspector()
+        let loginFactory = MyLoginFactory()
+        
+//        let loginInspector = LoginInspector()
+        let loginInspector = loginFactory.makeLoginInspector()
         
     #if DEBUG
         let testUserService = TestUserService(testUser: testUser)
