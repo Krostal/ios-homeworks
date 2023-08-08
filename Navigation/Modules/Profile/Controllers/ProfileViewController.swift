@@ -129,5 +129,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+extension ProfileViewController: LoginViewControllerDelegate {
+    func check(_ sender: LoginViewController, login: String, password: String) -> Bool {
+        Checker.shared.check(login: login, password: password)
+    }
+}
         
 
