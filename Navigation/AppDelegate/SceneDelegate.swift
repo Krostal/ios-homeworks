@@ -17,6 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let userService: UserService
         
+        let loginFactory = MyLoginFactory()
+        
+//        let loginInspector = LoginInspector()
+        let loginInspector = loginFactory.makeLoginInspector()
+        
     #if DEBUG
         let testUserService = TestUserService(testUser: testUser)
         userService = testUserService
@@ -25,12 +30,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         userService = currentUserService
     #endif
         
-        let loginViewController = UINavigationController(rootViewController: LogInViewController.init(userService: userService))
-        loginViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+        let loginViewController = LoginViewController(userService: userService, loginDelegate: loginInspector)
+        
+        let loginNavigationController = UINavigationController(rootViewController: loginViewController)
+        loginNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+        
+        
+        if let loginNavigationController = loginNavigationController.viewControllers.first as? LoginViewController {
+            loginNavigationController.loginDelegate = loginInspector
+        }
         
         let tabBarController = UITabBarController()
         tabBarController.view.tintColor = .systemBlue
-        tabBarController.viewControllers = [feedViewController, loginViewController]
+        tabBarController.viewControllers = [feedViewController, loginNavigationController]
         
         window.rootViewController = tabBarController
         
@@ -38,27 +50,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = window
     }
-
+    
     func sceneDidDisconnect(_ scene: UIScene) {
-
+        
     }
-
+    
     func sceneDidBecomeActive(_ scene: UIScene) {
- 
+        
     }
-
+    
     func sceneWillResignActive(_ scene: UIScene) {
-
+        
     }
-
+    
     func sceneWillEnterForeground(_ scene: UIScene) {
- 
+        
     }
-
+    
     func sceneDidEnterBackground(_ scene: UIScene) {
-
+        
     }
-
-
+    
 }
 

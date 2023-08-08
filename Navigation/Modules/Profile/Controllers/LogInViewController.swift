@@ -1,7 +1,17 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+protocol LoginViewControllerDelegate {
+    func check(
+        _ sender: LoginViewController,
+        login: String,
+        password: String
+    ) -> Bool
+}
+
+class LoginViewController: UIViewController {
+    
+    var loginDelegate: LoginViewControllerDelegate
     
     private let userService: UserService
     
@@ -104,10 +114,12 @@ class LogInViewController: UIViewController {
         return button
     }()
     
-    init(userService: UserService) {
-            self.userService = userService
-            super.init(nibName: nil, bundle: nil)
-        }
+    init(userService: UserService, loginDelegate: LoginViewControllerDelegate) {
+        self.userService = userService
+        self.loginDelegate = loginDelegate
+        
+        super.init(nibName: nil, bundle: nil)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -119,6 +131,7 @@ class LogInViewController: UIViewController {
         addSubviews()
         setupConstraints()
         setupContentOfScrollView()
+        defaultLoginAndPassword()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -204,6 +217,16 @@ class LogInViewController: UIViewController {
     logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
     }
+    
+    private func defaultLoginAndPassword() {
+    #if DEBUG
+        emailOrPhoneField.text = "TestUser"
+        passwordField.text = "UserTest"
+    #else
+        emailOrPhoneField.text = "Groot"
+        passwordField.text = "g18o15T"
+    #endif
+    }
 
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
@@ -249,10 +272,20 @@ class LogInViewController: UIViewController {
             showAlert(title: "Error", message: "Please enter a valid login.")
             return
         }
+        
+        guard let password = passwordField.text, !password.isEmpty else {
+            showAlert(title: "Error", message: "Please enter a password.")
+            return
+        }
+        
         if let user = userService.authorizeUser(login: login) {
-            let profileViewController = ProfileViewController()
-            profileViewController.currentUser = user
-            self.navigationController?.pushViewController(profileViewController, animated: true)
+            if loginDelegate.check(self, login: login, password: password) {
+                let profileViewController = ProfileViewController()
+                profileViewController.currentUser = user
+                self.navigationController?.pushViewController(profileViewController, animated: true)
+            } else {
+                showAlert(title: "Error", message: "Invalid login or password.")
+            }
         } else {
             showAlert(title: "Error", message: "Invalid login or user not found.")
         }
@@ -260,7 +293,7 @@ class LogInViewController: UIViewController {
     
 }
 
-extension LogInViewController: UITextFieldDelegate {
+extension LoginViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
