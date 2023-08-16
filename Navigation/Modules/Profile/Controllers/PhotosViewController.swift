@@ -58,9 +58,7 @@ class PhotosViewController: UIViewController {
     private func setupFacade() {
         
         facade = ImagePublisherFacade()
-        
         facade?.subscribe(self)
-    
         facade?.addImagesWithTimer(time: 0.5, repeat: 15, userImages: photos)
     }
     
@@ -112,9 +110,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
-        
         self.photos = images
-
         self.collectionView.reloadSections(IndexSet(integer: 0))
     }
 }
