@@ -41,8 +41,8 @@ final class FirstFourPhotosCell: UICollectionViewCell {
         ])
     }
     
-    func setup(with photos: PhotoGalery) {
-        firstFourPhotos.image = UIImage(named: photos.image)
+    func setup(with photos: UIImage) {
+        firstFourPhotos.image = photos
     }
     
 }

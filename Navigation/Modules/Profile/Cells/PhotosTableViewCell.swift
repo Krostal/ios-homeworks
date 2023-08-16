@@ -9,7 +9,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     var onLabelTapped: Action?
     
-    fileprivate lazy var photoGalery = PhotoGalery.make()
+    fileprivate lazy var photoGalery = PhotoGalery.makeImage()
     
     private lazy var collectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()

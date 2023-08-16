@@ -39,8 +39,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         setupLayouts()
     }
     
-    func setup(with photoGallery: PhotoGalery) {
-        photos.image = UIImage(named: photoGallery.image)
+    func setup(with photoGallery: UIImage) {
+        photos.image = photoGallery
     }
     
 }

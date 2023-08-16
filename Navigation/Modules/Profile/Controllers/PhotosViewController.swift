@@ -1,9 +1,12 @@
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
-    fileprivate lazy var photos: [PhotoGalery] = PhotoGalery.make()
+    fileprivate lazy var photos: [UIImage] = PhotoGalery.makeImage()
     
+    var facade: ImagePublisherFacade?
+            
     private lazy var collectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
         
@@ -15,22 +18,24 @@ class PhotosViewController: UIViewController {
         return collectionView
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupSubviews()
+        setupCollectionView()
         setupLayouts()
+        setupFacade()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = .systemBlue
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        facade?.removeSubscription(for: self)
+    }
+    
     private func setupView() {
         view.backgroundColor = .systemBackground
         title = "Photo Gallery"
-    }
-
-    private func setupSubviews() {
-        setupCollectionView()
     }
     
     private func setupCollectionView() {
@@ -49,6 +54,16 @@ class PhotosViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor)
         ])
     }
+    
+    private func setupFacade() {
+        
+        facade = ImagePublisherFacade()
+        
+        facade?.subscribe(self)
+    
+        facade?.addImagesWithTimer(time: 0.5, repeat: 15, userImages: photos)
+    }
+    
 }
 
 extension PhotosViewController: UICollectionViewDataSource {
@@ -59,8 +74,8 @@ extension PhotosViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
-        let photos = photos[indexPath.row]
-        cell.setup(with: photos)
+        let image = photos[indexPath.row]
+        cell.setup(with: image)
         return cell
     }
 }
@@ -93,3 +108,14 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     }
 
 }
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    
+    func receive(images: [UIImage]) {
+        
+        self.photos = images
+
+        self.collectionView.reloadSections(IndexSet(integer: 0))
+    }
+}
+
