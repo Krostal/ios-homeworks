@@ -2,14 +2,20 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-
-    private lazy var buttonDelete: UIButton = {
-        let deleteButton = UIButton()
-        deleteButton.setTitle("Delete this new", for: .normal)
-        deleteButton.setTitleColor(.darkText, for: .normal)
-        deleteButton.backgroundColor = .systemCyan
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        return deleteButton
+    
+    private enum Constants {
+        static let spacing: CGFloat = 50
+    }
+    
+    private lazy var buttonDelete: CustomButton = {
+        CustomButton(
+            title: "Delete this new",
+            backgroundColor: .systemCyan,
+            tintColor: .white,
+            tapHandler: {
+                Alert.showAlert(on: self)
+            }
+        )
     }()
     
     override func viewDidLoad() {
@@ -17,8 +23,6 @@ class InfoViewController: UIViewController {
         
         view.backgroundColor = .systemGray
         setupUI()
-        buttonDelete.addTarget(self, action: #selector(pressDelete(_:)), for: .touchDown)
-
     }
     
     private func setupUI() {
@@ -27,23 +31,18 @@ class InfoViewController: UIViewController {
         NSLayoutConstraint.activate([
             buttonDelete.leadingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                constant: 50
+                constant: Constants.spacing
             ),
             buttonDelete.trailingAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                constant: -50
+                constant: -Constants.spacing
             ),
             buttonDelete.centerYAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.centerYAnchor
             ),
-            buttonDelete.heightAnchor.constraint(equalToConstant: 50)
+            buttonDelete.heightAnchor.constraint(equalToConstant: Constants.spacing)
         ])
 
-    }
-    
-    @objc func pressDelete(_ sender: UIButton) {
-        
-        Alert.showAlert(on: self)
     }
 
 }

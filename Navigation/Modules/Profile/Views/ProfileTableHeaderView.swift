@@ -59,19 +59,23 @@ class ProfileTableHeaderView: UIView {
         return statusText
     }()
     
-    private lazy var setStatusButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Set status", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.tintColor = .white
-        button.layer.cornerRadius = 14
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        return button
+    private lazy var setStatusButton: CustomButton = {
+        CustomButton(
+            title: "Set status",
+            backgroundColor: .systemBlue,
+            tintColor: .white,
+            setupButton: { button in
+                button.layer.cornerRadius = 14
+                button.layer.shadowOffset = CGSize(width: 4, height: 4)
+                button.layer.shadowOpacity = 0.7
+                button.layer.shadowRadius = 4
+                button.layer.shadowColor = UIColor.black.cgColor
+            },
+            tapHandler: {
+                if self.statusTextField.text != nil {
+                    self.statusLabel.text = self.newStatus
+                }
+            })
     }()
     
     private lazy var returnAvatarButton = UIButton()
@@ -172,12 +176,6 @@ class ProfileTableHeaderView: UIView {
             fullNameLabel.text = user.fullName
             statusLabel.text = user.status
             avatarImageView.image = user.avatar
-        }
-    }
-    
-    @objc func buttonPressed(_ sender: UIButton) {
-        if statusTextField.text != nil {
-            statusLabel.text = newStatus
         }
     }
 
