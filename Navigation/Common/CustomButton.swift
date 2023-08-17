@@ -1,6 +1,6 @@
 import UIKit
 
-class CustomButton: UIButton {
+public class CustomButton: UIButton {
     
     private var tapHandler: (() -> Void)? // замыкание, которое будет вызвано при нажатии на кнопку
     private var setupButton: ((CustomButton) -> Void)? // замыкание, которое позволяет настроить внешний вид и свойства кнопки. Оно принимает в качестве параметра саму кнопку CustomButton.
