@@ -3,40 +3,70 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
+    private struct Constants {
+        static let spacing: CGFloat = 10
+    }
+    
     var new: News = News(title: "My post")
     
-    private lazy var firstButton: UIButton = {
-        let firstButton = UIButton()
-        firstButton.setTitle("Open the news", for: .normal)
-        firstButton.backgroundColor = .systemBlue
-        firstButton.tintColor = .white
-        firstButton.clipsToBounds = true
-        firstButton.layer.cornerRadius = 10
-        firstButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        firstButton.configuration = UIButton.Configuration.plain()
-        firstButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        return firstButton
+    private var feedModel = FeedModel() // создаем экземпляр класса FeelModel
+    
+    private lazy var firstButton = CustomButton(
+        title: "Open the news",
+        cornerRadius: Constants.spacing,
+        action: { [ weak self ] in
+            self?.showPostViewController()
+        }
+    )
+    
+    private lazy var secondButton = CustomButton(
+        title: "Show the news",
+        cornerRadius: Constants.spacing,
+        action: { [ weak self ] in
+            self?.showPostViewController()
+        }
+    )
+    
+    private lazy var textField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Enter the secret word (hint: \"пароль\")"
+        textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.keyboardType = UIKeyboardType.default
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        textField.font = .systemFont(ofSize: 17, weight: .regular)
+        textField.delegate = self
+        return textField
     }()
     
-    private lazy var secondButton: UIButton = {
-        let secondButton = UIButton()
-        secondButton.setTitle("Show the news", for: .normal)
-        secondButton.backgroundColor = .systemBlue
-        secondButton.tintColor = .white
-        secondButton.clipsToBounds = true
-        secondButton.layer.cornerRadius = 10
-        secondButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        secondButton.configuration = UIButton.Configuration.plain()
-        secondButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        return secondButton
+    private lazy var checkGuessButton = CustomButton(
+        title: "Check Guess",
+        backgroundColor: .systemGreen,
+        cornerRadius: Constants.spacing,
+        action: { [unowned self] in
+            guard let word = textField.text else { return }
+            feedModel.check(word: word)
+        })
+    
+    private lazy var resultLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 24, weight: .semibold)
+        return label
     }()
+    
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.clipsToBounds = true
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = Constants.spacing
         stackView.addArrangedSubview(firstButton)
         stackView.addArrangedSubview(secondButton)
         return stackView
@@ -45,23 +75,61 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.safeAreaLayoutGuide.owningView?.backgroundColor = .lightGray
+        addSubviews()
         setupConstraints()
+        feedModel.delegate = self // устанавливаем себя в качестве делегата модели FeelModel
+    }
+    
+    private func addSubviews() {
+        view.addSubview(stackView)
+        view.addSubview(textField)
+        view.addSubview(checkGuessButton)
+        view.addSubview(resultLabel)
     }
     
     private func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
-        view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: safeAreaGuide.centerYAnchor),
+            
+            checkGuessButton.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20),
+            checkGuessButton.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            checkGuessButton.heightAnchor.constraint(equalToConstant: 40),
+            checkGuessButton.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
+            
+            textField.bottomAnchor.constraint(equalTo: checkGuessButton.topAnchor, constant: -10),
+            textField.widthAnchor.constraint(lessThanOrEqualTo: safeAreaGuide.widthAnchor, multiplier: 0.9),
+            textField.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
+            
+            resultLabel.bottomAnchor.constraint(equalTo: textField.topAnchor, constant: -20),
+            resultLabel.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
         ])
     }
     
-    @objc func buttonPressed(_ sender: UIButton) {
+    private func showPostViewController() {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
         postViewController.titleNews = new.title
     }
+
+}
+
+extension FeedViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+// подписываемся на протокол FeedModelDelegate
+extension FeedViewController: FeedModelDelegate {
     
+    // Метод делегата, вызываемый после проверки слова в модели
+    func didCheckGuess(_ isCorrect: Bool) {
+        resultLabel.textColor = isCorrect ? .green : .systemRed
+        resultLabel.text = isCorrect ? "Correct!" : "Incorrect!"
+    }
 }

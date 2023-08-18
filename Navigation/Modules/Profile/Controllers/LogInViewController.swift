@@ -93,26 +93,26 @@ class LoginViewController: UIViewController {
         return password
     }()
     
-    private lazy var logInButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.configuration = UIButton.Configuration.plain()
-        button.setTitle("Log In", for: .normal)
-        button.tintColor = .white
-        button.configurationUpdateHandler = { button in
-            switch button.state {
-            case .highlighted, .disabled, .selected:
-                button.configuration?.background.image = UIImage(named: "bluePixel")
-                button.alpha = 0.8
-            default:
-                button.configuration?.background.image = UIImage(named: "bluePixel")
-                button.alpha = 1
+    private lazy var loginButton = CustomButton(
+        title: "Log In",
+        backgroundColor: .systemBackground,
+        tintColor: .white,
+        cornerRadius: 10,
+        setupButton: { button in
+            button.configurationUpdateHandler = { btn in
+                switch btn.state {
+                case .highlighted, .disabled, .selected:
+                    btn.configuration?.background.image = UIImage(named: "bluePixel")
+                    btn.alpha = 0.8
+                default:
+                    btn.configuration?.background.image = UIImage(named: "bluePixel")
+                    btn.alpha = 1
+                }
             }
-        }
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        return button
-    }()
+        },
+        action: { [weak self] in
+            self?.loginButtonPressed()
+        })
     
     init(userService: UserService, loginDelegate: LoginViewControllerDelegate) {
         self.userService = userService
@@ -152,7 +152,6 @@ class LoginViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-    
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -179,7 +178,7 @@ class LoginViewController: UIViewController {
         
         contentView.addSubview(logo)
         contentView.addSubview(registerField)
-        contentView.addSubview(logInButton)
+        contentView.addSubview(loginButton)
         
         NSLayoutConstraint.activate([
             logo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
@@ -208,13 +207,13 @@ class LoginViewController: UIViewController {
             separator.bottomAnchor.constraint(equalTo: passwordField.topAnchor),
             separator.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             
-            logInButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 16),
-            logInButton.leadingAnchor.constraint(equalTo: registerField.leadingAnchor),
-            logInButton.widthAnchor.constraint(equalTo: registerField.widthAnchor),
-            logInButton.heightAnchor.constraint(equalToConstant: 50),
+            loginButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 16),
+            loginButton.leadingAnchor.constraint(equalTo: registerField.leadingAnchor),
+            loginButton.widthAnchor.constraint(equalTo: registerField.widthAnchor),
+            loginButton.heightAnchor.constraint(equalToConstant: 50),
         ])
         
-    logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
     }
     
@@ -264,10 +263,9 @@ class LoginViewController: UIViewController {
 
     @objc func willHideKeyboard(_ notification: NSNotification) {
         scrollView.contentInset.bottom = 0.0
-
     }
     
-    @objc func buttonPressed(_ sender: UIButton) {
+    private func loginButtonPressed() {
         guard let login = emailOrPhoneField.text, !login.isEmpty else {
             showAlert(title: "Error", message: "Please enter a valid login.")
             return
@@ -297,7 +295,7 @@ extension LoginViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        return false
+        return true
     }
 }
 

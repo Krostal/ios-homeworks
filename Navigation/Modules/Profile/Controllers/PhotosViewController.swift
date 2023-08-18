@@ -26,7 +26,7 @@ class PhotosViewController: UIViewController {
         setupLayouts()
         setupFacade()
         navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.tintColor = .systemBlue
+        navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
     }
     
     override func viewWillDisappear(_ animated: Bool) {

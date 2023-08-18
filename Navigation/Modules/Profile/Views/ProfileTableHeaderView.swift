@@ -56,23 +56,31 @@ class ProfileTableHeaderView: UIView {
         statusText.textColor = .black
         statusText.layer.cornerRadius = 12
         statusText.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
+        statusText.autocapitalizationType = .none
+        statusText.autocorrectionType = UITextAutocorrectionType.no
+        statusText.keyboardType = UIKeyboardType.default
+        statusText.returnKeyType = UIReturnKeyType.done
+        statusText.clearButtonMode = UITextField.ViewMode.whileEditing
+        statusText.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        statusText.delegate = self
         return statusText
     }()
     
-    private lazy var setStatusButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Set status", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.tintColor = .white
-        button.layer.cornerRadius = 14
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        return button
-    }()
+    private lazy var setStatusButton = CustomButton(
+        title: "Set status",
+        backgroundColor: .systemBlue,
+        cornerRadius: 14,
+        setupButton: { button in
+            button.layer.shadowOffset = CGSize(width: 4, height: 4)
+            button.layer.shadowOpacity = 0.7
+            button.layer.shadowRadius = 4
+            button.layer.shadowColor = UIColor.black.cgColor
+        },
+        action: { [weak self] in
+            if let newStatus = self?.statusTextField.text {
+                self?.statusLabel.text = newStatus
+            }
+        })
     
     private lazy var returnAvatarButton = UIButton()
     private lazy var avatarBackground = UIView()
@@ -174,12 +182,6 @@ class ProfileTableHeaderView: UIView {
             avatarImageView.image = user.avatar
         }
     }
-    
-    @objc func buttonPressed(_ sender: UIButton) {
-        if statusTextField.text != nil {
-            statusLabel.text = newStatus
-        }
-    }
 
     @objc func statusTextChanged(_ textField: UITextField) {
         if statusTextField.text != nil {
@@ -231,5 +233,13 @@ class ProfileTableHeaderView: UIView {
         }
     }
 
+}
+
+extension ProfileTableHeaderView: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
                                    
