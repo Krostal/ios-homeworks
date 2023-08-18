@@ -11,49 +11,21 @@ class FeedViewController: UIViewController {
     
     private var feedModel = FeedModel() // создаем экземпляр класса FeelModel
     
-    private lazy var firstButton: CustomButton = {
-        CustomButton(
-            title: "Open the news",
-            backgroundColor: .systemBlue,
-            tintColor: .white,
-            setupButton: { button in
-                button.clipsToBounds = true
-                button.layer.cornerRadius = Constants.spacing
-                button.configuration = UIButton.Configuration.plain()
-                button.configuration?.contentInsets = NSDirectionalEdgeInsets(
-                    top: Constants.spacing,
-                    leading: Constants.spacing,
-                    bottom: Constants.spacing,
-                    trailing: Constants.spacing
-                )
-            },
-            tapHandler: {
-                self.showPostViewController()
-            }
-        )
-    }()
-
-    private lazy var secondButton: CustomButton = {
-        CustomButton(
-            title: "Show the news",
-            backgroundColor: .systemBlue,
-            tintColor: .white,
-            setupButton: { button in
-                button.clipsToBounds = true
-                button.layer.cornerRadius = Constants.spacing
-                button.configuration = UIButton.Configuration.plain()
-                button.configuration?.contentInsets = NSDirectionalEdgeInsets(
-                    top: Constants.spacing,
-                    leading: Constants.spacing,
-                    bottom: Constants.spacing,
-                    trailing: Constants.spacing
-                )
-            },
-            tapHandler: {
-                self.showPostViewController()
-            }
-        )
-    }()
+    private lazy var firstButton = CustomButton(
+        title: "Open the news",
+        cornerRadius: Constants.spacing,
+        action: { [ weak self ] in
+            self?.showPostViewController()
+        }
+    )
+    
+    private lazy var secondButton = CustomButton(
+        title: "Show the news",
+        cornerRadius: Constants.spacing,
+        action: { [ weak self ] in
+            self?.showPostViewController()
+        }
+    )
     
     private lazy var textField: UITextField = {
         let textField = UITextField()
@@ -71,27 +43,14 @@ class FeedViewController: UIViewController {
         return textField
     }()
     
-    private lazy var checkGuessButton: CustomButton = {
-        CustomButton(
-            title: "Check Guess",
-            backgroundColor: .systemGreen,
-            tintColor: .white,
-            setupButton: { button in
-                button.clipsToBounds = true
-                button.layer.cornerRadius = Constants.spacing
-                button.configuration = UIButton.Configuration.plain()
-                button.configuration?.contentInsets = NSDirectionalEdgeInsets(
-                    top: Constants.spacing,
-                    leading: Constants.spacing,
-                    bottom: Constants.spacing,
-                    trailing: Constants.spacing
-                )
-            },
-            tapHandler: {
-                self.checkGuess()
-            }
-        )
-    }()
+    private lazy var checkGuessButton = CustomButton(
+        title: "Check Guess",
+        backgroundColor: .systemGreen,
+        cornerRadius: Constants.spacing,
+        action: { [unowned self] in
+            guard let word = textField.text else { return }
+            feedModel.check(word: word)
+        })
     
     private lazy var resultLabel: UILabel = {
         let label = UILabel()
@@ -154,16 +113,7 @@ class FeedViewController: UIViewController {
         self.navigationController?.pushViewController(postViewController, animated: true)
         postViewController.titleNews = new.title
     }
-    
-    private func checkGuess() {
-        // Получаем введенное слово из текстового поля
-        guard let guess = textField.text, !guess.isEmpty else {
-            return
-        }
-        // Отправляем введенное слово в модель для проверки
-        feedModel.check(word: guess)
-    }
-    
+
 }
 
 extension FeedViewController: UITextFieldDelegate {

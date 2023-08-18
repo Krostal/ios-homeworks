@@ -93,29 +93,26 @@ class LoginViewController: UIViewController {
         return password
     }()
     
-    private lazy var loginButton: CustomButton = {
-        CustomButton(
-            title: "Log In",
-            backgroundColor: .systemBackground,
-            tintColor: .white,
-            setupButton: { button in
-                button.configuration = UIButton.Configuration.plain()
-                button.layer.cornerRadius = 10
-                button.configurationUpdateHandler = { btn in
-                    switch btn.state {
-                    case .highlighted, .disabled, .selected:
-                        btn.configuration?.background.image = UIImage(named: "bluePixel")
-                        btn.alpha = 0.8
-                    default:
-                        btn.configuration?.background.image = UIImage(named: "bluePixel")
-                        btn.alpha = 1
-                    }
+    private lazy var loginButton = CustomButton(
+        title: "Log In",
+        backgroundColor: .systemBackground,
+        tintColor: .white,
+        cornerRadius: 10,
+        setupButton: { button in
+            button.configurationUpdateHandler = { btn in
+                switch btn.state {
+                case .highlighted, .disabled, .selected:
+                    btn.configuration?.background.image = UIImage(named: "bluePixel")
+                    btn.alpha = 0.8
+                default:
+                    btn.configuration?.background.image = UIImage(named: "bluePixel")
+                    btn.alpha = 1
                 }
-            },
-            tapHandler: {
-                self.loginButtonPressed()
-            })
-    }()
+            }
+        },
+        action: { [weak self] in
+            self?.loginButtonPressed()
+        })
     
     init(userService: UserService, loginDelegate: LoginViewControllerDelegate) {
         self.userService = userService

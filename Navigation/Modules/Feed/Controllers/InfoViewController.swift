@@ -7,16 +7,12 @@ class InfoViewController: UIViewController {
         static let spacing: CGFloat = 50
     }
     
-    private lazy var buttonDelete: CustomButton = {
-        CustomButton(
+    private lazy var buttonDelete = CustomButton(
             title: "Delete this new",
             backgroundColor: .systemCyan,
-            tintColor: .white,
-            tapHandler: {
-                Alert.showAlert(on: self)
-            }
-        )
-    }()
+            action: { [weak self] in
+                self?.showAlert()
+            })
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +22,7 @@ class InfoViewController: UIViewController {
     }
     
     private func setupUI() {
+        
         view.addSubview(buttonDelete)
         
         NSLayoutConstraint.activate([
@@ -45,4 +42,20 @@ class InfoViewController: UIViewController {
 
     }
 
+    private func showAlert() {
+        let alert = UIAlertController(
+            title: "Attention!",
+            message: "Are you sure you want to delete this new?",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            print("The new successfully deleted")
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            print("Deletion canceled")
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
 }

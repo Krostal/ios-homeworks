@@ -41,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let tabBarController = UITabBarController()
-        tabBarController.view.tintColor = .systemBlue
+        tabBarController.view.tintColor = UIColor(named: "AccentColor")
         tabBarController.viewControllers = [feedViewController, loginNavigationController]
         
         window.rootViewController = tabBarController

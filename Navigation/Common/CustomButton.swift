@@ -2,43 +2,109 @@ import UIKit
 
 public class CustomButton: UIButton {
     
-    private var tapHandler: (() -> Void)? // замыкание, которое будет вызвано при нажатии на кнопку
-    private var setupButton: ((CustomButton) -> Void)? // замыкание, которое позволяет настроить внешний вид и свойства кнопки. Оно принимает в качестве параметра саму кнопку CustomButton.
+    typealias Action = () -> Void
+    
+    private var buttonAction: Action
+    
+    private var setupButton: ((CustomButton) -> Void)?
     
     init(
-        title: String, // текст, который будет отображаться на кнопке
-        backgroundColor: UIColor, // цвет фона кнопки
-        tintColor: UIColor, // цвет текста и значка на кнопке
-        setupButton: ((CustomButton) -> Void)? = nil, // замыкание для настройки внешнего вида кнопки (по умолчанию nil)
-        tapHandler: (() -> Void)? // замыкание, которое будет вызвано при нажатии на кнопку.
+        title: String,
+        backgroundColor: UIColor = UIColor(named: "AccentColor") ?? .systemBlue,
+        tintColor: UIColor = .white,
+        cornerRadius: CGFloat = 0,
+        setupButton: ((CustomButton) -> Void)? = nil,
+        action: @escaping Action
     ) {
+        buttonAction = action
         super.init(frame: .zero)
         
         setTitle(title, for: .normal)
         setTitleColor(.darkText, for: .normal)
         self.backgroundColor = backgroundColor
         self.tintColor = tintColor
-        
-        self.tapHandler = tapHandler
         self.setupButton = setupButton
+        
         configureButton()
         
-        translatesAutoresizingMaskIntoConstraints = false // отключаем автоматическую генерацию ограничений на основе фрейма для установки констрейнтов вручную
-        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside) // фиксируем действие кнопки
+        layer.cornerRadius = cornerRadius // Устанавливаем cornerRadius после setupButton
+
+        translatesAutoresizingMaskIntoConstraints = false
+        configuration = UIButton.Configuration.plain()
+        
+        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
-    // приватный метод, который вызывает переданное замыкание setupButton, если оно было передано, и передает ему текущий экземпляр CustomButton.
     private func configureButton() {
         setupButton?(self)
     }
     
-    // метод, который вызывается при нажатии на кнопку. Он запускает переданное замыкание tapHandler, если оно было передано.
     @objc private func buttonTapped() {
-        tapHandler?()
+        buttonAction()
     }
 }
+
+
+
+
+
+//import UIKit
+//
+//public class CustomButton: UIButton {
+//
+//    // Тип для замыкания, представляющего действие кнопки
+//    typealias Action = () -> Void
+//
+//    // Замыкание для выполнения действия при нажатии на кнопку
+//    var buttonAction: Action
+//
+//    // Приватные свойства для замыканий
+//    private var tapHandler: (() -> Void)?
+//    private var setupButton: ((CustomButton) -> Void)?
+//
+//    // Инициализатор кнопки
+//    init(
+//        title: String,
+//        backgroundColor: UIColor,
+//        tintColor: UIColor,
+//        setupButton: ((CustomButton) -> Void)? = nil,
+//        action: @escaping Action
+//    ) {
+//        buttonAction = action
+//        super.init(frame: .zero)
+//
+//        // Настройка внешнего вида кнопки
+//        setTitle(title, for: .normal)
+//        setTitleColor(.darkText, for: .normal)
+//        self.backgroundColor = backgroundColor
+//        self.tintColor = tintColor
+//
+//        // Привязка замыканий и настройка кнопки
+//        self.setupButton = setupButton
+//        configureButton()
+//
+//        // Отключение автоматически создаваемых ограничений и добавление действия для кнопки
+//        translatesAutoresizingMaskIntoConstraints = false
+//        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+//    // Вызов переданного замыкания для настройки внешнего вида кнопки
+//    private func configureButton() {
+//        setupButton?(self)
+//    }
+//
+//    // Обработчик нажатия на кнопку, вызывающий замыкание buttonAction
+//    @objc private func buttonTapped() {
+//        buttonAction()
+//    }
+//}
+
 
