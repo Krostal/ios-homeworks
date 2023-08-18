@@ -10,6 +10,7 @@
 		090DA49C2A8211C500BF7338 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49B2A8211C500BF7338 /* Checker.swift */; };
 		090DA49E2A821DE300BF7338 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49D2A821DE300BF7338 /* LoginInspector.swift */; };
 		090DA4A02A822F5B00BF7338 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49F2A822F5B00BF7338 /* LoginFactory.swift */; };
+		095BF86F2A8F83BA00CBD6B1 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */; };
 		096179682A8CC91C002F106E /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 096179672A8CC91C002F106E /* iOSIntPackage */; };
 		0961796A2A8DDF8A002F106E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096179692A8DDF8A002F106E /* CustomButton.swift */; };
 		097E879A2A40A50800B75D9C /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097E87992A40A50800B75D9C /* TextFieldWithPadding.swift */; };
@@ -85,6 +86,7 @@
 		090DA49B2A8211C500BF7338 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		090DA49D2A821DE300BF7338 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		090DA49F2A822F5B00BF7338 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		096179692A8DDF8A002F106E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		097E87992A40A50800B75D9C /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
 		09AA931A2A6BE8A1005896DB /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
@@ -146,6 +148,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		095BF86D2A8F837A00CBD6B1 /* MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				095BF8702A8F846500CBD6B1 /* Models */,
+				09B361C92A337411005979C8 /* FeedViewController.swift */,
+				095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */,
+			);
+			path = MVVM;
+			sourceTree = "<group>";
+		};
+		095BF8702A8F846500CBD6B1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				09C2B77A2A8DF92500120A82 /* FeedModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		09789B542A557B5200B98821 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,14 +184,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		09789B562A557B9300B98821 /* Controllers */ = {
+		09789B562A557B9300B98821 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				09B361C92A337411005979C8 /* FeedViewController.swift */,
 				09B361CE2A341C7A005979C8 /* PostViewController.swift */,
 				09B361D22A3433D2005979C8 /* InfoViewController.swift */,
 			);
-			path = Controllers;
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		09AA93542A6BEA25005896DB /* StorageService */ = {
@@ -218,8 +237,8 @@
 				09D6C06B2A51D4E1003C6DFB /* AppDelegate */,
 				09D6C06C2A51D53F003C6DFB /* Modules */,
 				09D6C06F2A51D63B003C6DFB /* Common */,
-				09B361BE2A336E8B005979C8 /* Assets.xcassets */,
 				09B361C02A336E8B005979C8 /* LaunchScreen.storyboard */,
+				09B361BE2A336E8B005979C8 /* Assets.xcassets */,
 				09B361C32A336E8B005979C8 /* Info.plist */,
 			);
 			path = Navigation;
@@ -246,7 +265,8 @@
 		09D6C06D2A51D54C003C6DFB /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				09789B562A557B9300B98821 /* Controllers */,
+				095BF86D2A8F837A00CBD6B1 /* MVVM */,
+				09789B562A557B9300B98821 /* Detail */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -275,7 +295,6 @@
 				090DA49D2A821DE300BF7338 /* LoginInspector.swift */,
 				090DA49F2A822F5B00BF7338 /* LoginFactory.swift */,
 				096179692A8DDF8A002F106E /* CustomButton.swift */,
-				09C2B77A2A8DF92500120A82 /* FeedModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -456,6 +475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				095BF86F2A8F83BA00CBD6B1 /* FeedViewModel.swift in Sources */,
 				09D6C0782A52CA17003C6DFB /* Reusable.swift in Sources */,
 				09B361B62A336E8A005979C8 /* AppDelegate.swift in Sources */,
 				09B361CA2A337411005979C8 /* FeedViewController.swift in Sources */,
