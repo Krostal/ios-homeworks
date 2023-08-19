@@ -59,7 +59,7 @@ class PhotosViewController: UIViewController {
         
         facade = ImagePublisherFacade()
         facade?.subscribe(self)
-        facade?.addImagesWithTimer(time: 0.5, repeat: 15, userImages: photos)
+        facade?.addImagesWithTimer(time: 0.5, repeat: 20, userImages: photos)
     }
     
 }

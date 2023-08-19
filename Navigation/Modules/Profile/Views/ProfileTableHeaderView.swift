@@ -45,26 +45,19 @@ class ProfileTableHeaderView: UIView {
         return status
     }()
     
-    private lazy var statusTextField: UITextField = {
-        let statusText = TextFieldWithPadding()
-        statusText.translatesAutoresizingMaskIntoConstraints = false
-        statusText.placeholder = "Set your status"
-        statusText.backgroundColor = .white
-        statusText.layer.borderWidth = 1
-        statusText.layer.borderColor = UIColor.black.cgColor
-        statusText.font = .systemFont(ofSize: 15, weight: .regular)
-        statusText.textColor = .black
-        statusText.layer.cornerRadius = 12
-        statusText.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
-        statusText.autocapitalizationType = .none
-        statusText.autocorrectionType = UITextAutocorrectionType.no
-        statusText.keyboardType = UIKeyboardType.default
-        statusText.returnKeyType = UIReturnKeyType.done
-        statusText.clearButtonMode = UITextField.ViewMode.whileEditing
-        statusText.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        statusText.delegate = self
-        return statusText
+    private lazy var statusTextField: CustomTextField = {
+        let textField = CustomTextField(
+            placeholder: "Set your status",
+            fontSize: 15
+        )
+        textField.backgroundColor = .white
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.cornerRadius = 12
+        textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
+        return textField
     }()
+    
     
     private lazy var setStatusButton = CustomButton(
         title: "Set status",
@@ -233,13 +226,5 @@ class ProfileTableHeaderView: UIView {
         }
     }
 
-}
-
-extension ProfileTableHeaderView: UITextFieldDelegate {
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
 }
                                    

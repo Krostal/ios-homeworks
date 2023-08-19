@@ -7,9 +7,9 @@ class FeedViewController: UIViewController {
         static let spacing: CGFloat = 10
     }
     
-    var new: News = News(title: "My post")
+    private let new: News = News(title: "My post")
     
-    private var feedModel = FeedModel() // создаем экземпляр класса FeelModel
+    private let viewModel: FeedViewModel
     
     private lazy var firstButton = CustomButton(
         title: "Open the news",
@@ -27,19 +27,12 @@ class FeedViewController: UIViewController {
         }
     )
     
-    private lazy var textField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter the secret word (hint: \"пароль\")"
+    private lazy var textField: CustomTextField = {
+        let textField = CustomTextField(
+            placeholder: "Enter the secret word (hint: \"пароль\")",
+            fontSize: 17
+        )
         textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.autocapitalizationType = .none
-        textField.autocorrectionType = UITextAutocorrectionType.no
-        textField.keyboardType = UIKeyboardType.default
-        textField.returnKeyType = UIReturnKeyType.done
-        textField.clearButtonMode = UITextField.ViewMode.whileEditing
-        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        textField.font = .systemFont(ofSize: 17, weight: .regular)
-        textField.delegate = self
         return textField
     }()
     
@@ -47,9 +40,9 @@ class FeedViewController: UIViewController {
         title: "Check Guess",
         backgroundColor: .systemGreen,
         cornerRadius: Constants.spacing,
-        action: { [unowned self] in
-            guard let word = textField.text else { return }
-            feedModel.check(word: word)
+        action: { [weak self] in
+            guard let word = self?.textField.text else { return }
+            self?.viewModel.validateSecretWord(word: word)
         })
     
     private lazy var resultLabel: UILabel = {
@@ -72,12 +65,21 @@ class FeedViewController: UIViewController {
         return stackView
     }()
     
+    init(viewModel: FeedViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.safeAreaLayoutGuide.owningView?.backgroundColor = .lightGray
+        view.backgroundColor = .lightGray
         addSubviews()
         setupConstraints()
-        feedModel.delegate = self // устанавливаем себя в качестве делегата модели FeelModel
+        bindViewModel()
     }
     
     private func addSubviews() {
@@ -108,28 +110,17 @@ class FeedViewController: UIViewController {
         ])
     }
     
+    private func bindViewModel() {
+        viewModel.stateChanged = { [weak self] newState in
+            self?.resultLabel.text = newState == .valid ? "Correct!" : "Incorrect!"
+            self?.resultLabel.textColor = newState == .valid ? .green : .red
+        }
+    }
+    
     private func showPostViewController() {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
         postViewController.titleNews = new.title
     }
 
-}
-
-extension FeedViewController: UITextFieldDelegate {
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
-
-// подписываемся на протокол FeedModelDelegate
-extension FeedViewController: FeedModelDelegate {
-    
-    // Метод делегата, вызываемый после проверки слова в модели
-    func didCheckGuess(_ isCorrect: Bool) {
-        resultLabel.textColor = isCorrect ? .green : .systemRed
-        resultLabel.text = isCorrect ? "Correct!" : "Incorrect!"
-    }
 }
