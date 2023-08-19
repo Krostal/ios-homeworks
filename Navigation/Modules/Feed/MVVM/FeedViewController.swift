@@ -27,19 +27,12 @@ class FeedViewController: UIViewController {
         }
     )
     
-    private lazy var textField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter the secret word (hint: \"пароль\")"
+    private lazy var textField: CustomTextField = {
+        let textField = CustomTextField(
+            placeholder: "Enter the secret word (hint: \"пароль\")",
+            fontSize: 17
+        )
         textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.autocapitalizationType = .none
-        textField.autocorrectionType = .no
-        textField.keyboardType = .default
-        textField.returnKeyType = .done
-        textField.clearButtonMode = .whileEditing
-        textField.contentVerticalAlignment = .center
-        textField.font = .systemFont(ofSize: 17, weight: .regular)
-        textField.delegate = self
         return textField
     }()
     
@@ -131,14 +124,3 @@ class FeedViewController: UIViewController {
     }
 
 }
-
-
-extension FeedViewController: UITextFieldDelegate {
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
-
-

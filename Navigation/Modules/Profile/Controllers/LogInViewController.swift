@@ -60,38 +60,33 @@ class LoginViewController: UIViewController {
         return separator
     }()
     
-    private lazy var emailOrPhoneField: UITextField = {
-        let emailOrPhone = TextFieldWithPadding()
-        emailOrPhone.translatesAutoresizingMaskIntoConstraints = false
-        emailOrPhone.placeholder = "Email or phone"
-        emailOrPhone.textColor = .black
-        emailOrPhone.font = .systemFont(ofSize: 16, weight: .regular)
-        emailOrPhone.autocapitalizationType = .none
-        emailOrPhone.autocorrectionType = UITextAutocorrectionType.no
-        emailOrPhone.keyboardType = UIKeyboardType.default
-        emailOrPhone.returnKeyType = UIReturnKeyType.done
-        emailOrPhone.clearButtonMode = UITextField.ViewMode.whileEditing
-        emailOrPhone.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        emailOrPhone.delegate = self
-        return emailOrPhone
+    private lazy var emailOrPhoneField: CustomTextField = {
+        let textField = CustomTextField(placeholder: "Email or phone", fontSize: 16)
+        textField.keyboardType = .emailAddress
+        return textField
     }()
     
-    private lazy var passwordField: UITextField = {
-        let password = TextFieldWithPadding()
-        password.translatesAutoresizingMaskIntoConstraints = false
-        password.placeholder = "Password"
-        password.textColor = .black
-        password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        password.autocapitalizationType = .none
-        password.isSecureTextEntry = true
-        password.autocorrectionType = UITextAutocorrectionType.no
-        password.keyboardType = UIKeyboardType.default
-        password.returnKeyType = UIReturnKeyType.done
-        password.clearButtonMode = UITextField.ViewMode.whileEditing
-        password.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        password.delegate = self
-        return password
+    private lazy var passwordField: CustomTextField = {
+        let textField = CustomTextField(placeholder: "Password", fontSize: 16)
+        textField.keyboardType = .default
+        textField.isSecureTextEntry = true
+        return textField
     }()
+    
+//    private lazy var emailOrPhoneField: UITextField = {
+//        let emailOrPhone = TextFieldWithPadding()
+//        emailOrPhone.placeholder = "Email or phone"
+//        setupTextField(element: emailOrPhone)
+//        return emailOrPhone
+//    }()
+//
+//    private lazy var passwordField: UITextField = {
+//        let password = TextFieldWithPadding()
+//        password.placeholder = "Password"
+//        password.isSecureTextEntry = true
+//        setupTextField(element: password)
+//        return password
+//    }()
     
     private lazy var loginButton = CustomButton(
         title: "Log In",
@@ -113,6 +108,19 @@ class LoginViewController: UIViewController {
         action: { [weak self] in
             self?.loginButtonPressed()
         })
+    
+    private func setupTextField(element: UITextField) {
+        element.translatesAutoresizingMaskIntoConstraints = false
+        element.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        element.textColor = .black
+        element.autocapitalizationType = .none
+        element.autocorrectionType = .no
+        element.keyboardType = .default
+        element.returnKeyType = .done
+        element.clearButtonMode = .whileEditing
+        element.contentVerticalAlignment = .center
+        element.delegate = self
+    }
     
     init(userService: UserService, loginDelegate: LoginViewControllerDelegate) {
         self.userService = userService
