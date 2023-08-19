@@ -7,9 +7,9 @@ class FeedViewController: UIViewController {
         static let spacing: CGFloat = 10
     }
     
-    var new: News = News(title: "My post")
+    private let new: News = News(title: "My post")
     
-    private let feedViewModel = FeedViewModel()
+    private let viewModel: FeedViewModel
     
     private lazy var firstButton = CustomButton(
         title: "Open the news",
@@ -33,11 +33,11 @@ class FeedViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.autocapitalizationType = .none
-        textField.autocorrectionType = UITextAutocorrectionType.no
-        textField.keyboardType = UIKeyboardType.default
-        textField.returnKeyType = UIReturnKeyType.done
-        textField.clearButtonMode = UITextField.ViewMode.whileEditing
-        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        textField.autocorrectionType = .no
+        textField.keyboardType = .default
+        textField.returnKeyType = .done
+        textField.clearButtonMode = .whileEditing
+        textField.contentVerticalAlignment = .center
         textField.font = .systemFont(ofSize: 17, weight: .regular)
         textField.delegate = self
         return textField
@@ -47,9 +47,9 @@ class FeedViewController: UIViewController {
         title: "Check Guess",
         backgroundColor: .systemGreen,
         cornerRadius: Constants.spacing,
-        action: { [unowned self] in
-            guard let word = textField.text else { return }
-            feedViewModel.checkGuess(word: word)
+        action: { [weak self] in
+            guard let word = self?.textField.text else { return }
+            self?.viewModel.validateSecretWord(word: word)
         })
     
     private lazy var resultLabel: UILabel = {
@@ -72,12 +72,21 @@ class FeedViewController: UIViewController {
         return stackView
     }()
     
+    init(viewModel: FeedViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.safeAreaLayoutGuide.owningView?.backgroundColor = .lightGray
+        view.backgroundColor = .lightGray
         addSubviews()
         setupConstraints()
-        feedViewModel.delegate = self
+        bindViewModel()
     }
     
     private func addSubviews() {
@@ -108,6 +117,13 @@ class FeedViewController: UIViewController {
         ])
     }
     
+    private func bindViewModel() {
+        viewModel.stateChanged = { [weak self] newState in
+            self?.resultLabel.text = newState == .valid ? "Correct!" : "Incorrect!"
+            self?.resultLabel.textColor = newState == .valid ? .green : .red
+        }
+    }
+    
     private func showPostViewController() {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
@@ -122,14 +138,6 @@ extension FeedViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-}
-
-
-extension FeedViewController: FeedViewModelDelegate {
-    func didCheckGuess(_ isCorrect: Bool) {
-        resultLabel.textColor = isCorrect ? .green : .systemRed
-        resultLabel.text = isCorrect ? "Correct!" : "Incorrect!"
     }
 }
 

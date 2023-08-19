@@ -10,16 +10,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
+        let feedModel = FeedModel()
+        let feedViewModel = FeedViewModel(model: feedModel)
         
-        let feedViewController = UINavigationController(rootViewController: FeedViewController())
+        let feedViewController = UINavigationController(rootViewController: FeedViewController(viewModel: feedViewModel))
         feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
-        feedViewController.view.tintColor = .black
         
         let userService: UserService
         
         let loginFactory = MyLoginFactory()
         
-//        let loginInspector = LoginInspector()
         let loginInspector = loginFactory.makeLoginInspector()
         
     #if DEBUG
