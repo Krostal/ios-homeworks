@@ -8,16 +8,23 @@ final class FeedViewModel {
         case invalid
     }
 
-    private let model: FeedModel
+    private let feedModel: FeedModel
+    private let feedCoordinator: FeedCoordinator
     var stateChanged: ((State) -> Void)?
 
-    init(model: FeedModel) {
-        self.model = model
+    init(model: FeedModel, coordinator: FeedCoordinator) {
+        self.feedModel = model
+        self.feedCoordinator = coordinator
     }
 
     func validateSecretWord(word: String) {
-        let isValid = model.check(word: word)
+        let isValid = feedModel.check(word: word)
         let newState: State = isValid ? .valid : .invalid
         stateChanged?(newState)
     }
+    
+    func buttonTapped() {
+        feedCoordinator.showDetails()
+    }
+
 }

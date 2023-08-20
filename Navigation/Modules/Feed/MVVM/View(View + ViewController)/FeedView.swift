@@ -1,9 +1,5 @@
 import UIKit
 
-protocol NavigationControllerProtocol: AnyObject {
-    var navigationController: UINavigationController? { get }
-}
-
 class FeedView: UIView {
     
     private struct Constants {
@@ -13,8 +9,6 @@ class FeedView: UIView {
     private let viewModel: FeedViewModel
     
     private let new: News = News(title: "My post")
-    
-    private weak var navigationControllerProtocol: NavigationControllerProtocol?
     
     private lazy var firstButton = CustomButton(
         title: "Open the news",
@@ -67,9 +61,8 @@ class FeedView: UIView {
         return stackView
     }()
     
-    init(viewModel: FeedViewModel, navigationControllerProtocol: NavigationControllerProtocol) {
+    init(viewModel: FeedViewModel) {
         self.viewModel = viewModel
-        self.navigationControllerProtocol = navigationControllerProtocol
         super.init(frame: .zero)
         setupSubviews()
         setupConstraints()
@@ -115,11 +108,7 @@ class FeedView: UIView {
     }
     
     private func showPostViewController() {
-        let postViewController = PostViewController()
-        postViewController.titleNews = new.title
-        if let navigationController = navigationControllerProtocol?.navigationController {
-            navigationController.pushViewController(postViewController, animated: true)
-        }
+        viewModel.buttonTapped()
     }
 }
 
