@@ -12,6 +12,7 @@
 		090DA4A02A822F5B00BF7338 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49F2A822F5B00BF7338 /* LoginFactory.swift */; };
 		095BF86F2A8F83BA00CBD6B1 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */; };
 		095BF8742A908B1A00CBD6B1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8732A908B1A00CBD6B1 /* CustomTextField.swift */; };
+		095BF8822A920BC500CBD6B1 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8812A920BC500CBD6B1 /* FeedView.swift */; };
 		096179682A8CC91C002F106E /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 096179672A8CC91C002F106E /* iOSIntPackage */; };
 		0961796A2A8DDF8A002F106E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096179692A8DDF8A002F106E /* CustomButton.swift */; };
 		09AA931B2A6BE8A1005896DB /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AA931A2A6BE8A1005896DB /* News.swift */; };
@@ -88,6 +89,7 @@
 		090DA49F2A822F5B00BF7338 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		095BF8732A908B1A00CBD6B1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		095BF8812A920BC500CBD6B1 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		096179692A8DDF8A002F106E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		09AA931A2A6BE8A1005896DB /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		09AA93532A6BEA25005896DB /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,19 +153,19 @@
 		095BF86D2A8F837A00CBD6B1 /* MVVM */ = {
 			isa = PBXGroup;
 			children = (
-				095BF8702A8F846500CBD6B1 /* Models */,
-				09B361C92A337411005979C8 /* FeedViewController.swift */,
-				095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */,
+				095BF8702A8F846500CBD6B1 /* Model */,
+				095BF87F2A920AFD00CBD6B1 /* View(View + ViewController) */,
+				095BF8802A920B1C00CBD6B1 /* ViewModel */,
 			);
 			path = MVVM;
 			sourceTree = "<group>";
 		};
-		095BF8702A8F846500CBD6B1 /* Models */ = {
+		095BF8702A8F846500CBD6B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				09C2B77A2A8DF92500120A82 /* FeedModel.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		095BF8752A908F7300CBD6B1 /* Custom UI-elements */ = {
@@ -174,6 +176,23 @@
 				09B361C02A336E8B005979C8 /* LaunchScreen.storyboard */,
 			);
 			path = "Custom UI-elements";
+			sourceTree = "<group>";
+		};
+		095BF87F2A920AFD00CBD6B1 /* View(View + ViewController) */ = {
+			isa = PBXGroup;
+			children = (
+				09B361C92A337411005979C8 /* FeedViewController.swift */,
+				095BF8812A920BC500CBD6B1 /* FeedView.swift */,
+			);
+			path = "View(View + ViewController)";
+			sourceTree = "<group>";
+		};
+		095BF8802A920B1C00CBD6B1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		09789B542A557B5200B98821 /* Controllers */ = {
@@ -493,6 +512,7 @@
 				09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */,
 				09AA931B2A6BE8A1005896DB /* News.swift in Sources */,
 				09B361CD2A337445005979C8 /* ProfileViewController.swift in Sources */,
+				095BF8822A920BC500CBD6B1 /* FeedView.swift in Sources */,
 				09F402722A7CBC3A009DCD7F /* TestUser.swift in Sources */,
 				09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */,
 				09E98EB22A3852D000DE6940 /* ProfileTableHeaderView.swift in Sources */,

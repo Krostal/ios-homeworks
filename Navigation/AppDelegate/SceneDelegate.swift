@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedModel = FeedModel()
         let feedViewModel = FeedViewModel(model: feedModel)
         
-        let feedViewController = UINavigationController(rootViewController: FeedViewController(viewModel: feedViewModel))
+        let feedViewController = UINavigationController(rootViewController: FeedViewController(viewModel: feedViewModel, firstNavigationController: UINavigationController()))
         feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
         
         let userService: UserService

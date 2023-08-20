@@ -1,15 +1,20 @@
-
 import UIKit
 
-class FeedViewController: UIViewController {
+protocol NavigationControllerProtocol: AnyObject {
+    var navigationController: UINavigationController? { get }
+}
+
+class FeedView: UIView {
     
     private struct Constants {
         static let spacing: CGFloat = 10
     }
     
+    private let viewModel: FeedViewModel
+    
     private let new: News = News(title: "My post")
     
-    private let viewModel: FeedViewModel
+    private weak var navigationControllerProtocol: NavigationControllerProtocol?
     
     private lazy var firstButton = CustomButton(
         title: "Open the news",
@@ -53,64 +58,56 @@ class FeedViewController: UIViewController {
         return label
     }()
     
-    
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
+        let stackView = UIStackView(arrangedSubviews: [firstButton, secondButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.clipsToBounds = true
         stackView.axis = .vertical
         stackView.spacing = Constants.spacing
-        stackView.addArrangedSubview(firstButton)
-        stackView.addArrangedSubview(secondButton)
         return stackView
     }()
     
-    init(viewModel: FeedViewModel) {
+    init(viewModel: FeedViewModel, navigationControllerProtocol: NavigationControllerProtocol) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        self.navigationControllerProtocol = navigationControllerProtocol
+        super.init(frame: .zero)
+        setupSubviews()
+        setupConstraints()
+        bindViewModel()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .lightGray
-        addSubviews()
-        setupConstraints()
-        bindViewModel()
-    }
-    
-    private func addSubviews() {
-        view.addSubview(stackView)
-        view.addSubview(textField)
-        view.addSubview(checkGuessButton)
-        view.addSubview(resultLabel)
+    private func setupSubviews() {
+        addSubview(stackView)
+        addSubview(textField)
+        addSubview(checkGuessButton)
+        addSubview(resultLabel)
     }
     
     private func setupConstraints() {
-        let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: safeAreaGuide.centerYAnchor),
+            stackView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
             
             checkGuessButton.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20),
             checkGuessButton.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             checkGuessButton.heightAnchor.constraint(equalToConstant: 40),
-            checkGuessButton.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
+            checkGuessButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             
             textField.bottomAnchor.constraint(equalTo: checkGuessButton.topAnchor, constant: -10),
-            textField.widthAnchor.constraint(lessThanOrEqualTo: safeAreaGuide.widthAnchor, multiplier: 0.9),
-            textField.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
+            textField.widthAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            textField.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             
             resultLabel.bottomAnchor.constraint(equalTo: textField.topAnchor, constant: -20),
-            resultLabel.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
+            resultLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
         ])
     }
     
-    private func bindViewModel() {
+    func bindViewModel() {
         viewModel.stateChanged = { [weak self] newState in
             self?.resultLabel.text = newState == .valid ? "Correct!" : "Incorrect!"
             self?.resultLabel.textColor = newState == .valid ? .green : .red
@@ -119,8 +116,10 @@ class FeedViewController: UIViewController {
     
     private func showPostViewController() {
         let postViewController = PostViewController()
-        self.navigationController?.pushViewController(postViewController, animated: true)
         postViewController.titleNews = new.title
+        if let navigationController = navigationControllerProtocol?.navigationController {
+            navigationController.pushViewController(postViewController, animated: true)
+        }
     }
-
 }
+
