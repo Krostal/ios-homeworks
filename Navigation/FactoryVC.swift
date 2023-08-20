@@ -37,12 +37,13 @@ final class Factory {
             
         case .loginCoordinator:
             
-            let loginCoordinator = LoginCoordinator()
-            
             let userService: UserService
-            
             let loginFactory = MyLoginFactory()
             let loginInspector = loginFactory.makeLoginInspector()
+            
+            let loginCoordinator = LoginCoordinator()
+            loginCoordinator.navigationController = navigationController
+                        
             
         #if DEBUG
             let testUserService = TestUserService(testUser: testUser)
@@ -53,8 +54,8 @@ final class Factory {
         #endif
             
             let loginViewController = LoginViewController(userService: userService, loginDelegate: loginInspector)
+            loginViewController.loginCoordinator = loginCoordinator
             
-            loginCoordinator.navigationController = navigationController
             
             navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
             navigationController.setViewControllers([loginViewController], animated: true)

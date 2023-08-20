@@ -13,6 +13,8 @@ class LoginViewController: UIViewController {
     
     var loginDelegate: LoginViewControllerDelegate
     
+    var loginCoordinator: LoginCoordinator?
+    
     private let userService: UserService
     
     private lazy var scrollView: UIScrollView = {
@@ -271,9 +273,7 @@ class LoginViewController: UIViewController {
         
         if let user = userService.authorizeUser(login: login) {
             if loginDelegate.check(self, login: login, password: password) {
-                let profileViewController = ProfileViewController()
-                profileViewController.currentUser = user
-                self.navigationController?.pushViewController(profileViewController, animated: true)
+                loginCoordinator?.showProfile(forUser: user)
             } else {
                 showAlert(title: "Error", message: "Invalid login or password.")
             }
