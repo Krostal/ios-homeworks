@@ -16,7 +16,6 @@
 		095BF8852A921B2100CBD6B1 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8842A921B2100CBD6B1 /* MainCoordinator.swift */; };
 		095BF8872A921B3300CBD6B1 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8862A921B3300CBD6B1 /* LoginCoordinator.swift */; };
 		095BF88B2A921B4E00CBD6B1 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF88A2A921B4E00CBD6B1 /* FeedCoordinator.swift */; };
-		095BF88D2A921E2000CBD6B1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF88C2A921E2000CBD6B1 /* MainTabBarController.swift */; };
 		095BF88F2A92280600CBD6B1 /* FactoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF88E2A92280600CBD6B1 /* FactoryVC.swift */; };
 		096179682A8CC91C002F106E /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 096179672A8CC91C002F106E /* iOSIntPackage */; };
 		0961796A2A8DDF8A002F106E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096179692A8DDF8A002F106E /* CustomButton.swift */; };
@@ -99,7 +98,6 @@
 		095BF8842A921B2100CBD6B1 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		095BF8862A921B3300CBD6B1 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		095BF88A2A921B4E00CBD6B1 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
-		095BF88C2A921E2000CBD6B1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		095BF88E2A92280600CBD6B1 /* FactoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryVC.swift; sourceTree = "<group>"; };
 		096179692A8DDF8A002F106E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		09AA931A2A6BE8A1005896DB /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
@@ -286,7 +284,6 @@
 		09B361B42A336E8A005979C8 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				095BF88C2A921E2000CBD6B1 /* MainTabBarController.swift */,
 				095BF88E2A92280600CBD6B1 /* FactoryVC.swift */,
 				095BF8832A921B0C00CBD6B1 /* Coordinators */,
 				09D6C06B2A51D4E1003C6DFB /* AppDelegate */,
@@ -557,7 +554,6 @@
 				09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */,
 				095BF88F2A92280600CBD6B1 /* FactoryVC.swift in Sources */,
 				090DA49C2A8211C500BF7338 /* Checker.swift in Sources */,
-				095BF88D2A921E2000CBD6B1 /* MainTabBarController.swift in Sources */,
 				095BF8852A921B2100CBD6B1 /* MainCoordinator.swift in Sources */,
 				09F402702A7C8F4F009DCD7F /* User.swift in Sources */,
 			);

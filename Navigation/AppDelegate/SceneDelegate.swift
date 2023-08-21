@@ -12,9 +12,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         let mainCoordinator = MainCoordinator()
+        let rootViewController = mainCoordinator.startApp()
         
-        window?.rootViewController = mainCoordinator.startApp()
-
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
 
     }
