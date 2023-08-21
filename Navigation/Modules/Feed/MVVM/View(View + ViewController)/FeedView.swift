@@ -101,9 +101,11 @@ class FeedView: UIView {
     }
     
     func bindViewModel() {
-        viewModel.stateChanged = { [weak self] newState in
-            self?.resultLabel.text = newState == .valid ? "Correct!" : "Incorrect!"
-            self?.resultLabel.textColor = newState == .valid ? .green : .red
+        viewModel.validationResultChanged = { [unowned self] isValid, validationResultText in
+            DispatchQueue.main.async {
+                self.resultLabel.text = validationResultText
+                self.resultLabel.textColor = isValid ? .green : .red
+            }
         }
     }
     

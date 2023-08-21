@@ -2,15 +2,12 @@
 import Foundation
 
 final class FeedViewModel {
-    
-    enum State {
-        case valid
-        case invalid
-    }
 
     private let feedModel: FeedModel
     private let feedCoordinator: FeedCoordinator
-    var stateChanged: ((State) -> Void)?
+    
+    var validationResultChanged: ((Bool, String) -> Void)?
+    
 
     init(model: FeedModel, coordinator: FeedCoordinator) {
         self.feedModel = model
@@ -19,8 +16,8 @@ final class FeedViewModel {
 
     func validateSecretWord(word: String) {
         let isValid = feedModel.check(word: word)
-        let newState: State = isValid ? .valid : .invalid
-        stateChanged?(newState)
+        let validationResultText = isValid ? "Сorrect!" : "Incorrect!"
+        validationResultChanged?(isValid, validationResultText)
     }
     
     func buttonTapped() {
