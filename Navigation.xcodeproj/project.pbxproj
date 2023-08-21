@@ -36,6 +36,7 @@
 		09B361CD2A337445005979C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361CC2A337445005979C8 /* ProfileViewController.swift */; };
 		09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361CE2A341C7A005979C8 /* PostViewController.swift */; };
 		09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361D22A3433D2005979C8 /* InfoViewController.swift */; };
+		09BD83032A9328160059DF3F /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD83022A9328160059DF3F /* ProfileCoordinator.swift */; };
 		09C2B77B2A8DF92500120A82 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C2B77A2A8DF92500120A82 /* FeedModel.swift */; };
 		09D6C0642A4C854A003C6DFB /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6C0632A4C854A003C6DFB /* PhotoGallery.swift */; };
 		09D6C0712A51E103003C6DFB /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6C0702A51E103003C6DFB /* PhotosTableViewCell.swift */; };
@@ -118,6 +119,7 @@
 		09B361CE2A341C7A005979C8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		09B361D02A342982005979C8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		09B361D22A3433D2005979C8 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		09BD83022A9328160059DF3F /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		09C2B77A2A8DF92500120A82 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		09D6C0632A4C854A003C6DFB /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
 		09D6C0702A51E103003C6DFB /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				095BF8842A921B2100CBD6B1 /* MainCoordinator.swift */,
 				095BF88A2A921B4E00CBD6B1 /* FeedCoordinator.swift */,
 				095BF8862A921B3300CBD6B1 /* LoginCoordinator.swift */,
+				09BD83022A9328160059DF3F /* ProfileCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				09B361CA2A337411005979C8 /* FeedViewController.swift in Sources */,
 				09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */,
 				09D6C0642A4C854A003C6DFB /* PhotoGallery.swift in Sources */,
+				09BD83032A9328160059DF3F /* ProfileCoordinator.swift in Sources */,
 				09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */,
 				095BF88B2A921B4E00CBD6B1 /* FeedCoordinator.swift in Sources */,
 				09AA931B2A6BE8A1005896DB /* News.swift in Sources */,

@@ -5,11 +5,8 @@ final class LoginCoordinator {
     var navigationController: UINavigationController?
     
     func showProfile(forUser user: User) {
-        let profileViewController = ProfileViewController()
-        profileViewController.currentUser = user
-        navigationController?.pushViewController(profileViewController, animated: true)
-        
+        let profileCoordinator = ProfileCoordinator()
+        profileCoordinator.navigationController = navigationController
+        profileCoordinator.start(forUser: user)
     }
 }
-
-
