@@ -7,9 +7,7 @@ class FeedView: UIView {
     }
     
     private let viewModel: FeedViewModel
-    
-    private let new: News = News(title: "My post")
-    
+
     private lazy var firstButton = CustomButton(
         title: "Open the news",
         cornerRadius: Constants.spacing,

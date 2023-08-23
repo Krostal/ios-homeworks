@@ -1,14 +1,14 @@
 import UIKit
 
-final class LoginCoordinator {
-    
-    var navigationController: UINavigationController?
-    
-    init() {
-        navigationController = UINavigationController() 
+final class LoginCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
+    var navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
-    
-    func start() -> UINavigationController {
+
+    func start() {
         let userService: UserService
         let loginFactory = MyLoginFactory()
         let loginInspector = loginFactory.makeLoginInspector()
@@ -24,19 +24,18 @@ final class LoginCoordinator {
         let loginViewController = LoginViewController(userService: userService, loginDelegate: loginInspector)
         loginViewController.loginCoordinator = self
         
-        navigationController?.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
-        navigationController?.setViewControllers([loginViewController], animated: true)
+        navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+        navigationController.setViewControllers([loginViewController], animated: true)
         
-        if let loginNavigationController = navigationController?.viewControllers.first as? LoginViewController {
+        if let loginNavigationController = navigationController.viewControllers.first as? LoginViewController {
             loginNavigationController.loginDelegate = loginInspector
         }
-        
-        return navigationController!
     }
     
     func showProfile(forUser user: User) {
-        let profileCoordinator = ProfileCoordinator()
-        profileCoordinator.navigationController = navigationController
+        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        addChildCoordinator(profileCoordinator)
         profileCoordinator.start(forUser: user)
     }
 }
+

@@ -143,7 +143,6 @@ class LoginViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-        tabBarController?.tabBar.backgroundColor = .systemGray6
         navigationController?.navigationBar.isHidden = true
     }
     

@@ -1,7 +1,13 @@
 
 import UIKit
 
+protocol InfoViewControllerDelegate: AnyObject {
+    func infoViewControllerDismissed()
+}
+
 class InfoViewController: UIViewController {
+    
+    weak var infoDelegate: InfoViewControllerDelegate?
     
     private enum Constants {
         static let spacing: CGFloat = 50
@@ -19,6 +25,11 @@ class InfoViewController: UIViewController {
         
         view.backgroundColor = .systemGray
         setupUI()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        infoDelegate?.infoViewControllerDismissed()
     }
     
     private func setupUI() {

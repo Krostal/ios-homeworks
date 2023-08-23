@@ -21,7 +21,7 @@ final class FeedViewModel {
     }
     
     func buttonTapped() {
-        feedCoordinator.showDetails()
+        feedCoordinator.showPost()
     }
 
 }

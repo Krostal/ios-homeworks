@@ -16,18 +16,17 @@ final class Factory {
     }
     
     private func startModule() {
-        
         switch flow {
-            
         case .feedCoordinator:
-            let feedCoordinator = FeedCoordinator()
-            navigationController = feedCoordinator.start()
+            let feedCoordinator = FeedCoordinator(navigationController: navigationController)
+            feedCoordinator.start()
             viewController = navigationController.viewControllers.first
             
         case .loginCoordinator:
-            let loginCoordinator = LoginCoordinator()
-            navigationController = loginCoordinator.start()
+            let loginCoordinator = LoginCoordinator(navigationController: navigationController)
+            loginCoordinator.start()
             viewController = navigationController.viewControllers.first
         }
     }
 }
+

@@ -1,33 +1,43 @@
 
 import UIKit
 
-final class FeedCoordinator {
+final class FeedCoordinator: Coordinator {
     
-    private let new: News = News(title: "My post")
+    var childCoordinators: [Coordinator] = []
     
-    var navigationController: UINavigationController?
+    private let postTitle: News = News(title: "My Post")
     
-    init() {
-        navigationController = UINavigationController() 
+    private let navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
-    
-    func start() -> UINavigationController {
+
+    func start() {
         let feedModel = FeedModel()
         let feedViewModel = FeedViewModel(model: feedModel, coordinator: self)
         let feedViewController = FeedViewController(viewModel: feedViewModel)
-                
-        navigationController?.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
-        navigationController?.setViewControllers([feedViewController], animated: true)
-        
-        return navigationController!
+
+        navigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
+        navigationController.setViewControllers([feedViewController], animated: true)
     }
-    
-    func showDetails() {
-        let postViewController = PostViewController()
-        postViewController.titleNews = new.title
-        
-        navigationController?.pushViewController(postViewController, animated: true)
+
+    func showPost() {
+        let postCoordinator = PostCoordinator(navigationController: navigationController, postTitle: postTitle.title)
+        postCoordinator.delegatePostCoordinator = self
+        print(childCoordinators)
+        addChildCoordinator(postCoordinator)
+        print(childCoordinators)
+        postCoordinator.start()
+        print(childCoordinators)
     }
 }
 
-
+extension FeedCoordinator: PostCoordinatorDelegate {
+    func postCoordinatorDidFinish(_ coordinator: PostCoordinator) {
+        removeChildCoordinator(coordinator)
+        print(childCoordinators)
+    }
+    
+    
+}
