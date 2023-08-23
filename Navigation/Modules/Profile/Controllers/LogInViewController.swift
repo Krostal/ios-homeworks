@@ -13,6 +13,8 @@ class LoginViewController: UIViewController {
     
     var loginDelegate: LoginViewControllerDelegate
     
+    var loginCoordinator: LoginCoordinator?
+    
     private let userService: UserService
     
     private lazy var scrollView: UIScrollView = {
@@ -73,21 +75,6 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
-//    private lazy var emailOrPhoneField: UITextField = {
-//        let emailOrPhone = TextFieldWithPadding()
-//        emailOrPhone.placeholder = "Email or phone"
-//        setupTextField(element: emailOrPhone)
-//        return emailOrPhone
-//    }()
-//
-//    private lazy var passwordField: UITextField = {
-//        let password = TextFieldWithPadding()
-//        password.placeholder = "Password"
-//        password.isSecureTextEntry = true
-//        setupTextField(element: password)
-//        return password
-//    }()
-    
     private lazy var loginButton = CustomButton(
         title: "Log In",
         backgroundColor: .systemBackground,
@@ -144,19 +131,18 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         setupKeyboardObservers()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         removeKeyboardObservers()
     }
     
     private func setupView() {
         view.backgroundColor = .white
-        tabBarController?.tabBar.backgroundColor = .systemGray6
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -221,30 +207,30 @@ class LoginViewController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: 50),
         ])
         
-    loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
     }
     
     private func defaultLoginAndPassword() {
-    #if DEBUG
+#if DEBUG
         emailOrPhoneField.text = "TestUser"
         passwordField.text = "UserTest"
-    #else
+#else
         emailOrPhoneField.text = "Groot"
         passwordField.text = "g18o15T"
-    #endif
+#endif
     }
-
+    
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
-
+        
         notificationCenter.addObserver(
             self,
             selector: #selector(self.willShowKeyboard(_:)),
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-
+        
         notificationCenter.addObserver(
             self,
             selector: #selector(self.willHideKeyboard(_:)),
@@ -258,7 +244,7 @@ class LoginViewController: UIViewController {
         notificationCenter.removeObserver(self)
     }
     
-    private func showAlert(title: String, message: String) {
+    func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -268,7 +254,7 @@ class LoginViewController: UIViewController {
         let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
         scrollView.contentInset.bottom += keyboardHeight ?? 0.0
     }
-
+    
     @objc func willHideKeyboard(_ notification: NSNotification) {
         scrollView.contentInset.bottom = 0.0
     }
@@ -286,9 +272,7 @@ class LoginViewController: UIViewController {
         
         if let user = userService.authorizeUser(login: login) {
             if loginDelegate.check(self, login: login, password: password) {
-                let profileViewController = ProfileViewController()
-                profileViewController.currentUser = user
-                self.navigationController?.pushViewController(profileViewController, animated: true)
+                loginCoordinator?.showProfile(forUser: user)
             } else {
                 showAlert(title: "Error", message: "Invalid login or password.")
             }

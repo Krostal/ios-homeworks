@@ -9,46 +9,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         
-        let window = UIWindow(windowScene: scene)
-        let feedModel = FeedModel()
-        let feedViewModel = FeedViewModel(model: feedModel)
+        window = UIWindow(windowScene: scene)
         
-        let feedViewController = UINavigationController(rootViewController: FeedViewController(viewModel: feedViewModel))
-        feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
+        let mainCoordinator = MainCoordinator()
+        let rootViewController = mainCoordinator.startApp()
         
-        let userService: UserService
-        
-        let loginFactory = MyLoginFactory()
-        
-        let loginInspector = loginFactory.makeLoginInspector()
-        
-    #if DEBUG
-        let testUserService = TestUserService(testUser: testUser)
-        userService = testUserService
-    #else
-        let currentUserService = CurrentUserService(currentUser: groot)
-        userService = currentUserService
-    #endif
-        
-        let loginViewController = LoginViewController(userService: userService, loginDelegate: loginInspector)
-        
-        let loginNavigationController = UINavigationController(rootViewController: loginViewController)
-        loginNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
-        
-        
-        if let loginNavigationController = loginNavigationController.viewControllers.first as? LoginViewController {
-            loginNavigationController.loginDelegate = loginInspector
-        }
-        
-        let tabBarController = UITabBarController()
-        tabBarController.view.tintColor = UIColor(named: "AccentColor")
-        tabBarController.viewControllers = [feedViewController, loginNavigationController]
-        
-        window.rootViewController = tabBarController
-        
-        window.makeKeyAndVisible()
-        
-        self.window = window
+        window?.rootViewController = rootViewController
+        window?.makeKeyAndVisible()
+
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

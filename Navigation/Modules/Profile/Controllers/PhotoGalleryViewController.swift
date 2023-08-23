@@ -1,9 +1,15 @@
 import UIKit
 import iOSIntPackage
 
-class PhotosViewController: UIViewController {
+protocol PhotoGalleryViewControllerDelegate: AnyObject {
+    func photoGalleryViewControllerDidDisappear()
+}
+
+class PhotoGalleryViewController: UIViewController {
     
     fileprivate lazy var photos: [UIImage] = PhotoGalery.makeImage()
+    
+    weak var delegate: PhotoGalleryViewControllerDelegate?
     
     var facade: ImagePublisherFacade?
             
@@ -31,6 +37,10 @@ class PhotosViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         facade?.removeSubscription(for: self)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        delegate?.photoGalleryViewControllerDidDisappear()
     }
     
     private func setupView() {
@@ -64,7 +74,7 @@ class PhotosViewController: UIViewController {
     
 }
 
-extension PhotosViewController: UICollectionViewDataSource {
+extension PhotoGalleryViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photos.count
@@ -78,7 +88,7 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
 }
 
-extension PhotosViewController: UICollectionViewDelegateFlowLayout {
+extension PhotoGalleryViewController: UICollectionViewDelegateFlowLayout {
     
     private func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
         
@@ -107,7 +117,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
 }
 
-extension PhotosViewController: ImageLibrarySubscriber {
+extension PhotoGalleryViewController: ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
         self.photos = images

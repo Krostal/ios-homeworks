@@ -1,19 +1,20 @@
 
 import UIKit
 
-typealias Action = () -> Void?
+protocol PhotosTableViewCellDelegate: AnyObject {
+    func tapArrowClickLabel()
+}
 
-class PhotosTableViewCell: UITableViewCell {
+class PhotoGalleryTableViewCell: UITableViewCell {
     
     static let id = "PhotosTableViewCell"
     
-    var onLabelTapped: Action?
+    weak var delegate: PhotosTableViewCellDelegate?
     
     fileprivate lazy var photoGalery = PhotoGalery.makeImage()
     
     private lazy var collectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: viewLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .white
@@ -28,7 +29,6 @@ class PhotosTableViewCell: UITableViewCell {
         photosLabel.text = "Photos"
         photosLabel.textColor = .black
         photosLabel.font = .systemFont(ofSize: 24, weight: .bold)
-        
         return photosLabel
     }()
     
@@ -94,12 +94,12 @@ class PhotosTableViewCell: UITableViewCell {
     
     @objc
     private func tapOnLabel() {
-        onLabelTapped?()
+        delegate?.tapArrowClickLabel()
     }
     
 }
 
-extension PhotosTableViewCell: UICollectionViewDataSource {
+extension PhotoGalleryTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photoGalery.index(before: 5)
@@ -109,21 +109,18 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FirstFourPhotosCell.identifier, for: indexPath) as! FirstFourPhotosCell
         let photos = photoGalery[indexPath.row]
         cell.setup(with: photos)
-        
         return cell
     }
 }
     
-extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
+extension PhotoGalleryTableViewCell: UICollectionViewDelegateFlowLayout {
     
     
     private func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {
         let itemsInRow: CGFloat = 4
         let padding: CGFloat = 12
-        
         let totalSpacing: CGFloat = (itemsInRow - 1) * spacing + (2 * padding)
         let finalWidth = (width - totalSpacing) / itemsInRow
-        
         return floor(finalWidth)
     }
     
