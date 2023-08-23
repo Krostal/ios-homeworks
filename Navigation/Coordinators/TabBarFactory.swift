@@ -1,13 +1,13 @@
 import UIKit
 
-final class Factory {
+final class TabBarFactory {
     enum Flow {
         case feedCoordinator
         case loginCoordinator
     }
     
     private let flow: Flow
-    private(set) var viewController: UIViewController!
+    private(set) var viewController: UIViewController?
     private(set) var navigationController = UINavigationController()
     
     init(flow: Flow) {

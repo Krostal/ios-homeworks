@@ -4,7 +4,7 @@ protocol PostCoordinatorDelegate: AnyObject {
     func postCoordinatorDidFinish(_ coordinator: PostCoordinator)
 }
 
-class PostCoordinator: Coordinator {
+final class PostCoordinator: Coordinator {
     
     weak var delegatePostCoordinator: PostCoordinatorDelegate?
     

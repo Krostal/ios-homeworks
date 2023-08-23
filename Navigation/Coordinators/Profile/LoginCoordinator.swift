@@ -34,8 +34,16 @@ final class LoginCoordinator: Coordinator {
     
     func showProfile(forUser user: User) {
         let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        profileCoordinator.delegate = self
         addChildCoordinator(profileCoordinator)
         profileCoordinator.start(forUser: user)
+    }
+}
+
+extension LoginCoordinator: ProfileCoordinatorDelegate {
+    func profileCoordinatorDidFinished(_ coordinator: ProfileCoordinator) {
+        removeChildCoordinator(coordinator)
+   
     }
 }
 

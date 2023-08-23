@@ -2,7 +2,14 @@
 import UIKit
 import StorageService
 
+protocol ProfileViewControllerDelegate: AnyObject {
+    func showPhotoGalleryViewController()
+    func profileViewControllerDidDisappear()
+}
+
 class ProfileViewController: UIViewController {
+    
+    weak var delegate: ProfileViewControllerDelegate?
     
     var currentUser: User?
     
@@ -13,7 +20,7 @@ class ProfileViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
+        tableView.register(PhotoGalleryTableViewCell.self, forCellReuseIdentifier: PhotoGalleryTableViewCell.id)
         return tableView
     }()
     
@@ -38,6 +45,11 @@ class ProfileViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.profileViewControllerDidDisappear()
     }
     
     private func setupTableView() {
@@ -88,14 +100,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             return UITableViewCell()
         } else if indexPath.row == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.id, for: indexPath) as? PhotosTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotoGalleryTableViewCell.id, for: indexPath) as? PhotoGalleryTableViewCell else {
                 return UITableViewCell()
             }
-            cell.onLabelTapped = { [weak self] in
-                let photoGallery = PhotosViewController()
-                photoGallery.title = "Photo Gallery"
-                self?.navigationController?.pushViewController(photoGallery, animated: true)
-            }
+            cell.delegate = self
             return cell
         }
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else {
@@ -136,4 +144,11 @@ extension ProfileViewController: LoginViewControllerDelegate {
     }
 }
         
+
+
+extension ProfileViewController: PhotosTableViewCellDelegate {
+    func tapArrowClickLabel() {
+        delegate?.showPhotoGalleryViewController()
+    }
+}
 

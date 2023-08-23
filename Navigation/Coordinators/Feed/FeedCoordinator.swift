@@ -25,18 +25,14 @@ final class FeedCoordinator: Coordinator {
     func showPost() {
         let postCoordinator = PostCoordinator(navigationController: navigationController, postTitle: postTitle.title)
         postCoordinator.delegatePostCoordinator = self
-        print(childCoordinators)
         addChildCoordinator(postCoordinator)
-        print(childCoordinators)
         postCoordinator.start()
-        print(childCoordinators)
     }
 }
 
 extension FeedCoordinator: PostCoordinatorDelegate {
     func postCoordinatorDidFinish(_ coordinator: PostCoordinator) {
         removeChildCoordinator(coordinator)
-        print(childCoordinators)
     }
     
     

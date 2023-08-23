@@ -1,6 +1,6 @@
 import UIKit
 
-protocol AppCoordinator: AnyObject {
+protocol MainCoordinatorProtocol: AnyObject {
     func startApp() -> UIViewController
 }
 
@@ -11,13 +11,13 @@ protocol Coordinator: AnyObject {
     func removeChildCoordinator(_ coordinator: Coordinator)
 }
 
-class MainCoordinator: AppCoordinator {
+final class MainCoordinator: MainCoordinatorProtocol {
     
     private lazy var tabBarController: UITabBarController = {
         let tabBarController = UITabBarController()
         
-        let feedNavigationController = Factory(flow: .feedCoordinator).navigationController
-        let loginNavigationController = Factory(flow: .loginCoordinator).navigationController
+        let feedNavigationController = TabBarFactory(flow: .feedCoordinator).navigationController
+        let loginNavigationController = TabBarFactory(flow: .loginCoordinator).navigationController
         tabBarController.viewControllers = [feedNavigationController, loginNavigationController]
         tabBarController.tabBar.tintColor = UIColor(named: "AccentColor")
         tabBarController.tabBar.backgroundColor = .systemGray6
