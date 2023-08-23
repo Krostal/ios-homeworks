@@ -242,22 +242,87 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		09789B542A557B5200B98821 /* Controllers */ = {
+		097826902A962580002096A2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				097826932A9625BA002096A2 /* View */,
+				097826942A9625C3002096A2 /* Models */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		097826912A96258A002096A2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				097826952A96269D002096A2 /* View */,
+				097826962A9626A4002096A2 /* Models */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		097826922A962596002096A2 /* PhotoGallery */ = {
+			isa = PBXGroup;
+			children = (
+				097826982A9627F4002096A2 /* View */,
+				097826972A9627ED002096A2 /* Models */,
+			);
+			path = PhotoGallery;
+			sourceTree = "<group>";
+		};
+		097826932A9625BA002096A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				09E677412A45EF8000A36ED1 /* LogInViewController.swift */,
-				09B361CC2A337445005979C8 /* ProfileViewController.swift */,
-				09D6C0792A530145003C6DFB /* PhotoGalleryViewController.swift */,
 			);
-			path = Controllers;
+			path = View;
 			sourceTree = "<group>";
 		};
-		09789B552A557B6D00B98821 /* Views */ = {
+		097826942A9625C3002096A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */,
+				090DA49B2A8211C500BF7338 /* Checker.swift */,
+				090DA49D2A821DE300BF7338 /* LoginInspector.swift */,
+				090DA49F2A822F5B00BF7338 /* LoginFactory.swift */,
 			);
-			path = Views;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		097826952A96269D002096A2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				09B361CC2A337445005979C8 /* ProfileViewController.swift */,
+				09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */,
+				09D6C0702A51E103003C6DFB /* PhotoGalleryTableViewCell.swift */,
+				09D6C0722A52A153003C6DFB /* FirstFourPhotosCell.swift */,
+				09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		097826962A9626A4002096A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				09F4026F2A7C8F4F009DCD7F /* User.swift */,
+				09F402712A7CBC3A009DCD7F /* TestUser.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		097826972A9627ED002096A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				09D6C0632A4C854A003C6DFB /* PhotoGallery.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		097826982A9627F4002096A2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				09D6C0792A530145003C6DFB /* PhotoGalleryViewController.swift */,
+				09D6C07B2A5303F7003C6DFB /* PhotosCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		09789B562A557B9300B98821 /* Detail */ = {
@@ -265,6 +330,7 @@
 			children = (
 				09B361CE2A341C7A005979C8 /* PostViewController.swift */,
 				09B361D22A3433D2005979C8 /* InfoViewController.swift */,
+				09AA931A2A6BE8A1005896DB /* News.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -348,28 +414,10 @@
 			path = Feed;
 			sourceTree = "<group>";
 		};
-		09D6C06E2A51D5FC003C6DFB /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */,
-				09D6C0702A51E103003C6DFB /* PhotoGalleryTableViewCell.swift */,
-				09D6C0722A52A153003C6DFB /* FirstFourPhotosCell.swift */,
-				09D6C07B2A5303F7003C6DFB /* PhotosCollectionViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		09D6C06F2A51D63B003C6DFB /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				09AA931A2A6BE8A1005896DB /* News.swift */,
-				09D6C0632A4C854A003C6DFB /* PhotoGallery.swift */,
 				09D6C0772A52CA17003C6DFB /* Reusable.swift */,
-				09F4026F2A7C8F4F009DCD7F /* User.swift */,
-				09F402712A7CBC3A009DCD7F /* TestUser.swift */,
-				090DA49B2A8211C500BF7338 /* Checker.swift */,
-				090DA49D2A821DE300BF7338 /* LoginInspector.swift */,
-				090DA49F2A822F5B00BF7338 /* LoginFactory.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -377,9 +425,9 @@
 		09E98EB02A3852A200DE6940 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				09789B542A557B5200B98821 /* Controllers */,
-				09789B552A557B6D00B98821 /* Views */,
-				09D6C06E2A51D5FC003C6DFB /* Cells */,
+				097826902A962580002096A2 /* Login */,
+				097826912A96258A002096A2 /* Profile */,
+				097826922A962596002096A2 /* PhotoGallery */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
