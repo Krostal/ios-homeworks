@@ -247,7 +247,7 @@
 		097826902A962580002096A2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				097826992A96578C002096A2 /* Controller */,
+				097826992A96578C002096A2 /* ViewController */,
 				097826932A9625BA002096A2 /* View */,
 				097826942A9625C3002096A2 /* Models */,
 			);
@@ -257,7 +257,7 @@
 		097826912A96258A002096A2 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				097826952A96269D002096A2 /* View */,
+				097826952A96269D002096A2 /* ViewController */,
 				097826962A9626A4002096A2 /* Models */,
 			);
 			path = Profile;
@@ -266,7 +266,7 @@
 		097826922A962596002096A2 /* PhotoGallery */ = {
 			isa = PBXGroup;
 			children = (
-				097826982A9627F4002096A2 /* View */,
+				097826982A9627F4002096A2 /* ViewController */,
 				097826972A9627ED002096A2 /* Models */,
 			);
 			path = PhotoGallery;
@@ -290,7 +290,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		097826952A96269D002096A2 /* View */ = {
+		097826952A96269D002096A2 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				09B361CC2A337445005979C8 /* ProfileViewController.swift */,
@@ -299,7 +299,7 @@
 				09D6C0722A52A153003C6DFB /* FirstFourPhotosCell.swift */,
 				09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */,
 			);
-			path = View;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		097826962A9626A4002096A2 /* Models */ = {
@@ -319,21 +319,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		097826982A9627F4002096A2 /* View */ = {
+		097826982A9627F4002096A2 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				09D6C0792A530145003C6DFB /* PhotoGalleryViewController.swift */,
 				09D6C07B2A5303F7003C6DFB /* PhotosCollectionViewCell.swift */,
 			);
-			path = View;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
-		097826992A96578C002096A2 /* Controller */ = {
+		097826992A96578C002096A2 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				09E677412A45EF8000A36ED1 /* LogInViewController.swift */,
 			);
-			path = Controller;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		09789B562A557B9300B98821 /* Detail */ = {

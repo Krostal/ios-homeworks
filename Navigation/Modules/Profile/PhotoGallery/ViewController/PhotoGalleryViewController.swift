@@ -10,8 +10,6 @@ class PhotoGalleryViewController: UIViewController {
     fileprivate lazy var photos: [UIImage] = PhotoGalery.makeImage()
     
     weak var delegate: PhotoGalleryViewControllerDelegate?
-    
-    var facade: ImagePublisherFacade?
             
     private lazy var collectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
@@ -30,13 +28,8 @@ class PhotoGalleryViewController: UIViewController {
         setupView()
         setupCollectionView()
         setupLayouts()
-        setupFacade()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        facade?.removeSubscription(for: self)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -63,13 +56,6 @@ class PhotoGalleryViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor)
         ])
-    }
-    
-    private func setupFacade() {
-        
-        facade = ImagePublisherFacade()
-        facade?.subscribe(self)
-        facade?.addImagesWithTimer(time: 0.5, repeat: 20, userImages: photos)
     }
     
 }
@@ -115,13 +101,5 @@ extension PhotoGalleryViewController: UICollectionViewDelegateFlowLayout {
         return 8
     }
 
-}
-
-extension PhotoGalleryViewController: ImageLibrarySubscriber {
-    
-    func receive(images: [UIImage]) {
-        self.photos = images
-        self.collectionView.reloadSections(IndexSet(integer: 0))
-    }
 }
 
