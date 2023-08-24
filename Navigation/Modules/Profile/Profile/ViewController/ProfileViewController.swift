@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     fileprivate let dataSource = Post.make()
     
     static let tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
@@ -30,9 +30,15 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPurple
         setupTableView()
         setupConstraints()
+        
+        #if DEBUG
+        view.backgroundColor = .lightGray
+        #else
+        view.backgroundColor = .white
+        #endif
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +59,7 @@ class ProfileViewController: UIViewController {
     private func setupTableView() {
         view.addSubview(Self.tableView)
         Self.tableView.backgroundColor = view.backgroundColor
-        Self.tableView.separatorStyle = .none
+        Self.tableView.sectionHeaderTopPadding = 0
         Self.tableView.delegate = self
         Self.tableView.dataSource = self
         Self.tableView.refreshControl = UIRefreshControl()
@@ -120,44 +126,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == 0 {
+            sectionZeroHeader.translatesAutoresizingMaskIntoConstraints = false
+            sectionZeroHeader.user = currentUser
+            return sectionZeroHeader
+        }
+        return nil
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return sectionZeroHeader.intrinsicContentSize.height
+            return sectionZeroHeader.intrinsicContentSize.height + 20
         } else {
             return 0
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        0
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 0
-        } else {
-            return UITableView.automaticDimension
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        if section == 0 {
-            sectionZeroHeader.user = currentUser
-            sectionZeroHeader.translatesAutoresizingMaskIntoConstraints = false
-            
-            #if DEBUG
-            sectionZeroHeader.backgroundColor = .lightGray
-            #else
-            sectionZeroHeader.backgroundColor = .white
-            #endif
-            
-            return sectionZeroHeader
-        } else {
-            return nil
-        }
-    }
-
 }
 
 extension ProfileViewController: LoginViewControllerDelegate {

@@ -42,8 +42,9 @@ final class LoginCoordinator: Coordinator {
 
 extension LoginCoordinator: ProfileCoordinatorDelegate {
     func profileCoordinatorDidFinished(_ coordinator: ProfileCoordinator) {
-        removeChildCoordinator(coordinator)
-   
+        if coordinator.childCoordinators.isEmpty {
+            removeChildCoordinator(coordinator)
+        }
     }
 }
 

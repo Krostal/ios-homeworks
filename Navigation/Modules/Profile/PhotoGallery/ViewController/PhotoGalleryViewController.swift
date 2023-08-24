@@ -60,12 +60,12 @@ class PhotoGalleryViewController: UIViewController {
     }
     
     private func photoGalleryHandler() {
-        
-        ImageProcessor().processImagesOnThread(sourceImages: photos, filter: .bloom(intensity: 0.6), qos: .utility) { [ weak self ] processedImages in
+
+        ImageProcessor().processImagesOnThread(sourceImages: photos, filter: .colorInvert, qos: .default) { [ weak self ] processedImages in
             self?.photos = processedImages.compactMap( { processedImages in
                 processedImages.flatMap { UIImage(cgImage: $0) }
             })
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 self?.collectionView.reloadData()
             }
         }

@@ -32,8 +32,8 @@ final class FeedCoordinator: Coordinator {
 
 extension FeedCoordinator: PostCoordinatorDelegate {
     func postCoordinatorDidFinish(_ coordinator: PostCoordinator) {
-        removeChildCoordinator(coordinator)
+        if coordinator.childCoordinators.isEmpty {
+            removeChildCoordinator(coordinator)
+        }
     }
-    
-    
 }
