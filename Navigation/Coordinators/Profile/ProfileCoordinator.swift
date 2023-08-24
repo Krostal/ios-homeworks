@@ -50,6 +50,5 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
 extension ProfileCoordinator: PhotoGalleryCoordinatorDelegate {
     func photoGalleryCoordinatorDidFinish(_ coordinator: PhotoGalleryCoordinator) {
         removeChildCoordinator(coordinator)
-        print(childCoordinators)
     }
 }

@@ -27,7 +27,6 @@ class PostViewController: UIViewController {
     }
     
     
-    
     @objc func barButtonItemTapped(_ sender: UIBarButtonItem) {
         delegatePostVC?.editButtonTapped()
     }

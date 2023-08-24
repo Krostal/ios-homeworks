@@ -22,6 +22,7 @@
 		097826872A94C032002096A2 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097826862A94C032002096A2 /* PostCoordinator.swift */; };
 		097826892A94C03F002096A2 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097826882A94C03F002096A2 /* InfoCoordinator.swift */; };
 		0978268D2A9608AB002096A2 /* PhotoGalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */; };
+		0978269B2A9712D3002096A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978269A2A9712D3002096A2 /* LoginView.swift */; };
 		09AA931B2A6BE8A1005896DB /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AA931A2A6BE8A1005896DB /* News.swift */; };
 		09AA93572A6BEA25005896DB /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = 09AA93562A6BEA25005896DB /* StorageService.docc */; };
 		09AA935D2A6BEA25005896DB /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09AA93532A6BEA25005896DB /* StorageService.framework */; };
@@ -106,6 +107,7 @@
 		097826862A94C032002096A2 /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		097826882A94C03F002096A2 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCoordinator.swift; sourceTree = "<group>"; };
+		0978269A2A9712D3002096A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		09AA931A2A6BE8A1005896DB /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		09AA93532A6BEA25005896DB /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		09AA93552A6BEA25005896DB /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		097826902A962580002096A2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				097826992A96578C002096A2 /* Controller */,
 				097826932A9625BA002096A2 /* View */,
 				097826942A9625C3002096A2 /* Models */,
 			);
@@ -272,7 +275,7 @@
 		097826932A9625BA002096A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				09E677412A45EF8000A36ED1 /* LogInViewController.swift */,
+				0978269A2A9712D3002096A2 /* LoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -323,6 +326,14 @@
 				09D6C07B2A5303F7003C6DFB /* PhotosCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		097826992A96578C002096A2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				09E677412A45EF8000A36ED1 /* LogInViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		09789B562A557B9300B98821 /* Detail */ = {
@@ -376,7 +387,7 @@
 		09B361B42A336E8A005979C8 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				09D6C06B2A51D4E1003C6DFB /* AppDelegate */,
+				09D6C06B2A51D4E1003C6DFB /* Scene */,
 				095BF8832A921B0C00CBD6B1 /* Coordinators */,
 				09D6C06C2A51D53F003C6DFB /* Modules */,
 				09D6C06F2A51D63B003C6DFB /* Common */,
@@ -387,13 +398,13 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
-		09D6C06B2A51D4E1003C6DFB /* AppDelegate */ = {
+		09D6C06B2A51D4E1003C6DFB /* Scene */ = {
 			isa = PBXGroup;
 			children = (
 				09B361B52A336E8A005979C8 /* AppDelegate.swift */,
 				09B361B72A336E8A005979C8 /* SceneDelegate.swift */,
 			);
-			path = AppDelegate;
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		09D6C06C2A51D53F003C6DFB /* Modules */ = {
@@ -606,6 +617,7 @@
 				09B361CA2A337411005979C8 /* FeedViewController.swift in Sources */,
 				09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */,
 				09D6C0642A4C854A003C6DFB /* PhotoGallery.swift in Sources */,
+				0978269B2A9712D3002096A2 /* LoginView.swift in Sources */,
 				09BD83032A9328160059DF3F /* ProfileCoordinator.swift in Sources */,
 				09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */,
 				095BF88B2A921B4E00CBD6B1 /* FeedCoordinator.swift in Sources */,
