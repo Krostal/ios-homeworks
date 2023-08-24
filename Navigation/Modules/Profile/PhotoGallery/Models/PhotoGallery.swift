@@ -4,7 +4,7 @@ struct PhotoGalery {
     var image: String
     
     static var photoNames: [String] {
-        return (1...20).map { String($0) }
+        return (1...5).map { String($0) }
     }
     
     static func makeImage() -> [UIImage] {

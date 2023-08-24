@@ -5,7 +5,7 @@ protocol PhotosTableViewCellDelegate: AnyObject {
     func tapArrowClickLabel()
 }
 
-class PhotoGalleryTableViewCell: UITableViewCell {
+class PhotosTableViewCell: UITableViewCell {
     
     static let id = "PhotosTableViewCell"
     
@@ -99,7 +99,7 @@ class PhotoGalleryTableViewCell: UITableViewCell {
     
 }
 
-extension PhotoGalleryTableViewCell: UICollectionViewDataSource {
+extension PhotosTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photoGalery.index(before: 5)
@@ -113,7 +113,7 @@ extension PhotoGalleryTableViewCell: UICollectionViewDataSource {
     }
 }
     
-extension PhotoGalleryTableViewCell: UICollectionViewDelegateFlowLayout {
+extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     
     
     private func itemWidth(for width: CGFloat, spacing: CGFloat) -> CGFloat {

@@ -30,6 +30,7 @@ class PhotoGalleryViewController: UIViewController {
         setupLayouts()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
+        photoGalleryHandler()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -58,6 +59,17 @@ class PhotoGalleryViewController: UIViewController {
         ])
     }
     
+    private func photoGalleryHandler() {
+        
+        ImageProcessor().processImagesOnThread(sourceImages: photos, filter: .bloom(intensity: 0.6), qos: .utility) { [ weak self ] processedImages in
+            self?.photos = processedImages.compactMap( { processedImages in
+                processedImages.flatMap { UIImage(cgImage: $0) }
+            })
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
 }
 
 extension PhotoGalleryViewController: UICollectionViewDataSource {

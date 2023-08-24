@@ -31,7 +31,6 @@ final class ProfileCoordinator: Coordinator {
         let photoGalleryCoordinator = PhotoGalleryCoordinator(navigationController: navigationController)
         photoGalleryCoordinator.delegate = self
         addChildCoordinator(photoGalleryCoordinator)
-        print(childCoordinators)
         photoGalleryCoordinator.start()
     }
     
