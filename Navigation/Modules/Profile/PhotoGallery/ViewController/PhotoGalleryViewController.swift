@@ -10,7 +10,7 @@ class PhotoGalleryViewController: UIViewController {
     fileprivate lazy var photos: [UIImage] = PhotoGalery.makeImage()
     
     weak var delegate: PhotoGalleryViewControllerDelegate?
-            
+    
     private lazy var collectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
         
@@ -30,7 +30,7 @@ class PhotoGalleryViewController: UIViewController {
         setupLayouts()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
-        photoGalleryHandler()
+        photoGalleryHandler(sourceImages: photos, filter: .noir, qos: .utility)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -47,7 +47,7 @@ class PhotoGalleryViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
-
+    
     private func setupLayouts() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         
@@ -59,16 +59,41 @@ class PhotoGalleryViewController: UIViewController {
         ])
     }
     
-    private func photoGalleryHandler() {
-
-        ImageProcessor().processImagesOnThread(sourceImages: photos, filter: .colorInvert, qos: .default) { [ weak self ] processedImages in
-            self?.photos = processedImages.compactMap( { processedImages in
-                processedImages.flatMap { UIImage(cgImage: $0) }
-            })
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
+    
+    func photoGalleryHandler(sourceImages: [UIImage], filter: ColorFilter, qos: QualityOfService) {
+        
+        let qosName: String
+        switch qos {
+        case .userInteractive:
+            qosName = "userInteractive"
+        case .userInitiated:
+            qosName = "userInitiated"
+        case .utility:
+            qosName = "utility"
+        case .background:
+            qosName = "background"
+        case .default:
+            qosName = "default"
+        @unknown default:
+            qosName = "unknown"
+        }
+        
+        let clock = ContinuousClock()
+        
+        let result = clock.measure {
+            
+            // Применение фильтра для текущего массива изображений photos, присваивание переменной photos массива обработанных изображений и асинхронное обновление коллекции
+            ImageProcessor().processImagesOnThread(sourceImages: sourceImages, filter: filter, qos: qos) { [ weak self ] processedImages in
+                self?.photos = processedImages.compactMap( { processedImages in
+                    processedImages.flatMap { UIImage(cgImage: $0) }
+                })
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
             }
         }
+        
+        print("Время обработки изображений фильтром \"\(filter)\" для параметра qos \"\(qosName)\" составило \(result)")
     }
 }
 
