@@ -7,12 +7,14 @@ protocol PhotoGalleryViewControllerDelegate: AnyObject {
 
 class PhotoGalleryViewController: UIViewController {
     
+    private enum Constants {
+        static let spacing: CGFloat = 8.0
+    }
+    
     fileprivate lazy var photos: [UIImage] = PhotoGalery.makeImage()
     
     weak var delegate: PhotoGalleryViewControllerDelegate?
     
-    var facade: ImagePublisherFacade?
-            
     private lazy var collectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
         
@@ -30,13 +32,9 @@ class PhotoGalleryViewController: UIViewController {
         setupView()
         setupCollectionView()
         setupLayouts()
-        setupFacade()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        facade?.removeSubscription(for: self)
+        photoGalleryHandler()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -53,7 +51,7 @@ class PhotoGalleryViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
-
+    
     private func setupLayouts() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         
@@ -64,14 +62,24 @@ class PhotoGalleryViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor)
         ])
     }
-    
-    private func setupFacade() {
         
-        facade = ImagePublisherFacade()
-        facade?.subscribe(self)
-        facade?.addImagesWithTimer(time: 0.5, repeat: 20, userImages: photos)
+    func photoGalleryHandler() {
+        
+        let startTime = DispatchTime.now()
+        
+        ImageProcessor().processImagesOnThread(sourceImages: photos, filter: .noir, qos: .background) { [ weak self ] processedImages in
+            self?.photos = processedImages.compactMap( { processedImages in
+                processedImages.flatMap { UIImage(cgImage: $0) }
+            })
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+                let endTime = DispatchTime.now()
+                let nanoTime = endTime.uptimeNanoseconds - startTime.uptimeNanoseconds
+                let result = Double(nanoTime) / 1_000_000_000
+                print(String(format: "Time elapsed: %.2f seconds", result))
+            }
+        }
     }
-    
 }
 
 extension PhotoGalleryViewController: UICollectionViewDataSource {
@@ -99,29 +107,21 @@ extension PhotoGalleryViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = itemWidth(for: view.frame.width, spacing: 8)
+        let width = itemWidth(for: view.frame.width, spacing: Constants.spacing)
         return CGSize(width: width, height: width)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        UIEdgeInsets(top: Constants.spacing, left: Constants.spacing, bottom: Constants.spacing, right: Constants.spacing)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return Constants.spacing
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return Constants.spacing
     }
 
-}
-
-extension PhotoGalleryViewController: ImageLibrarySubscriber {
-    
-    func receive(images: [UIImage]) {
-        self.photos = images
-        self.collectionView.reloadSections(IndexSet(integer: 0))
-    }
 }
 
