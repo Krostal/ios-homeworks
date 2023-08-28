@@ -67,7 +67,7 @@ class PhotoGalleryViewController: UIViewController {
         
         let startTime = DispatchTime.now()
         
-        ImageProcessor().processImagesOnThread(sourceImages: photos, filter: .noir, qos: .background) { [ weak self ] processedImages in
+        ImageProcessor().processImagesOnThread(sourceImages: photos, filter: .noir, qos: .default) { [ weak self ] processedImages in
             self?.photos = processedImages.compactMap( { processedImages in
                 processedImages.flatMap { UIImage(cgImage: $0) }
             })
