@@ -8,6 +8,10 @@ final class LoginView: UIView {
     
     weak var delegate: LoginViewDelegate?
     
+    private var isCrackingPassword = false
+    
+    let passwordCracker = PasswordCracker()
+    
     private(set) lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
@@ -87,6 +91,20 @@ final class LoginView: UIView {
             self?.buttonPressed()
         })
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
+    private lazy var crackPasswordButton = CustomButton(
+        title: "crack password",
+        tintColor: .white,
+        cornerRadius: 10,
+        action: { [weak self] in
+            self?.crackPassword()
+        })
+    
     init() {
         super.init(frame: .zero)
         setupView()
@@ -94,6 +112,7 @@ final class LoginView: UIView {
         setupConstraints()
         setupContentOfScrollView()
         defaultLoginAndPassword()
+        activityIndicator.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -130,6 +149,8 @@ final class LoginView: UIView {
         contentView.addSubview(logo)
         contentView.addSubview(registerField)
         contentView.addSubview(loginButton)
+        contentView.addSubview(activityIndicator)
+        contentView.addSubview(crackPasswordButton)
         
         NSLayoutConstraint.activate([
             logo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
@@ -162,6 +183,14 @@ final class LoginView: UIView {
             loginButton.leadingAnchor.constraint(equalTo: registerField.leadingAnchor),
             loginButton.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: passwordField.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: passwordField.centerYAnchor),
+            
+            crackPasswordButton.bottomAnchor.constraint(equalTo: emailOrPhoneField.topAnchor, constant: -16),
+            crackPasswordButton.leadingAnchor.constraint(equalTo: emailOrPhoneField.leadingAnchor),
+            crackPasswordButton.widthAnchor.constraint(equalTo: emailOrPhoneField.widthAnchor),
+            crackPasswordButton.heightAnchor.constraint(equalToConstant: 30),
         ])
         
         loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
@@ -169,18 +198,53 @@ final class LoginView: UIView {
     }
     
     private func defaultLoginAndPassword() {
-        #if DEBUG
+#if DEBUG
         emailOrPhoneField.text = "TestUser"
         passwordField.text = "UserTest"
-        #else
+#else
         emailOrPhoneField.text = "Groot"
-        passwordField.text = "g18o15T"
-        #endif
+        passwordField.text = "Gro1"
+#endif
     }
     
-    @objc private func buttonPressed() {
+    private func buttonPressed() {
         guard let login = emailOrPhoneField.text else { return }
         guard let password = passwordField.text else { return }
         delegate?.loginButtonPressed(login: login, password: password)
+    }
+    
+    private func crackPassword() {
+        
+        guard let targetPassword = passwordField.text, !targetPassword.isEmpty else {
+            return
+        }
+        
+        if isCrackingPassword {
+            isCrackingPassword = false
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+            crackPasswordButton.setTitle("crack password", for: .normal)
+        } else {
+            isCrackingPassword = true
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            crackPasswordButton.setTitle("stop cracking", for: .normal)
+        }
+        
+        passwordCracker.bruteForce(targetPassword: targetPassword) { [weak self] crackedPassword in
+            DispatchQueue.main.async {
+                self?.activityIndicator.isHidden = true
+                self?.activityIndicator.stopAnimating()
+                self?.passwordField.isSecureTextEntry = false
+                self?.isCrackingPassword = false
+                self?.crackPasswordButton.setTitle("crack password", for: .normal)
+                
+                if let crackedPassword = crackedPassword {
+                    self?.passwordField.text = crackedPassword
+                } else {
+                    print ("Password crack error")
+                }
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ final class Checker {
         private let password = "UserTest"
     #else
         private let login = "Groot"
-        private let password = "g18o15T"
+        private let password = "Gro1"
     #endif
     
     
