@@ -8,6 +8,8 @@ final class LoginView: UIView {
     
     weak var delegate: LoginViewDelegate?
     
+    private var isCrackingPassword = false
+    
     let passwordCracker = PasswordCracker()
     
     private(set) lazy var scrollView: UIScrollView = {
@@ -217,16 +219,27 @@ final class LoginView: UIView {
             return
         }
         
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
+        if isCrackingPassword {
+            isCrackingPassword = false
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+            crackPasswordButton.setTitle("crack password", for: .normal)
+        } else {
+            isCrackingPassword = true
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            crackPasswordButton.setTitle("stop cracking", for: .normal)
+        }
         
         passwordCracker.bruteForce(targetPassword: targetPassword) { [weak self] crackedPassword in
             DispatchQueue.main.async {
                 self?.activityIndicator.isHidden = true
                 self?.activityIndicator.stopAnimating()
+                self?.passwordField.isSecureTextEntry = false
+                self?.isCrackingPassword = false
+                self?.crackPasswordButton.setTitle("crack password", for: .normal)
                 
                 if let crackedPassword = crackedPassword {
-                    self?.passwordField.isSecureTextEntry = false
                     self?.passwordField.text = crackedPassword
                 } else {
                     print ("Password crack error")
