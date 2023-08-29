@@ -129,7 +129,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
-            sectionZeroHeader.translatesAutoresizingMaskIntoConstraints = false
             sectionZeroHeader.user = currentUser
             return sectionZeroHeader
         }
