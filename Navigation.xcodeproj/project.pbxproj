@@ -10,7 +10,6 @@
 		090DA49C2A8211C500BF7338 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49B2A8211C500BF7338 /* Checker.swift */; };
 		090DA49E2A821DE300BF7338 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49D2A821DE300BF7338 /* LoginInspector.swift */; };
 		090DA4A02A822F5B00BF7338 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49F2A822F5B00BF7338 /* LoginFactory.swift */; };
-		093CFD902A9C9C5500C2D7BA /* PasswordCracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD8F2A9C9C5500C2D7BA /* PasswordCracker.swift */; };
 		095BF86F2A8F83BA00CBD6B1 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */; };
 		095BF8742A908B1A00CBD6B1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8732A908B1A00CBD6B1 /* CustomTextField.swift */; };
 		095BF8822A920BC500CBD6B1 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8812A920BC500CBD6B1 /* FeedView.swift */; };
@@ -97,7 +96,6 @@
 		090DA49B2A8211C500BF7338 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		090DA49D2A821DE300BF7338 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		090DA49F2A822F5B00BF7338 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
-		093CFD8F2A9C9C5500C2D7BA /* PasswordCracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCracker.swift; sourceTree = "<group>"; };
 		095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		095BF8732A908B1A00CBD6B1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		095BF8812A920BC500CBD6B1 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -287,7 +285,6 @@
 				090DA49B2A8211C500BF7338 /* Checker.swift */,
 				090DA49D2A821DE300BF7338 /* LoginInspector.swift */,
 				090DA49F2A822F5B00BF7338 /* LoginFactory.swift */,
-				093CFD8F2A9C9C5500C2D7BA /* PasswordCracker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -632,7 +629,6 @@
 				09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */,
 				09E98EB22A3852D000DE6940 /* ProfileTableHeaderView.swift in Sources */,
 				09D6C07A2A530145003C6DFB /* PhotoGalleryViewController.swift in Sources */,
-				093CFD902A9C9C5500C2D7BA /* PasswordCracker.swift in Sources */,
 				09D6C0712A51E103003C6DFB /* PhotosTableViewCell.swift in Sources */,
 				09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */,
 				09D6C0732A52A153003C6DFB /* FirstFourPhotosCell.swift in Sources */,
