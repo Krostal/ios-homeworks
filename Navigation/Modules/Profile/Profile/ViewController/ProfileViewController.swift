@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController {
     
     private let sectionZeroHeader = ProfileTableHeaderView()
     
-    fileprivate let dataSource = Post.make()
+    fileprivate var dataSource = Post.make()
     
     static let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -44,11 +44,27 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        for cell in Self.tableView.visibleCells {
+            if let postCell = cell as? PostTableViewCell {
+                postCell.startTimer()
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        for (index, cell) in Self.tableView.visibleCells.enumerated() {
+            if let postCell = cell as? PostTableViewCell {
+                postCell.stopTimer()
+                
+                if index < dataSource.count {
+                    dataSource[index].likes = postCell.currentLikes
+                    dataSource[index].views = postCell.currentViews
+                }
+            }
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

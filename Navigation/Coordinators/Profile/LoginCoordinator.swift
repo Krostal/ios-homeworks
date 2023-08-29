@@ -43,7 +43,10 @@ final class LoginCoordinator: Coordinator {
 extension LoginCoordinator: ProfileCoordinatorDelegate {
     func profileCoordinatorDidFinished(_ coordinator: ProfileCoordinator) {
         if coordinator.childCoordinators.isEmpty {
-            removeChildCoordinator(coordinator)
+            if let topViewController = navigationController.topViewController,
+               !(topViewController is ProfileViewController) {
+                removeChildCoordinator(coordinator)
+            }
         }
     }
 }

@@ -10,6 +10,11 @@ class PostTableViewCell: UITableViewCell {
     
     static let id = "PostTableViewCell"
     
+    var currentLikes: Int = 0
+    var currentViews: Int = 0
+    
+    private var timer: Timer?
+    
     private lazy var postAuthor: UILabel = {
         let postAuthor = UILabel()
         postAuthor.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +84,11 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        stopTimer()
+//    }
+    
     private func addSubviews() {
         addSubview(postAuthor)
         addSubview(postDescription)
@@ -108,13 +118,59 @@ class PostTableViewCell: UITableViewCell {
             postPopularity.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.padding)
         ])
     }
+    
+    func startTimer() {
+        if timer == nil {
+            DispatchQueue.global().async { [ weak self ] in
+                guard let self else {
+                    return
+                }
+                timer = Timer.scheduledTimer(
+                    withTimeInterval: 2.0,
+                    repeats: true,
+                    block: { [weak self ] timer in
+                        guard let self else {
+                            return
+                        }
+                        DispatchQueue.main.async { [ weak self ] in
+                            guard let self else {
+                                return
+                            }
+                            currentLikes += 2
+                            currentViews += 1
+                            updateLikesAndViews()
+                        }
+                    })
+                
+                guard let timer = timer else {
+                    return
+                }
+                timer.tolerance = 0.3
+                RunLoop.current.add(timer, forMode: .common)
+                RunLoop.current.run()
+            }
+            
+        }
+    }
         
+    private func updateLikesAndViews() {
+        postLikes.text = "Likes: \(currentLikes)"
+        postViews.text = "Views: \(currentViews)"
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
     func configure(_ post: Post) {
         postAuthor.text = post.author
         postImage.image = UIImage(named: post.image)
         postDescription.text = post.description
-        postLikes.text = "Likes: \(post.likes)"
-        postViews.text = "Views: \(post.views)"
+        currentLikes = post.likes
+        currentViews = post.views
+        updateLikesAndViews()
+        startTimer()
     }
     
 }
