@@ -170,11 +170,11 @@ final class LoginView: UIView {
     
     private func defaultLoginAndPassword() {
 #if DEBUG
-        emailOrPhoneField.text = "TestUser"
-        passwordField.text = "UserTest"
+        emailOrPhoneField.text = testUser.login
+        passwordField.text = testUser.login
 #else
-        emailOrPhoneField.text = "Groot"
-        passwordField.text = "Gro1"
+        emailOrPhoneField.text = user.login
+        passwordField.text = user.password
 #endif
     }
     

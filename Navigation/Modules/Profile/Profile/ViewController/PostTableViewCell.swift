@@ -84,10 +84,10 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        stopTimer()
-//    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        stopTimer()
+    }
     
     private func addSubviews() {
         addSubview(postAuthor)
@@ -103,10 +103,11 @@ class PostTableViewCell: UITableViewCell {
             postAuthor.topAnchor.constraint(equalTo: topAnchor, constant: Constants.padding),
             postAuthor.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),
             postAuthor.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.padding),
+            postAuthor.heightAnchor.constraint(equalToConstant: 24),
             
             postImage.topAnchor.constraint(equalTo: postAuthor.bottomAnchor, constant: Constants.padding),
             postImage.widthAnchor.constraint(equalTo: widthAnchor),
-            postImage.heightAnchor.constraint(equalTo: widthAnchor),
+            postImage.heightAnchor.constraint(equalTo: postImage.widthAnchor),
             
             postDescription.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: Constants.padding),
             postDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),

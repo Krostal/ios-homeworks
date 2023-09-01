@@ -2,14 +2,12 @@
 import UIKit
 
 protocol LoginViewControllerDelegate {
-    func check(
-        _ sender: LoginViewController,
-        login: String,
-        password: String
-    ) -> Bool
+    func check(_ sender: LoginViewController, login: String, password: String) -> Bool
 }
 
 class LoginViewController: UIViewController {
+    
+    let alert = Alert()
     
     var loginDelegate: LoginViewControllerDelegate
     
@@ -45,12 +43,6 @@ class LoginViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeKeyboardObservers()
-    }
-
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
     }
     
     private func setupLoginView() {
@@ -103,6 +95,34 @@ extension LoginViewController: LoginViewDelegate {
     func loginButtonPressed(login: String, password: String) {
         
         if login.isEmpty {
+            alert.showAlert(on: self, title: "Username is empty", message: "Fill the username, please")
+        }
+        
+        if password.isEmpty {
+            alert.showAlert(on: self, title: "Password is empty", message: "Fill the password, please")
+        }
+        
+        do {
+            if let user = try userService.authorizeUser(login: login) {
+                if loginDelegate.check(self, login: login, password: password) {
+                    loginCoordinator?.showProfile(forUser: user)
+                }
+            }
+        } catch LoginError.invalidUserName {
+            alert.showAlert(on: self, title: "Invalid Username", message: "Check the username, please")
+        } catch LoginError.unauthorized {
+            alert.showAlert(on: self, title: "Invalid Username", message: "Check the username, please")
+        } catch {
+            
+        }
+        
+    }
+    
+}
+        
+/*
+        
+        if login.isEmpty {
             showAlert(title: "Error", message: "Please enter a valid login.")
         }
         
@@ -121,3 +141,5 @@ extension LoginViewController: LoginViewDelegate {
         }
     }
 }
+
+*/

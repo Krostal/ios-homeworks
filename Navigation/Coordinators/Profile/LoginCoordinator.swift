@@ -17,7 +17,7 @@ final class LoginCoordinator: Coordinator {
         let testUserService = TestUserService(testUser: testUser)
         userService = testUserService
         #else
-        let currentUserService = CurrentUserService(currentUser: groot)
+        let currentUserService = CurrentUserService(currentUser: user)
         userService = currentUserService
         #endif
         
