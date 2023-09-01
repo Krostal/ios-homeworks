@@ -1,7 +1,7 @@
 import UIKit
 
 protocol UserService {
-    func authorizeUser(login: String) -> User?
+    func authorizeUser(login: String) throws -> User?
 }
 
 public class User {
@@ -21,9 +21,9 @@ public class User {
     
 }
     
-private (set) var user = User(login: "Groot", fullName: "I am Groot", avatar: UIImage(named: "Groot"), status: "Happy :)", password: "Groot")
+private (set) var currentUser: User? = User(login: "Groot", fullName: "I am Groot", avatar: UIImage(named: "Groot"), status: "Happy :)", password: "Groot")
 
-private (set) var testUser = User(login: "TestUser", fullName: "TestUser", avatar: UIImage(systemName: "person.fill.questionmark"), status: "Test is done", password: "TestUser")
+private (set) var testUser: User? = User(login: "TestUser", fullName: "TestUser", avatar: UIImage(systemName: "person.fill.questionmark"), status: "Test is done", password: "TestUser")
 
 
 

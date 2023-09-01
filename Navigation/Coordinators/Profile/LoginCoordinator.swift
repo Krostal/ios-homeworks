@@ -14,10 +14,16 @@ final class LoginCoordinator: Coordinator {
         let loginInspector = loginFactory.makeLoginInspector()
         
         #if DEBUG
+        guard let testUser = testUser else {
+            preconditionFailure("TestUser is not found")
+        }
         let testUserService = TestUserService(testUser: testUser)
         userService = testUserService
         #else
-        let currentUserService = CurrentUserService(currentUser: user)
+        guard let currentUser = currentUser else {
+            preconditionFailure("Current User is not found")
+        }
+        let currentUserService = CurrentUserService(currentUser: currentUser)
         userService = currentUserService
         #endif
         

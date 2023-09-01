@@ -6,11 +6,11 @@ final class Checker {
     static let shared = Checker()
     
 #if DEBUG
-    private let login = testUser.fullName
-    private let password = testUser.password
+    private let login = testUser?.fullName
+    private let password = testUser?.password
 #else
-    private let login = user.login
-    private let password = user.password
+    private let login = currentUser?.login
+    private let password = currentUser?.password
 #endif
     
     
@@ -30,10 +30,8 @@ final class Checker {
             return true
         } else if login == self.login {
             throw LoginError.invalidPassword
-        } else if password == self.password {
-            throw LoginError.invalidUserName
         } else {
-            throw LoginError.unauthorized
+            throw LoginError.invalidUserName
         }
     }
     

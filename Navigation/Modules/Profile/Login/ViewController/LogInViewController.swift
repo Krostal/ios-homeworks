@@ -95,10 +95,17 @@ extension LoginViewController: LoginViewDelegate {
     func loginButtonPressed(login: String, password: String) {
         
         do {
-            if try loginDelegate.check(self, login: login, password: password) {
-                loginCoordinator?.showProfile(forUser: user)
+            if login.isEmpty {
+                throw LoginError.emptyUserName
             }
-            
+            if password.isEmpty {
+                throw LoginError.emptyPassword
+            }
+            if let user = try userService.authorizeUser(login: login) {
+                if try loginDelegate.check(self, login: login, password: password) {
+                    loginCoordinator?.showProfile(forUser: user)
+                }
+            }
         } catch LoginError.emptyUserName {
             alert.showAlert(on: self, title: "Username is empty", message: "Please enter your username")
         } catch LoginError.emptyPassword {
@@ -107,8 +114,6 @@ extension LoginViewController: LoginViewDelegate {
             alert.showAlert(on: self, title: "Invalid Password", message: "The entered password is invalid. Please check the password and try again")
         } catch LoginError.invalidUserName {
             alert.showAlert(on: self, title: "Invalid Username", message: "The entered username is invalid. Please check the spelling and try again")
-        } catch LoginError.unauthorized {
-            alert.showAlert(on: self, title: "Access Error", message: "You do not have permission to access this resource. Please log in with valid credentials")
         } catch {
             alert.showAlert(on: self, title: "Unknown Error", message: "Please try again later")
         }

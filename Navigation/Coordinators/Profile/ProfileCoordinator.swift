@@ -17,7 +17,7 @@ final class ProfileCoordinator: Coordinator {
     }
 
     func start() {
-        fatalError("ProfileCoordinator requires a user to start.")
+       fatalError("ProfileCoordinator requires a user to start.")
     }
 
     func start(forUser user: User) {
