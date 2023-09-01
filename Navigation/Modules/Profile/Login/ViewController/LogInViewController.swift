@@ -95,11 +95,10 @@ extension LoginViewController: LoginViewDelegate {
     func loginButtonPressed(login: String, password: String) {
         
         do {
-            if let user = userService.authorizeUser(login: login) {
-                if try loginDelegate.check(self, login: login, password: password) {
-                    loginCoordinator?.showProfile(forUser: user)
-                }
+            if try loginDelegate.check(self, login: login, password: password) {
+                loginCoordinator?.showProfile(forUser: user)
             }
+            
         } catch LoginError.emptyUserName {
             alert.showAlert(on: self, title: "Username is empty", message: "Please enter your username")
         } catch LoginError.emptyPassword {
