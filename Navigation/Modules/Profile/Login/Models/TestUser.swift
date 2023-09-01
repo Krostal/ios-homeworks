@@ -9,16 +9,7 @@ public final class TestUserService: UserService {
         self.testUser = testUser
     }
     
-    func authorizeUser(login: String) throws -> User? {
-        
-        guard let testUser = testUser else {
-            throw LoginError.unauthorized
-        }
-        
-        guard testUser.login == login else {
-            throw LoginError.invalidUserName
-        }
-        
-        return testUser
+    func authorizeUser(login: String) -> User? {
+        testUser?.login == login ? testUser : nil
     }
 }

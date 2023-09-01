@@ -2,7 +2,7 @@
 import UIKit
 
 protocol LoginViewControllerDelegate {
-    func check(_ sender: LoginViewController, login: String, password: String) -> Bool
+    func check(_ sender: LoginViewController, login: String, password: String) throws -> Bool
 }
 
 class LoginViewController: UIViewController {
@@ -94,52 +94,26 @@ class LoginViewController: UIViewController {
 extension LoginViewController: LoginViewDelegate {
     func loginButtonPressed(login: String, password: String) {
         
-        if login.isEmpty {
-            alert.showAlert(on: self, title: "Username is empty", message: "Fill the username, please")
-        }
-        
-        if password.isEmpty {
-            alert.showAlert(on: self, title: "Password is empty", message: "Fill the password, please")
-        }
-        
         do {
-            if let user = try userService.authorizeUser(login: login) {
-                if loginDelegate.check(self, login: login, password: password) {
+            if let user = userService.authorizeUser(login: login) {
+                if try loginDelegate.check(self, login: login, password: password) {
                     loginCoordinator?.showProfile(forUser: user)
                 }
             }
+        } catch LoginError.emptyUserName {
+            alert.showAlert(on: self, title: "Username is empty", message: "Please enter your username")
+        } catch LoginError.emptyPassword {
+            alert.showAlert(on: self, title: "Password is empty", message: "Enter your password, please")
+        } catch LoginError.invalidPassword {
+            alert.showAlert(on: self, title: "Invalid Password", message: "The entered password is invalid. Please check the password and try again")
         } catch LoginError.invalidUserName {
-            alert.showAlert(on: self, title: "Invalid Username", message: "Check the username, please")
+            alert.showAlert(on: self, title: "Invalid Username", message: "The entered username is invalid. Please check the spelling and try again")
         } catch LoginError.unauthorized {
-            alert.showAlert(on: self, title: "Invalid Username", message: "Check the username, please")
+            alert.showAlert(on: self, title: "Access Error", message: "You do not have permission to access this resource. Please log in with valid credentials")
         } catch {
-            
+            alert.showAlert(on: self, title: "Unknown Error", message: "Please try again later")
         }
-        
+            
     }
     
 }
-        
-/*
-        
-        if login.isEmpty {
-            showAlert(title: "Error", message: "Please enter a valid login.")
-        }
-        
-        if password.isEmpty {
-            showAlert(title: "Error", message: "Please enter a password.")
-        }
-        
-        if let user = userService.authorizeUser(login: login) {
-            if loginDelegate.check(self, login: login, password: password) {
-                loginCoordinator?.showProfile(forUser: user)
-            } else {
-                showAlert(title: "Error", message: "Invalid login or password.")
-            }
-        } else {
-            showAlert(title: "Error", message: "Invalid login or user not found.")
-        }
-    }
-}
-
-*/
