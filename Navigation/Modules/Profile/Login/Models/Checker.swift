@@ -5,13 +5,13 @@ final class Checker {
     
     static let shared = Checker()
     
-    #if DEBUG
-        private let login = "TestUser"
-        private let password = "UserTest"
-    #else
-        private let login = "Groot"
-        private let password = "Gro1"
-    #endif
+#if DEBUG
+    private let login = testUser.fullName
+    private let password = testUser.password
+#else
+    private let login = user.login
+    private let password = user.password
+#endif
     
     
     private init() {}

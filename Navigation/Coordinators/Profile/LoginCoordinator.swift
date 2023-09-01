@@ -17,7 +17,7 @@ final class LoginCoordinator: Coordinator {
         let testUserService = TestUserService(testUser: testUser)
         userService = testUserService
         #else
-        let currentUserService = CurrentUserService(currentUser: groot)
+        let currentUserService = CurrentUserService(currentUser: user)
         userService = currentUserService
         #endif
         
@@ -43,7 +43,10 @@ final class LoginCoordinator: Coordinator {
 extension LoginCoordinator: ProfileCoordinatorDelegate {
     func profileCoordinatorDidFinished(_ coordinator: ProfileCoordinator) {
         if coordinator.childCoordinators.isEmpty {
-            removeChildCoordinator(coordinator)
+            if let topViewController = navigationController.topViewController,
+               !(topViewController is ProfileViewController) {
+                removeChildCoordinator(coordinator)
+            }
         }
     }
 }

@@ -183,7 +183,7 @@ class ProfileTableHeaderView: UIView {
     }
     
     @objc private func tapOnAvatar() {
-        // create an animation
+        
         avatarImageView.isUserInteractionEnabled = false
         
         ProfileViewController.tableView.isScrollEnabled = false
@@ -210,15 +210,13 @@ class ProfileTableHeaderView: UIView {
     
     @objc private func returnAvatarToOrigin() {
         UIImageView.animate(withDuration: 0.5) {
-            UIImageView.animate(withDuration: 0.5) {
-                self.returnAvatarButton.alpha = 0
-                self.avatarImageView.center = self.avatarOriginPoint
-                self.avatarImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
-                self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.width / 2
-                self.avatarImageView.layer.borderWidth = 3
-                self.avatarImageView.layer.borderColor = UIColor.white.cgColor
-                self.avatarBackground.alpha = 0
-            }
+            self.returnAvatarButton.alpha = 0
+            self.avatarImageView.center = self.avatarOriginPoint
+            self.avatarImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.width / 2
+            self.avatarImageView.layer.borderWidth = 3
+            self.avatarImageView.layer.borderColor = UIColor.white.cgColor
+            self.avatarBackground.alpha = 0
         } completion: { _ in
             ProfileViewController.tableView.isScrollEnabled = true
             ProfileViewController.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = true
