@@ -21,7 +21,7 @@ public class User {
     
 }
     
-//private (set) var user = User(login: "Groot", fullName: "I am Groot", avatar: UIImage(named: "Groot"), status: "Happy :)", password: "Groot")
+private (set) var user = User(login: "Groot", fullName: "I am Groot", avatar: UIImage(named: "Groot"), status: "Happy :)", password: "Groot")
 
 private (set) var testUser = User(login: "TestUser", fullName: "TestUser", avatar: UIImage(systemName: "person.fill.questionmark"), status: "Test is done", password: "TestUser")
 

@@ -3,13 +3,17 @@ import Foundation
 
 final class FeedModel {
     
-    // Секретное слово, которое будет сравниваться с введенным словом
-    let secretWord = "пароль"
+    let secretWord = "secret"
     
-    // Метод для проверки введенного слова
-    func check(word: String) -> Bool {
-        let isCorrect = word == secretWord
-        return isCorrect
+    func check(word: String, completion: @escaping (Result<String, SecretWordError>) -> Void) {
+        
+        if word == secretWord {
+            completion(.success("Correct!"))
+        } else if word.isEmpty {
+            completion(.failure(.isEmpty))
+        } else {
+            completion(.failure(.incorrect))
+        }
     }
     
 }

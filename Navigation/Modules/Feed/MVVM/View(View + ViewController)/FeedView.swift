@@ -26,7 +26,7 @@ class FeedView: UIView {
     
     private lazy var textField: CustomTextField = {
         let textField = CustomTextField(
-            placeholder: "Enter the secret word (hint: \"пароль\")",
+            placeholder: "Enter the secret word (hint: \"secret\")",
             fontSize: 17
         )
         textField.borderStyle = .roundedRect
@@ -38,8 +38,14 @@ class FeedView: UIView {
         backgroundColor: .systemGreen,
         cornerRadius: Constants.spacing,
         action: { [weak self] in
-            guard let word = self?.textField.text else { return }
-            self?.viewModel.validateSecretWord(word: word)
+            guard let self,
+                  let word = self.textField.text else { return }
+            self.viewModel.validateSecretWord(word: word) {message  in
+                DispatchQueue.main.async {
+                    self.resultLabel.text = message
+                    self.resultLabel.textColor = message == "Correct!" ? .green : .red
+                }
+            }
         })
     
     private lazy var resultLabel: UILabel = {
@@ -64,7 +70,6 @@ class FeedView: UIView {
         super.init(frame: .zero)
         setupSubviews()
         setupConstraints()
-        bindViewModel()
     }
     
     required init?(coder: NSCoder) {
@@ -96,15 +101,6 @@ class FeedView: UIView {
             resultLabel.bottomAnchor.constraint(equalTo: textField.topAnchor, constant: -20),
             resultLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
         ])
-    }
-    
-    func bindViewModel() {
-        viewModel.validationResultChanged = { [unowned self] isValid, validationResultText in
-            DispatchQueue.main.async {
-                self.resultLabel.text = validationResultText
-                self.resultLabel.textColor = isValid ? .green : .red
-            }
-        }
     }
     
     private func showPostViewController() {

@@ -14,6 +14,7 @@
 		093CFD942AA1A97F00C2D7BA /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD932AA1A97F00C2D7BA /* CurrentUser.swift */; };
 		093CFD962AA1A98800C2D7BA /* TestUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD952AA1A98800C2D7BA /* TestUser.swift */; };
 		093CFD982AA1AD0100C2D7BA /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD972AA1AD0100C2D7BA /* Alert.swift */; };
+		093CFD9A2AA1CD7A00C2D7BA /* SecretWordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD992AA1CD7A00C2D7BA /* SecretWordError.swift */; };
 		095BF86F2A8F83BA00CBD6B1 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */; };
 		095BF8742A908B1A00CBD6B1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8732A908B1A00CBD6B1 /* CustomTextField.swift */; };
 		095BF8822A920BC500CBD6B1 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8812A920BC500CBD6B1 /* FeedView.swift */; };
@@ -103,6 +104,7 @@
 		093CFD932AA1A97F00C2D7BA /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		093CFD952AA1A98800C2D7BA /* TestUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUser.swift; sourceTree = "<group>"; };
 		093CFD972AA1AD0100C2D7BA /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		093CFD992AA1CD7A00C2D7BA /* SecretWordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretWordError.swift; sourceTree = "<group>"; };
 		095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		095BF8732A908B1A00CBD6B1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		095BF8812A920BC500CBD6B1 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				09C2B77A2A8DF92500120A82 /* FeedModel.swift */,
+				093CFD992AA1CD7A00C2D7BA /* SecretWordError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				09D6C07A2A530145003C6DFB /* PhotoGalleryViewController.swift in Sources */,
 				09D6C0712A51E103003C6DFB /* PhotosTableViewCell.swift in Sources */,
 				09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */,
+				093CFD9A2AA1CD7A00C2D7BA /* SecretWordError.swift in Sources */,
 				09D6C0732A52A153003C6DFB /* FirstFourPhotosCell.swift in Sources */,
 				093CFD962AA1A98800C2D7BA /* TestUser.swift in Sources */,
 				090DA4A02A822F5B00BF7338 /* LoginFactory.swift in Sources */,
