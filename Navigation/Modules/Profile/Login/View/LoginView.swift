@@ -40,7 +40,7 @@ final class LoginView: UIView {
         registerField.layer.cornerRadius = 10
         registerField.layer.borderWidth = 0.5
         registerField.layer.borderColor = UIColor.lightGray.cgColor
-        registerField.addArrangedSubview(emailOrPhoneField)
+        registerField.addArrangedSubview(userName)
         registerField.addArrangedSubview(separator)
         registerField.addArrangedSubview(passwordField)
         return registerField
@@ -53,8 +53,8 @@ final class LoginView: UIView {
         return separator
     }()
     
-    private lazy var emailOrPhoneField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Email or phone", fontSize: 16)
+    private lazy var userName: CustomTextField = {
+        let textField = CustomTextField(placeholder: "Username", fontSize: 16)
         textField.keyboardType = .emailAddress
         return textField
     }()
@@ -142,11 +142,11 @@ final class LoginView: UIView {
             registerField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             registerField.heightAnchor.constraint(equalToConstant: 100),
             
-            emailOrPhoneField.topAnchor.constraint(equalTo: registerField.topAnchor),
-            emailOrPhoneField.heightAnchor.constraint(equalToConstant: 49.75),
-            emailOrPhoneField.widthAnchor.constraint(equalTo: registerField.widthAnchor),
+            userName.topAnchor.constraint(equalTo: registerField.topAnchor),
+            userName.heightAnchor.constraint(equalToConstant: 49.75),
+            userName.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             
-            separator.topAnchor.constraint(equalTo: emailOrPhoneField.bottomAnchor),
+            separator.topAnchor.constraint(equalTo: userName.bottomAnchor),
             separator.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             separator.heightAnchor.constraint(equalToConstant: 0.5),
             
@@ -154,7 +154,7 @@ final class LoginView: UIView {
             passwordField.heightAnchor.constraint(equalToConstant: 49.75),
             passwordField.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             
-            separator.topAnchor.constraint(equalTo: emailOrPhoneField.bottomAnchor),
+            separator.topAnchor.constraint(equalTo: userName.bottomAnchor),
             separator.bottomAnchor.constraint(equalTo: passwordField.topAnchor),
             separator.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             
@@ -170,16 +170,16 @@ final class LoginView: UIView {
     
     private func defaultLoginAndPassword() {
 #if DEBUG
-        emailOrPhoneField.text = testUser.login
-        passwordField.text = testUser.login
+        userName.text = testUser?.login
+        passwordField.text = testUser?.login
 #else
-        emailOrPhoneField.text = user.login
-        passwordField.text = user.password
+        userName.text = currentUser?.login
+        passwordField.text = currentUser?.password
 #endif
     }
     
     private func buttonPressed() {
-        guard let login = emailOrPhoneField.text else { return }
+        guard let login = userName.text else { return }
         guard let password = passwordField.text else { return }
         delegate?.loginButtonPressed(login: login, password: password)
     }

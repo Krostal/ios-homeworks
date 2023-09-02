@@ -6,5 +6,4 @@ enum LoginError: Error {
     case emptyPassword
     case invalidUserName
     case invalidPassword
-    case unauthorized
 }
