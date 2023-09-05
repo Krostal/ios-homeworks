@@ -34,20 +34,56 @@ final class ProfileCoordinator: Coordinator {
         photoGalleryCoordinator.start()
     }
     
+    func showAudioPlayer() {
+        let musicCoordinator = MusicCoordinator(navigationController: navigationController)
+        musicCoordinator.delegate = self
+        addChildCoordinator(musicCoordinator)
+        musicCoordinator.start()
+    }
+    
+    func showVideoController() {
+        let videoCoordinator = VideoCoordinator(navigationController: navigationController)
+        videoCoordinator.delegate = self
+        addChildCoordinator(videoCoordinator)
+        videoCoordinator.start()
+    }
+    
 }
 
 extension ProfileCoordinator: ProfileViewControllerDelegate {
+        
     func showPhotoGalleryViewController() {
         showPhotoGallery()
+    }
+    
+    func showMusicViewController() {
+        showAudioPlayer()
+    }
+    
+    func showVideoViewController() {
+        showVideoController()
     }
     
     func profileViewControllerDidDisappear() {
         delegate?.profileCoordinatorDidFinished(self)
     }
+
 }
 
 extension ProfileCoordinator: PhotoGalleryCoordinatorDelegate {
     func photoGalleryCoordinatorDidFinish(_ coordinator: PhotoGalleryCoordinator) {
+        removeChildCoordinator(coordinator)
+    }
+}
+
+extension ProfileCoordinator: MusicCoordinatorDelegate {
+    func musicCoordinatorDidFinish(_ coordinator: MusicCoordinator) {
+        removeChildCoordinator(coordinator)
+    }
+}
+
+extension ProfileCoordinator: VideoCoordinatorDelegate {
+    func videoCoordinatorDidFinish(_ coordinator: VideoCoordinator) {
         removeChildCoordinator(coordinator)
     }
 }

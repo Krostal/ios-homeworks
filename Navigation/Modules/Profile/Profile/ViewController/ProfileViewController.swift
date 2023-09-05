@@ -3,6 +3,8 @@ import StorageService
 
 protocol ProfileViewControllerDelegate: AnyObject {
     func showPhotoGalleryViewController()
+    func showMusicViewController()
+    func showVideoViewController()
     func profileViewControllerDidDisappear()
 }
 
@@ -146,6 +148,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
             sectionZeroHeader.user = currentUser
+            sectionZeroHeader.delegate = self
             return sectionZeroHeader
         }
         return nil
@@ -174,3 +177,12 @@ extension ProfileViewController: PhotosTableViewCellDelegate {
     }
 }
 
+extension ProfileViewController: ProfileTableHeaderViewDelegate {
+    func didTapMyVideoButton() {
+        delegate?.showVideoViewController()
+    }
+    
+    func didTapMyMusicButton() {
+        delegate?.showMusicViewController()
+    }
+}

@@ -38,6 +38,7 @@ class PhotoGalleryViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         delegate?.photoGalleryViewControllerDidDisappear()
     }
     

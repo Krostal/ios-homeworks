@@ -1,6 +1,13 @@
 import UIKit
 
+protocol ProfileTableHeaderViewDelegate: AnyObject {
+    func didTapMyMusicButton()
+    func didTapMyVideoButton()
+}
+
 class ProfileTableHeaderView: UIView {
+    
+    weak var delegate: ProfileTableHeaderViewDelegate?
     
     var user: User? {
         didSet {
@@ -35,6 +42,24 @@ class ProfileTableHeaderView: UIView {
         fullName.textColor = .black
         fullName.font = .systemFont(ofSize: 18, weight: .bold)
         return fullName
+    }()
+    
+    private lazy var musicButton: UIButton = {
+        let musicButton = UIButton(type: .system)
+        musicButton.translatesAutoresizingMaskIntoConstraints = false
+        musicButton.setImage(UIImage(systemName: "airpodsmax"), for: .normal)
+        musicButton.setTitle("my music", for: .normal)
+        musicButton.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
+        return musicButton
+    }()
+    
+    private lazy var videoButton: UIButton = {
+        let musicButton = UIButton(type: .system)
+        musicButton.translatesAutoresizingMaskIntoConstraints = false
+        musicButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
+        musicButton.setTitle("my video", for: .normal)
+        musicButton.addTarget(self, action: #selector(videoButtonTapped), for: .touchUpInside)
+        return musicButton
     }()
     
     private lazy var statusLabel: UILabel = {
@@ -102,6 +127,8 @@ class ProfileTableHeaderView: UIView {
         
         addSubview(avatarImageView)
         addSubview(fullNameLabel)
+        addSubview(musicButton)
+        addSubview(videoButton)
         addSubview(setStatusButton)
         addSubview(statusLabel)
         addSubview(statusTextField)
@@ -117,6 +144,15 @@ class ProfileTableHeaderView: UIView {
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: Constants.horizontalPadding),
             fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
             fullNameLabel.heightAnchor.constraint(equalToConstant: 18),
+            
+            musicButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
+            musicButton.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            musicButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            videoButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
+            videoButton.leadingAnchor.constraint(greaterThanOrEqualTo: musicButton.trailingAnchor),
+            videoButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
+            videoButton.heightAnchor.constraint(equalToConstant: 20),
             
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -54),
@@ -174,6 +210,14 @@ class ProfileTableHeaderView: UIView {
             statusLabel.text = user.status
             avatarImageView.image = user.avatar
         }
+    }
+    
+    @objc func musicButtonTapped(_ sender: UIButton) {
+        delegate?.didTapMyMusicButton()
+    }
+    
+    @objc func videoButtonTapped(_ sender: UIButton) {
+        delegate?.didTapMyVideoButton()
     }
 
     @objc func statusTextChanged(_ textField: UITextField) {
