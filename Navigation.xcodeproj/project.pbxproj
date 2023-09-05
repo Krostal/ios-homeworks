@@ -52,6 +52,17 @@
 		09D6C0782A52CA17003C6DFB /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6C0772A52CA17003C6DFB /* Reusable.swift */; };
 		09D6C07A2A530145003C6DFB /* PhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6C0792A530145003C6DFB /* PhotoGalleryViewController.swift */; };
 		09D6C07C2A5303F7003C6DFB /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6C07B2A5303F7003C6DFB /* PhotosCollectionViewCell.swift */; };
+		09DB0C282AA5DA0500D2C1F3 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DB0C272AA5DA0500D2C1F3 /* MusicViewController.swift */; };
+		09DB0C2E2AA5DA6500D2C1F3 /* Linkin Park Numb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09DB0C292AA5DA6400D2C1F3 /* Linkin Park Numb.mp3 */; };
+		09DB0C2F2AA5DA6500D2C1F3 /* The xx Night Time.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09DB0C2A2AA5DA6400D2C1F3 /* The xx Night Time.mp3 */; };
+		09DB0C302AA5DA6500D2C1F3 /* Sting Shape Of My Heart.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09DB0C2B2AA5DA6400D2C1F3 /* Sting Shape Of My Heart.mp3 */; };
+		09DB0C312AA5DA6500D2C1F3 /* OneRepublic Secrets.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09DB0C2C2AA5DA6400D2C1F3 /* OneRepublic Secrets.mp3 */; };
+		09DB0C322AA5DA6500D2C1F3 /* Imagine Dragons Bones.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 09DB0C2D2AA5DA6500D2C1F3 /* Imagine Dragons Bones.mp3 */; };
+		09DB0C352AA5E7CF00D2C1F3 /* MusicCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DB0C342AA5E7CF00D2C1F3 /* MusicCoordinator.swift */; };
+		09DB0C3B2AA60D5500D2C1F3 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DB0C3A2AA60D5500D2C1F3 /* VideoViewController.swift */; };
+		09DB0C3E2AA60F8E00D2C1F3 /* VideoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DB0C3D2AA60F8E00D2C1F3 /* VideoCoordinator.swift */; };
+		09DB0C462AA630A400D2C1F3 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 09DB0C452AA630A400D2C1F3 /* YouTubeiOSPlayerHelper */; };
+		09DB0C482AA6DD0A00D2C1F3 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DB0C472AA6DD0A00D2C1F3 /* VideoTableViewCell.swift */; };
 		09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E677412A45EF8000A36ED1 /* LogInViewController.swift */; };
 		09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */; };
 		09E98EB22A3852D000DE6940 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */; };
@@ -142,6 +153,16 @@
 		09D6C0772A52CA17003C6DFB /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		09D6C0792A530145003C6DFB /* PhotoGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryViewController.swift; sourceTree = "<group>"; };
 		09D6C07B2A5303F7003C6DFB /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		09DB0C272AA5DA0500D2C1F3 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
+		09DB0C292AA5DA6400D2C1F3 /* Linkin Park Numb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Linkin Park Numb.mp3"; sourceTree = "<group>"; };
+		09DB0C2A2AA5DA6400D2C1F3 /* The xx Night Time.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "The xx Night Time.mp3"; sourceTree = "<group>"; };
+		09DB0C2B2AA5DA6400D2C1F3 /* Sting Shape Of My Heart.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sting Shape Of My Heart.mp3"; sourceTree = "<group>"; };
+		09DB0C2C2AA5DA6400D2C1F3 /* OneRepublic Secrets.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "OneRepublic Secrets.mp3"; sourceTree = "<group>"; };
+		09DB0C2D2AA5DA6500D2C1F3 /* Imagine Dragons Bones.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Imagine Dragons Bones.mp3"; sourceTree = "<group>"; };
+		09DB0C342AA5E7CF00D2C1F3 /* MusicCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCoordinator.swift; sourceTree = "<group>"; };
+		09DB0C3A2AA60D5500D2C1F3 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		09DB0C3D2AA60F8E00D2C1F3 /* VideoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCoordinator.swift; sourceTree = "<group>"; };
+		09DB0C472AA6DD0A00D2C1F3 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		09E677412A45EF8000A36ED1 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
@@ -170,6 +191,7 @@
 			files = (
 				09AA93682A6BEA26005896DB /* StorageService.framework in Frameworks */,
 				096179682A8CC91C002F106E /* iOSIntPackage in Frameworks */,
+				09DB0C462AA630A400D2C1F3 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +270,8 @@
 				095BF8862A921B3300CBD6B1 /* LoginCoordinator.swift */,
 				09BD83022A9328160059DF3F /* ProfileCoordinator.swift */,
 				0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */,
+				09DB0C342AA5E7CF00D2C1F3 /* MusicCoordinator.swift */,
+				09DB0C3D2AA60F8E00D2C1F3 /* VideoCoordinator.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -403,6 +427,7 @@
 				09D6C06F2A51D63B003C6DFB /* Common */,
 				095BF8752A908F7300CBD6B1 /* Custom UI-elements */,
 				09B361BE2A336E8B005979C8 /* Assets.xcassets */,
+				09DB0C332AA5DA6B00D2C1F3 /* Music */,
 				09B361C02A336E8B005979C8 /* LaunchScreen.storyboard */,
 				09B361C32A336E8B005979C8 /* Info.plist */,
 			);
@@ -445,12 +470,51 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		09DB0C332AA5DA6B00D2C1F3 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		09DB0C362AA5EF0A00D2C1F3 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				09DB0C272AA5DA0500D2C1F3 /* MusicViewController.swift */,
+				09DB0C372AA5EF2700D2C1F3 /* Tracks */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		09DB0C372AA5EF2700D2C1F3 /* Tracks */ = {
+			isa = PBXGroup;
+			children = (
+				09DB0C2D2AA5DA6500D2C1F3 /* Imagine Dragons Bones.mp3 */,
+				09DB0C292AA5DA6400D2C1F3 /* Linkin Park Numb.mp3 */,
+				09DB0C2C2AA5DA6400D2C1F3 /* OneRepublic Secrets.mp3 */,
+				09DB0C2B2AA5DA6400D2C1F3 /* Sting Shape Of My Heart.mp3 */,
+				09DB0C2A2AA5DA6400D2C1F3 /* The xx Night Time.mp3 */,
+			);
+			path = Tracks;
+			sourceTree = "<group>";
+		};
+		09DB0C3C2AA60D5F00D2C1F3 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				09DB0C3A2AA60D5500D2C1F3 /* VideoViewController.swift */,
+				09DB0C472AA6DD0A00D2C1F3 /* VideoTableViewCell.swift */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		09E98EB02A3852A200DE6940 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				097826902A962580002096A2 /* Login */,
 				097826912A96258A002096A2 /* Profile */,
 				097826922A962596002096A2 /* PhotoGallery */,
+				09DB0C362AA5EF0A00D2C1F3 /* Music */,
+				09DB0C3C2AA60D5F00D2C1F3 /* Video */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -523,6 +587,7 @@
 			name = Navigation;
 			packageProductDependencies = (
 				096179672A8CC91C002F106E /* iOSIntPackage */,
+				09DB0C452AA630A400D2C1F3 /* YouTubeiOSPlayerHelper */,
 			);
 			productName = Navigation;
 			productReference = 09B361B22A336E8A005979C8 /* Navigation.app */;
@@ -561,6 +626,7 @@
 			mainGroup = 09B361A92A336E8A005979C8;
 			packageReferences = (
 				096179662A8CC91C002F106E /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+				09DB0C442AA630A400D2C1F3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 09B361B32A336E8A005979C8 /* Products */;
 			projectDirPath = "";
@@ -592,8 +658,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09DB0C2E2AA5DA6500D2C1F3 /* Linkin Park Numb.mp3 in Resources */,
+				09DB0C2F2AA5DA6500D2C1F3 /* The xx Night Time.mp3 in Resources */,
 				09B361C22A336E8B005979C8 /* LaunchScreen.storyboard in Resources */,
 				09B361BF2A336E8B005979C8 /* Assets.xcassets in Resources */,
+				09DB0C322AA5DA6500D2C1F3 /* Imagine Dragons Bones.mp3 in Resources */,
+				09DB0C312AA5DA6500D2C1F3 /* OneRepublic Secrets.mp3 in Resources */,
+				09DB0C302AA5DA6500D2C1F3 /* Sting Shape Of My Heart.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +700,7 @@
 				09B361CA2A337411005979C8 /* FeedViewController.swift in Sources */,
 				09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */,
 				09D6C0642A4C854A003C6DFB /* PhotoGallery.swift in Sources */,
+				09DB0C3B2AA60D5500D2C1F3 /* VideoViewController.swift in Sources */,
 				0978269B2A9712D3002096A2 /* LoginView.swift in Sources */,
 				09BD83032A9328160059DF3F /* ProfileCoordinator.swift in Sources */,
 				09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */,
@@ -645,9 +717,11 @@
 				09D6C0712A51E103003C6DFB /* PhotosTableViewCell.swift in Sources */,
 				09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */,
 				093CFD9A2AA1CD7A00C2D7BA /* SecretWordError.swift in Sources */,
+				09DB0C482AA6DD0A00D2C1F3 /* VideoTableViewCell.swift in Sources */,
 				09D6C0732A52A153003C6DFB /* FirstFourPhotosCell.swift in Sources */,
 				093CFD962AA1A98800C2D7BA /* TestUserService.swift in Sources */,
 				090DA4A02A822F5B00BF7338 /* LoginFactory.swift in Sources */,
+				09DB0C3E2AA60F8E00D2C1F3 /* VideoCoordinator.swift in Sources */,
 				09C2B77B2A8DF92500120A82 /* FeedModel.swift in Sources */,
 				090DA49E2A821DE300BF7338 /* LoginInspector.swift in Sources */,
 				09D6C07C2A5303F7003C6DFB /* PhotosCollectionViewCell.swift in Sources */,
@@ -657,6 +731,8 @@
 				095BF88F2A92280600CBD6B1 /* TabBarFactory.swift in Sources */,
 				0978268D2A9608AB002096A2 /* PhotoGalleryCoordinator.swift in Sources */,
 				090DA49C2A8211C500BF7338 /* Checker.swift in Sources */,
+				09DB0C352AA5E7CF00D2C1F3 /* MusicCoordinator.swift in Sources */,
+				09DB0C282AA5DA0500D2C1F3 /* MusicViewController.swift in Sources */,
 				095BF8852A921B2100CBD6B1 /* MainCoordinator.swift in Sources */,
 				093CFD942AA1A97F00C2D7BA /* CurrentUserService.swift in Sources */,
 				09F402702A7C8F4F009DCD7F /* User.swift in Sources */,
@@ -1017,6 +1093,14 @@
 				kind = branch;
 			};
 		};
+		09DB0C442AA630A400D2C1F3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1024,6 +1108,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 096179662A8CC91C002F106E /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
+		};
+		09DB0C452AA630A400D2C1F3 /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09DB0C442AA630A400D2C1F3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
