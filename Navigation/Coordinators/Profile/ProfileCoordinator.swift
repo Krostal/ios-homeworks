@@ -48,6 +48,13 @@ final class ProfileCoordinator: Coordinator {
         videoCoordinator.start()
     }
     
+    func showRecordView() {
+        let recordCoordinator = RecordCoordinator(navigationController: navigationController)
+        recordCoordinator.delegate = self
+        addChildCoordinator(recordCoordinator)
+        recordCoordinator.start()
+    }
+    
 }
 
 extension ProfileCoordinator: ProfileViewControllerDelegate {
@@ -64,6 +71,10 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
         showVideoController()
     }
     
+    func showRecordViewController() {
+        showRecordView()
+    }
+    
     func profileViewControllerDidDisappear() {
         delegate?.profileCoordinatorDidFinished(self)
     }
@@ -73,6 +84,7 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
 extension ProfileCoordinator: PhotoGalleryCoordinatorDelegate {
     func photoGalleryCoordinatorDidFinish(_ coordinator: PhotoGalleryCoordinator) {
         removeChildCoordinator(coordinator)
+        
     }
 }
 
@@ -84,6 +96,12 @@ extension ProfileCoordinator: MusicCoordinatorDelegate {
 
 extension ProfileCoordinator: VideoCoordinatorDelegate {
     func videoCoordinatorDidFinish(_ coordinator: VideoCoordinator) {
+        removeChildCoordinator(coordinator)
+    }
+}
+
+extension ProfileCoordinator: RecordCoordinatorDelegate {
+    func recordCoordinatorDidFinish(_ coordinator: RecordCoordinator) {
         removeChildCoordinator(coordinator)
     }
 }

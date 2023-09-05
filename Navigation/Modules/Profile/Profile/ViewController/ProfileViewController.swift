@@ -5,6 +5,7 @@ protocol ProfileViewControllerDelegate: AnyObject {
     func showPhotoGalleryViewController()
     func showMusicViewController()
     func showVideoViewController()
+    func showRecordViewController()
     func profileViewControllerDidDisappear()
 }
 
@@ -178,6 +179,10 @@ extension ProfileViewController: PhotosTableViewCellDelegate {
 }
 
 extension ProfileViewController: ProfileTableHeaderViewDelegate {
+    func didTapRecordButton() {
+        delegate?.showRecordViewController()
+    }
+    
     func didTapMyVideoButton() {
         delegate?.showVideoViewController()
     }

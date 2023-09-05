@@ -3,6 +3,7 @@ import UIKit
 protocol ProfileTableHeaderViewDelegate: AnyObject {
     func didTapMyMusicButton()
     func didTapMyVideoButton()
+    func didTapRecordButton()
 }
 
 class ProfileTableHeaderView: UIView {
@@ -48,7 +49,7 @@ class ProfileTableHeaderView: UIView {
         let musicButton = UIButton(type: .system)
         musicButton.translatesAutoresizingMaskIntoConstraints = false
         musicButton.setImage(UIImage(systemName: "airpodsmax"), for: .normal)
-        musicButton.setTitle("my music", for: .normal)
+        musicButton.setTitle("Music", for: .normal)
         musicButton.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
         return musicButton
     }()
@@ -57,9 +58,18 @@ class ProfileTableHeaderView: UIView {
         let musicButton = UIButton(type: .system)
         musicButton.translatesAutoresizingMaskIntoConstraints = false
         musicButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
-        musicButton.setTitle("my video", for: .normal)
+        musicButton.setTitle("Video", for: .normal)
         musicButton.addTarget(self, action: #selector(videoButtonTapped), for: .touchUpInside)
         return musicButton
+    }()
+    
+    private lazy var recordButton: UIButton = {
+        let recordButton = UIButton(type: .system)
+        recordButton.translatesAutoresizingMaskIntoConstraints = false
+        recordButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
+        recordButton.setTitle("Rec", for: .normal)
+        recordButton.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
+        return recordButton
     }()
     
     private lazy var statusLabel: UILabel = {
@@ -129,6 +139,7 @@ class ProfileTableHeaderView: UIView {
         addSubview(fullNameLabel)
         addSubview(musicButton)
         addSubview(videoButton)
+        addSubview(recordButton)
         addSubview(setStatusButton)
         addSubview(statusLabel)
         addSubview(statusTextField)
@@ -150,9 +161,13 @@ class ProfileTableHeaderView: UIView {
             musicButton.heightAnchor.constraint(equalToConstant: 20),
             
             videoButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
-            videoButton.leadingAnchor.constraint(greaterThanOrEqualTo: musicButton.trailingAnchor),
-            videoButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
+            videoButton.leadingAnchor.constraint(equalTo: musicButton.trailingAnchor, constant: 3),
             videoButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            recordButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
+            recordButton.leadingAnchor.constraint(equalTo: videoButton.trailingAnchor, constant: 3),
+            recordButton.trailingAnchor.constraint(lessThanOrEqualTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
+            recordButton.heightAnchor.constraint(equalToConstant: 20),
             
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -54),
@@ -218,6 +233,10 @@ class ProfileTableHeaderView: UIView {
     
     @objc func videoButtonTapped(_ sender: UIButton) {
         delegate?.didTapMyVideoButton()
+    }
+    
+    @objc func recordButtonTapped(_ sender: UIButton) {
+        delegate?.didTapRecordButton()
     }
 
     @objc func statusTextChanged(_ textField: UITextField) {
