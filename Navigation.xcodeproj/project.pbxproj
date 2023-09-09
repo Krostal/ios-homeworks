@@ -432,7 +432,6 @@
 				09D6C06F2A51D63B003C6DFB /* Common */,
 				095BF8752A908F7300CBD6B1 /* Custom UI-elements */,
 				09B361BE2A336E8B005979C8 /* Assets.xcassets */,
-				09DB0C332AA5DA6B00D2C1F3 /* Music */,
 				09B361C02A336E8B005979C8 /* LaunchScreen.storyboard */,
 				09B361C32A336E8B005979C8 /* Info.plist */,
 			);
@@ -473,13 +472,6 @@
 				093CFD972AA1AD0100C2D7BA /* Alert.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		09DB0C332AA5DA6B00D2C1F3 /* Music */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Music;
 			sourceTree = "<group>";
 		};
 		09DB0C362AA5EF0A00D2C1F3 /* Music */ = {
