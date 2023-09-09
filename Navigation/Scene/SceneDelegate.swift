@@ -4,6 +4,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    var appConfiguration: AppConfiguration?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -11,6 +12,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
+        appConfiguration = [.people, .planets, .starships].randomElement()
+
+        if let configuration = appConfiguration {
+            NetworkService.request(for: configuration)
+        }
+
         let mainCoordinator = MainCoordinator()
         let rootViewController = mainCoordinator.startApp()
         
