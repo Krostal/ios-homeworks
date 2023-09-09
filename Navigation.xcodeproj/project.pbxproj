@@ -63,6 +63,8 @@
 		09DB0C3E2AA60F8E00D2C1F3 /* VideoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DB0C3D2AA60F8E00D2C1F3 /* VideoCoordinator.swift */; };
 		09DB0C462AA630A400D2C1F3 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 09DB0C452AA630A400D2C1F3 /* YouTubeiOSPlayerHelper */; };
 		09DB0C482AA6DD0A00D2C1F3 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DB0C472AA6DD0A00D2C1F3 /* VideoTableViewCell.swift */; };
+		09DB0C4E2AA7394E00D2C1F3 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DB0C4D2AA7394E00D2C1F3 /* RecordCoordinator.swift */; };
+		09DB0C512AA73B9200D2C1F3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DB0C502AA73B9200D2C1F3 /* RecordViewController.swift */; };
 		09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E677412A45EF8000A36ED1 /* LogInViewController.swift */; };
 		09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */; };
 		09E98EB22A3852D000DE6940 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */; };
@@ -163,6 +165,8 @@
 		09DB0C3A2AA60D5500D2C1F3 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		09DB0C3D2AA60F8E00D2C1F3 /* VideoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCoordinator.swift; sourceTree = "<group>"; };
 		09DB0C472AA6DD0A00D2C1F3 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		09DB0C4D2AA7394E00D2C1F3 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
+		09DB0C502AA73B9200D2C1F3 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		09E677412A45EF8000A36ED1 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
@@ -272,6 +276,7 @@
 				0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */,
 				09DB0C342AA5E7CF00D2C1F3 /* MusicCoordinator.swift */,
 				09DB0C3D2AA60F8E00D2C1F3 /* VideoCoordinator.swift */,
+				09DB0C4D2AA7394E00D2C1F3 /* RecordCoordinator.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -507,6 +512,14 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
+		09DB0C4F2AA73B6700D2C1F3 /* Recording */ = {
+			isa = PBXGroup;
+			children = (
+				09DB0C502AA73B9200D2C1F3 /* RecordViewController.swift */,
+			);
+			path = Recording;
+			sourceTree = "<group>";
+		};
 		09E98EB02A3852A200DE6940 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +528,7 @@
 				097826922A962596002096A2 /* PhotoGallery */,
 				09DB0C362AA5EF0A00D2C1F3 /* Music */,
 				09DB0C3C2AA60D5F00D2C1F3 /* Video */,
+				09DB0C4F2AA73B6700D2C1F3 /* Recording */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -717,6 +731,7 @@
 				09D6C0712A51E103003C6DFB /* PhotosTableViewCell.swift in Sources */,
 				09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */,
 				093CFD9A2AA1CD7A00C2D7BA /* SecretWordError.swift in Sources */,
+				09DB0C4E2AA7394E00D2C1F3 /* RecordCoordinator.swift in Sources */,
 				09DB0C482AA6DD0A00D2C1F3 /* VideoTableViewCell.swift in Sources */,
 				09D6C0732A52A153003C6DFB /* FirstFourPhotosCell.swift in Sources */,
 				093CFD962AA1A98800C2D7BA /* TestUserService.swift in Sources */,
@@ -730,6 +745,7 @@
 				09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */,
 				095BF88F2A92280600CBD6B1 /* TabBarFactory.swift in Sources */,
 				0978268D2A9608AB002096A2 /* PhotoGalleryCoordinator.swift in Sources */,
+				09DB0C512AA73B9200D2C1F3 /* RecordViewController.swift in Sources */,
 				090DA49C2A8211C500BF7338 /* Checker.swift in Sources */,
 				09DB0C352AA5E7CF00D2C1F3 /* MusicCoordinator.swift in Sources */,
 				09DB0C282AA5DA0500D2C1F3 /* MusicViewController.swift in Sources */,
@@ -995,10 +1011,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone Access Permission Request";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1024,10 +1040,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone Access Permission Request";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (

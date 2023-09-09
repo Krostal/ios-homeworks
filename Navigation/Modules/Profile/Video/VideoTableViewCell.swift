@@ -10,6 +10,7 @@ final class VideoTableViewCell: UITableViewCell {
     private lazy var youtubePlayer: YTPlayerView = {
         let player = YTPlayerView()
         player.translatesAutoresizingMaskIntoConstraints = false
+        player.contentMode = .scaleAspectFit
         return player
     }()
     

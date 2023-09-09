@@ -115,11 +115,20 @@ final class MusicViewController: UIViewController {
         guard let audioPath = Bundle.main.path(forResource: trackNames[currentTrackIndex], ofType: "mp3") else { return }
         do {
             player = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: audioPath))
-            player.prepareToPlay()
+            setupAudioSession()
             trackNameLabel.text = trackNames[currentTrackIndex]
         }
         catch {
             print(error)
+        }
+    }
+    
+    private func setupAudioSession() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback)
+        } catch {
+            print(error.localizedDescription)
         }
     }
     
