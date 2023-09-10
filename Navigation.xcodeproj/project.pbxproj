@@ -28,6 +28,8 @@
 		097826892A94C03F002096A2 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097826882A94C03F002096A2 /* InfoCoordinator.swift */; };
 		0978268D2A9608AB002096A2 /* PhotoGalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */; };
 		0978269B2A9712D3002096A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978269A2A9712D3002096A2 /* LoginView.swift */; };
+		098595152AAC36E40049CDEF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098595142AAC36E40049CDEF /* NetworkService.swift */; };
+		098595172AAC39C40049CDEF /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098595162AAC39C40049CDEF /* AppConfiguration.swift */; };
 		09AA931B2A6BE8A1005896DB /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AA931A2A6BE8A1005896DB /* News.swift */; };
 		09AA93572A6BEA25005896DB /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = 09AA93562A6BEA25005896DB /* StorageService.docc */; };
 		09AA935D2A6BEA25005896DB /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09AA93532A6BEA25005896DB /* StorageService.framework */; };
@@ -130,6 +132,8 @@
 		097826882A94C03F002096A2 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCoordinator.swift; sourceTree = "<group>"; };
 		0978269A2A9712D3002096A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		098595142AAC36E40049CDEF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		098595162AAC39C40049CDEF /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		09AA931A2A6BE8A1005896DB /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		09AA93532A6BEA25005896DB /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		09AA93552A6BEA25005896DB /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
@@ -385,6 +389,15 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		098595182AAC50EA0049CDEF /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				098595142AAC36E40049CDEF /* NetworkService.swift */,
+				098595162AAC39C40049CDEF /* AppConfiguration.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
 		09AA93542A6BEA25005896DB /* StorageService */ = {
 			isa = PBXGroup;
 			children = (
@@ -429,6 +442,7 @@
 				09D6C06B2A51D4E1003C6DFB /* Scene */,
 				095BF8832A921B0C00CBD6B1 /* Coordinators */,
 				09D6C06C2A51D53F003C6DFB /* Modules */,
+				098595182AAC50EA0049CDEF /* NetworkService */,
 				09D6C06F2A51D63B003C6DFB /* Common */,
 				095BF8752A908F7300CBD6B1 /* Custom UI-elements */,
 				09B361BE2A336E8B005979C8 /* Assets.xcassets */,
@@ -711,6 +725,7 @@
 				09BD83032A9328160059DF3F /* ProfileCoordinator.swift in Sources */,
 				09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */,
 				095BF88B2A921B4E00CBD6B1 /* FeedCoordinator.swift in Sources */,
+				098595152AAC36E40049CDEF /* NetworkService.swift in Sources */,
 				097826892A94C03F002096A2 /* InfoCoordinator.swift in Sources */,
 				093CFD982AA1AD0100C2D7BA /* Alert.swift in Sources */,
 				09AA931B2A6BE8A1005896DB /* News.swift in Sources */,
@@ -739,6 +754,7 @@
 				0978268D2A9608AB002096A2 /* PhotoGalleryCoordinator.swift in Sources */,
 				09DB0C512AA73B9200D2C1F3 /* RecordViewController.swift in Sources */,
 				090DA49C2A8211C500BF7338 /* Checker.swift in Sources */,
+				098595172AAC39C40049CDEF /* AppConfiguration.swift in Sources */,
 				09DB0C352AA5E7CF00D2C1F3 /* MusicCoordinator.swift in Sources */,
 				09DB0C282AA5DA0500D2C1F3 /* MusicViewController.swift in Sources */,
 				095BF8852A921B2100CBD6B1 /* MainCoordinator.swift in Sources */,
