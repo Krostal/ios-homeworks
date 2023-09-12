@@ -1,6 +1,6 @@
 import Foundation
 
-final class JSONDataService {
+final class JSONSerializationDataService {
     
     static func fetchJSONData(from urlString: String, completion: @escaping (Result<[String: Any], Error>) -> Void) {
         guard let url = URL(string: urlString) else {

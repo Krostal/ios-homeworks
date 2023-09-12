@@ -55,7 +55,7 @@ class InfoViewController: UIViewController {
     }
     
     private func fetchJsonData() {
-        JSONDataService.fetchJSONData(from: "https://jsonplaceholder.typicode.com/todos/123") { result in
+        JSONSerializationDataService.fetchJSONData(from: "https://jsonplaceholder.typicode.com/todos/123") { result in
             switch result {
             case .success(let jsonObject):
                 if let title = jsonObject["title"] as? String {
@@ -70,7 +70,8 @@ class InfoViewController: UIViewController {
     }
     
     private func fetchPlanetData() {
-        PlanetDataService.fetchPlanetData(from: "https://swapi.dev/api/planets/1") { result in
+        DataService<Planet>.fetchData(from: "https://swapi.dev/api/planets/1") { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let planet):
                 self.planetName = planet.name
@@ -83,8 +84,7 @@ class InfoViewController: UIViewController {
                 self.fetchResidents(residentsURLs: planet.residents)
                 
             case .failure(let error):
-                print ("❌ Error decoding planet data:", error.localizedDescription)
-                
+                print("❌ Network Error:", error.description)
             }
         }
     }
@@ -92,8 +92,11 @@ class InfoViewController: UIViewController {
     private func fetchResidents(residentsURLs: [String]) {
         
         for url in residentsURLs {
-            PlanetDataService.fetchResidentData(from: url) { result in
+            DataService<Resident>.fetchData(from: url) { [weak self] result in
+                guard let self else { return }
+                
                 switch result {
+                    
                 case .success(let resident):
                     self.residents.append(resident.name)
                     
@@ -102,12 +105,12 @@ class InfoViewController: UIViewController {
                     }
                     
                 case .failure(let error):
-                    print("❌ Error fetching Resident data:", error.localizedDescription)
+                    print("❌ Network Error:", error.description)
+                    
                 }
             }
         }
     }
-    
 }
 
 extension InfoViewController: UITableViewDelegate, UITableViewDataSource {

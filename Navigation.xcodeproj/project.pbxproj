@@ -15,13 +15,15 @@
 		093CFD962AA1A98800C2D7BA /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD952AA1A98800C2D7BA /* TestUserService.swift */; };
 		093CFD982AA1AD0100C2D7BA /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD972AA1AD0100C2D7BA /* Alert.swift */; };
 		093CFD9A2AA1CD7A00C2D7BA /* SecretWordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD992AA1CD7A00C2D7BA /* SecretWordError.swift */; };
+		094225052AB038E0008BD01B /* ExtensionURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094225042AB038E0008BD01B /* ExtensionURLSession.swift */; };
+		094225072AB039F2008BD01B /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094225062AB039F2008BD01B /* DataService.swift */; };
+		094225092AB03AE3008BD01B /* FetchDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094225082AB03AE3008BD01B /* FetchDataError.swift */; };
 		095988902AADE01C007608F4 /* JsonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0959888F2AADE01C007608F4 /* JsonModel.swift */; };
 		095988922AAE068B007608F4 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095988912AAE068B007608F4 /* Planet.swift */; };
 		095988942AAE19CB007608F4 /* Resident.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095988932AAE19CB007608F4 /* Resident.swift */; };
 		095988962AAE2175007608F4 /* ResidentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095988952AAE2175007608F4 /* ResidentsTableViewCell.swift */; };
 		0959889C2AAE2CAB007608F4 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0959889B2AAE2CAB007608F4 /* InfoView.swift */; };
-		0959889F2AAE4092007608F4 /* JSONDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0959889E2AAE4092007608F4 /* JSONDataService.swift */; };
-		095988A12AAE4144007608F4 /* PlanetDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095988A02AAE4144007608F4 /* PlanetDataService.swift */; };
+		0959889F2AAE4092007608F4 /* JSONSerializationDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0959889E2AAE4092007608F4 /* JSONSerializationDataService.swift */; };
 		095BF86F2A8F83BA00CBD6B1 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */; };
 		095BF8742A908B1A00CBD6B1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8732A908B1A00CBD6B1 /* CustomTextField.swift */; };
 		095BF8822A920BC500CBD6B1 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF8812A920BC500CBD6B1 /* FeedView.swift */; };
@@ -127,13 +129,15 @@
 		093CFD952AA1A98800C2D7BA /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		093CFD972AA1AD0100C2D7BA /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		093CFD992AA1CD7A00C2D7BA /* SecretWordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretWordError.swift; sourceTree = "<group>"; };
+		094225042AB038E0008BD01B /* ExtensionURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionURLSession.swift; sourceTree = "<group>"; };
+		094225062AB039F2008BD01B /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		094225082AB03AE3008BD01B /* FetchDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataError.swift; sourceTree = "<group>"; };
 		0959888F2AADE01C007608F4 /* JsonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonModel.swift; sourceTree = "<group>"; };
 		095988912AAE068B007608F4 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		095988932AAE19CB007608F4 /* Resident.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resident.swift; sourceTree = "<group>"; };
 		095988952AAE2175007608F4 /* ResidentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentsTableViewCell.swift; sourceTree = "<group>"; };
 		0959889B2AAE2CAB007608F4 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		0959889E2AAE4092007608F4 /* JSONDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataService.swift; sourceTree = "<group>"; };
-		095988A02AAE4144007608F4 /* PlanetDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDataService.swift; sourceTree = "<group>"; };
+		0959889E2AAE4092007608F4 /* JSONSerializationDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSerializationDataService.swift; sourceTree = "<group>"; };
 		095BF86E2A8F83BA00CBD6B1 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		095BF8732A908B1A00CBD6B1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		095BF8812A920BC500CBD6B1 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 				095988912AAE068B007608F4 /* Planet.swift */,
 				095988932AAE19CB007608F4 /* Resident.swift */,
 				0959888F2AADE01C007608F4 /* JsonModel.swift */,
+				094225082AB03AE3008BD01B /* FetchDataError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -262,8 +267,8 @@
 		0959889D2AAE4067007608F4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0959889E2AAE4092007608F4 /* JSONDataService.swift */,
-				095988A02AAE4144007608F4 /* PlanetDataService.swift */,
+				0959889E2AAE4092007608F4 /* JSONSerializationDataService.swift */,
+				094225062AB039F2008BD01B /* DataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -545,6 +550,7 @@
 			children = (
 				09D6C0772A52CA17003C6DFB /* Reusable.swift */,
 				093CFD972AA1AD0100C2D7BA /* Alert.swift */,
+				094225042AB038E0008BD01B /* ExtensionURLSession.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -779,6 +785,7 @@
 				09D6C0782A52CA17003C6DFB /* Reusable.swift in Sources */,
 				09B361B62A336E8A005979C8 /* AppDelegate.swift in Sources */,
 				09B361CA2A337411005979C8 /* FeedViewController.swift in Sources */,
+				094225072AB039F2008BD01B /* DataService.swift in Sources */,
 				09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */,
 				09D6C0642A4C854A003C6DFB /* PhotoGallery.swift in Sources */,
 				09DB0C3B2AA60D5500D2C1F3 /* VideoViewController.swift in Sources */,
@@ -797,8 +804,8 @@
 				095BF8822A920BC500CBD6B1 /* FeedView.swift in Sources */,
 				093CFD922AA0AB0C00C2D7BA /* LoginError.swift in Sources */,
 				09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */,
+				094225052AB038E0008BD01B /* ExtensionURLSession.swift in Sources */,
 				09E98EB22A3852D000DE6940 /* ProfileTableHeaderView.swift in Sources */,
-				095988A12AAE4144007608F4 /* PlanetDataService.swift in Sources */,
 				09D6C07A2A530145003C6DFB /* PhotoGalleryViewController.swift in Sources */,
 				09D6C0712A51E103003C6DFB /* PhotosTableViewCell.swift in Sources */,
 				09B361B82A336E8A005979C8 /* SceneDelegate.swift in Sources */,
@@ -807,9 +814,10 @@
 				09DB0C482AA6DD0A00D2C1F3 /* VideoTableViewCell.swift in Sources */,
 				09D6C0732A52A153003C6DFB /* FirstFourPhotosCell.swift in Sources */,
 				093CFD962AA1A98800C2D7BA /* TestUserService.swift in Sources */,
-				0959889F2AAE4092007608F4 /* JSONDataService.swift in Sources */,
+				0959889F2AAE4092007608F4 /* JSONSerializationDataService.swift in Sources */,
 				090DA4A02A822F5B00BF7338 /* LoginFactory.swift in Sources */,
 				09DB0C3E2AA60F8E00D2C1F3 /* VideoCoordinator.swift in Sources */,
+				094225092AB03AE3008BD01B /* FetchDataError.swift in Sources */,
 				09C2B77B2A8DF92500120A82 /* FeedModel.swift in Sources */,
 				090DA49E2A821DE300BF7338 /* LoginInspector.swift in Sources */,
 				09D6C07C2A5303F7003C6DFB /* PhotosCollectionViewCell.swift in Sources */,
