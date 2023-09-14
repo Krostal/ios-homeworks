@@ -20,11 +20,13 @@ final class ProfileCoordinator: Coordinator {
        fatalError("ProfileCoordinator requires a user to start.")
     }
 
-    func start(forUser user: User) {
+    func start(forUser user: UserModel) {
         let profileViewController = ProfileViewController()
-        profileViewController.delegate = self
         profileViewController.currentUser = user
+        profileViewController.delegate = self
         navigationController.pushViewController(profileViewController, animated: true)
+        navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+        navigationController.setViewControllers([profileViewController], animated: true)
     }
     
     func showPhotoGallery() {
@@ -58,12 +60,12 @@ final class ProfileCoordinator: Coordinator {
 }
 
 extension ProfileCoordinator: ProfileViewControllerDelegate {
-        
     func showPhotoGalleryViewController() {
         showPhotoGallery()
     }
     
     func showMusicViewController() {
+        print("саботал ProfileViewControllerDelegate")
         showAudioPlayer()
     }
     
@@ -78,8 +80,34 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
     func profileViewControllerDidDisappear() {
         delegate?.profileCoordinatorDidFinished(self)
     }
-
+    
+    
 }
+
+//extension ProfileCoordinator: ProfileViewControllerDelegate {
+//
+//    func showPhotoGalleryViewController() {
+//        showPhotoGallery()
+//    }
+//
+//    func showMusicViewController() {
+//        print("саботал ProfileViewControllerDelegate")
+//        showAudioPlayer()
+//    }
+//
+//    func showVideoViewController() {
+//        showVideoController()
+//    }
+//
+//    func showRecordViewController() {
+//        showRecordView()
+//    }
+//
+//    func profileViewControllerDidDisappear() {
+//        delegate?.profileCoordinatorDidFinished(self)
+//    }
+//
+//}
 
 extension ProfileCoordinator: PhotoGalleryCoordinatorDelegate {
     func photoGalleryCoordinatorDidFinish(_ coordinator: PhotoGalleryCoordinator) {

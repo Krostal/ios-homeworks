@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
     
     weak var delegate: ProfileViewControllerDelegate?
     
-    var currentUser: User?
+    var currentUser: UserModel?
     
     private let sectionZeroHeader = ProfileTableHeaderView()
     
@@ -164,14 +164,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ProfileViewController: LoginViewControllerDelegate {
-    func check(_ sender: LoginViewController, login: String, password: String) throws -> Bool {
-        try Checker.shared.check(login: login, password: password)
-    }
-}
-        
-
-
 extension ProfileViewController: PhotosTableViewCellDelegate {
     func tapArrowClickLabel() {
         delegate?.showPhotoGalleryViewController()
@@ -188,6 +180,7 @@ extension ProfileViewController: ProfileTableHeaderViewDelegate {
     }
     
     func didTapMyMusicButton() {
+        print("сработал ProfileTableHeaderViewDelegate")
         delegate?.showMusicViewController()
     }
 }

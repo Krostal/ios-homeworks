@@ -1,5 +1,7 @@
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -7,6 +9,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var appConfiguration: AppConfiguration?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        FirebaseApp.configure()
         
         guard let scene = (scene as? UIWindowScene) else { return }
         
