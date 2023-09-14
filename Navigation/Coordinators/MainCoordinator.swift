@@ -17,13 +17,9 @@ final class MainCoordinator: MainCoordinatorProtocol {
         let tabBarController = UITabBarController()
         
         let feedNavigationController = TabBarFactory(flow: .feedCoordinator).navigationController
-        if CheckerService.shared.isLogIn {
-            let profileNavigationController = TabBarFactory(flow: .profileCoordinator(CheckerService.shared.currentUser!)).navigationController
-            tabBarController.viewControllers = [feedNavigationController, profileNavigationController]
-        } else {
-            let loginNavigationController = TabBarFactory(flow: .loginCoordinator).navigationController
-            tabBarController.viewControllers = [feedNavigationController, loginNavigationController]
-        }
+        let loginNavigationController = TabBarFactory(flow: .loginCoordinator).navigationController
+        tabBarController.viewControllers = [feedNavigationController, loginNavigationController]
+
         tabBarController.tabBar.tintColor = UIColor(named: "AccentColor")
         tabBarController.tabBar.backgroundColor = .systemGray6
         return tabBarController

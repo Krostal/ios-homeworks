@@ -228,7 +228,6 @@ class ProfileTableHeaderView: UIView {
     }
     
     @objc func musicButtonTapped(_ sender: UIButton) {
-        print ("Нажал кнопку музыка")
         delegate?.didTapMyMusicButton()
     }
     

@@ -34,29 +34,12 @@ final class CheckerService: CheckerServiceProtocol {
     }
     
     var isLogIn: Bool {
-        if let currentUser = firebaseAuth.currentUser {
-                // Проверить наличие пользователя в Firebase
-                currentUser.getIDTokenForcingRefresh(true) { (token, error) in
-                    if let error = error {
-                        print("Ошибка проверки статуса входа: \(error)")
-                    } else {
-                        // Пользователь есть в Firebase
-                        print("Пользователь \(currentUser.email) вошел в Firebase")
-                    }
-                }
-                return true
-            }
-            
-            return false
+        currentUser != nil
     }
     
     static let shared = CheckerService()
     
-    private init() {
-//        if let firUser = firebaseAuth.currentUser {
-//            currentUser = UserModel(from: firUser)
-//        }
-    }
+    private init() {}
     
     func signUp(
         email: String,
@@ -75,7 +58,6 @@ final class CheckerService: CheckerServiceProtocol {
             }
             
             let user = UserModel(from: firUser)
-//            self.currentUser = user
             completion(.success(user))
         }
         
@@ -98,7 +80,6 @@ final class CheckerService: CheckerServiceProtocol {
             }
             
             let user = UserModel(from: firUser)
-//            self.currentUser = user
             completion(.success(user))
         }
     }

@@ -25,8 +25,6 @@ final class ProfileCoordinator: Coordinator {
         profileViewController.currentUser = user
         profileViewController.delegate = self
         navigationController.pushViewController(profileViewController, animated: true)
-        navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
-        navigationController.setViewControllers([profileViewController], animated: true)
     }
     
     func showPhotoGallery() {
@@ -65,7 +63,6 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
     }
     
     func showMusicViewController() {
-        print("саботал ProfileViewControllerDelegate")
         showAudioPlayer()
     }
     
@@ -83,31 +80,6 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
     
     
 }
-
-//extension ProfileCoordinator: ProfileViewControllerDelegate {
-//
-//    func showPhotoGalleryViewController() {
-//        showPhotoGallery()
-//    }
-//
-//    func showMusicViewController() {
-//        print("саботал ProfileViewControllerDelegate")
-//        showAudioPlayer()
-//    }
-//
-//    func showVideoViewController() {
-//        showVideoController()
-//    }
-//
-//    func showRecordViewController() {
-//        showRecordView()
-//    }
-//
-//    func profileViewControllerDidDisappear() {
-//        delegate?.profileCoordinatorDidFinished(self)
-//    }
-//
-//}
 
 extension ProfileCoordinator: PhotoGalleryCoordinatorDelegate {
     func photoGalleryCoordinatorDidFinish(_ coordinator: PhotoGalleryCoordinator) {

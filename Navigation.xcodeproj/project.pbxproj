@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		090DA49E2A821DE300BF7338 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49D2A821DE300BF7338 /* LoginInspector.swift */; };
 		090DA4A02A822F5B00BF7338 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49F2A822F5B00BF7338 /* LoginFactory.swift */; };
-		093CFD942AA1A97F00C2D7BA /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD932AA1A97F00C2D7BA /* CurrentUserService.swift */; };
 		093CFD982AA1AD0100C2D7BA /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD972AA1AD0100C2D7BA /* Alert.swift */; };
 		093CFD9A2AA1CD7A00C2D7BA /* SecretWordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD992AA1CD7A00C2D7BA /* SecretWordError.swift */; };
 		094225052AB038E0008BD01B /* ExtensionURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094225042AB038E0008BD01B /* ExtensionURLSession.swift */; };
@@ -128,7 +127,6 @@
 /* Begin PBXFileReference section */
 		090DA49D2A821DE300BF7338 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		090DA49F2A822F5B00BF7338 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
-		093CFD932AA1A97F00C2D7BA /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		093CFD972AA1AD0100C2D7BA /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		093CFD992AA1CD7A00C2D7BA /* SecretWordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretWordError.swift; sourceTree = "<group>"; };
 		094225042AB038E0008BD01B /* ExtensionURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionURLSession.swift; sourceTree = "<group>"; };
@@ -239,7 +237,6 @@
 			children = (
 				094225122AB15F00008BD01B /* CheckerService.swift */,
 				090DA49D2A821DE300BF7338 /* LoginInspector.swift */,
-				093CFD932AA1A97F00C2D7BA /* CurrentUserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -861,7 +858,6 @@
 				09DB0C352AA5E7CF00D2C1F3 /* MusicCoordinator.swift in Sources */,
 				09DB0C282AA5DA0500D2C1F3 /* MusicViewController.swift in Sources */,
 				095BF8852A921B2100CBD6B1 /* MainCoordinator.swift in Sources */,
-				093CFD942AA1A97F00C2D7BA /* CurrentUserService.swift in Sources */,
 				094225172AB16119008BD01B /* UserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

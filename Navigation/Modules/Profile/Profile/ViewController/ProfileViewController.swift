@@ -180,7 +180,6 @@ extension ProfileViewController: ProfileTableHeaderViewDelegate {
     }
     
     func didTapMyMusicButton() {
-        print("сработал ProfileTableHeaderViewDelegate")
         delegate?.showMusicViewController()
     }
 }

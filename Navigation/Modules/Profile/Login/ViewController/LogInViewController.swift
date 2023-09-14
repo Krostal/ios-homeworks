@@ -32,7 +32,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLoginView()
-        print(CheckerService.shared.isLogIn)
     }
     
     override func viewWillAppear(_ animated: Bool) {

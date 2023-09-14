@@ -22,13 +22,20 @@ final class LoginCoordinator: Coordinator {
         if let loginNavigationController = navigationController.viewControllers.first as? LoginViewController {
             loginNavigationController.loginDelegate = loginInspector
         }
+        
+        if CheckerService.shared.isLogIn {
+            if let currentUser = CheckerService.shared.currentUser {
+                showProfile(forUser: currentUser)
+            }
+        }
+        
     }
     
     func showProfile(forUser user: UserModel) {
         let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        profileCoordinator.delegate = self
         addChildCoordinator(profileCoordinator)
         profileCoordinator.start(forUser: user)
-        
         removeChildCoordinator(self)
     }
     
@@ -40,16 +47,16 @@ final class LoginCoordinator: Coordinator {
     }
 }
 
-//extension LoginCoordinator: ProfileCoordinatorDelegate {
-//    func profileCoordinatorDidFinished(_ coordinator: ProfileCoordinator) {
-//        if coordinator.childCoordinators.isEmpty {
-//            if let topViewController = navigationController.topViewController,
-//               !(topViewController is ProfileViewController) {
-//                removeChildCoordinator(coordinator)
-//            }
-//        }
-//    }
-//}
+extension LoginCoordinator: ProfileCoordinatorDelegate {
+    func profileCoordinatorDidFinished(_ coordinator: ProfileCoordinator) {
+        if coordinator.childCoordinators.isEmpty {
+            if let topViewController = navigationController.topViewController,
+               !(topViewController is ProfileViewController) {
+                removeChildCoordinator(coordinator)
+            }
+        }
+    }
+}
 
 extension LoginCoordinator: SignUpCoordinatorDelegate {
     func signUpCoordinatorDidFinish(_ coordinator: SignUpCoordinator) {

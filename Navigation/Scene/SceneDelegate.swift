@@ -31,7 +31,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
-        
+        CheckerService.shared.signOut { result in
+            switch result {
+            case(.success()):
+                print("✅ LogOut is successful")
+            case(.failure(let error)):
+                print("❌", error.errorDescription)
+            }
+        }
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
