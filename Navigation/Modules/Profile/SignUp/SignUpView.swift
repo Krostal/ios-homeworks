@@ -1,13 +1,12 @@
 import UIKit
 
-protocol LoginViewDelegate: AnyObject {
-    func loginButtonPressed(login: String, password: String)
-    func signUpButtonPressed()
+protocol SignUpViewDelegate: AnyObject {
+    func signedUpNewUser(username: String, email: String, password: String)
 }
 
-final class LoginView: UIView {
+final class SignUpView: UIView {
     
-    weak var delegate: LoginViewDelegate?
+    weak var delegate: SignUpViewDelegate?
     
     private(set) lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -41,33 +40,47 @@ final class LoginView: UIView {
         registerField.layer.cornerRadius = 10
         registerField.layer.borderWidth = 0.5
         registerField.layer.borderColor = UIColor.lightGray.cgColor
-        registerField.addArrangedSubview(userName)
-        registerField.addArrangedSubview(separator)
+        registerField.addArrangedSubview(userNameField)
+        registerField.addArrangedSubview(separator1)
+        registerField.addArrangedSubview(emailField)
+        registerField.addArrangedSubview(separator2)
         registerField.addArrangedSubview(passwordField)
         return registerField
     }()
     
-    private lazy var separator: UIView = {
+    private lazy var separator1: UIView = {
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
         separator.backgroundColor = .lightGray
         return separator
     }()
     
-    private lazy var userName: CustomTextField = {
+    private lazy var separator2: UIView = {
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor = .lightGray
+        return separator
+    }()
+    
+    private lazy var userNameField: CustomTextField = {
         let textField = CustomTextField(placeholder: "Username", fontSize: 16)
+        return textField
+    }()
+    
+    private lazy var emailField: CustomTextField = {
+        let textField = CustomTextField(placeholder: "Email", fontSize: 16)
         textField.keyboardType = .emailAddress
         return textField
     }()
     
     private lazy var passwordField: CustomTextField = {
         let textField = CustomTextField(placeholder: "Password", fontSize: 16)
-        textField.isSecureTextEntry = true
         return textField
     }()
     
-    private lazy var loginButton = CustomButton(
-        title: "Log In",
+    
+    private lazy var signUpButton = CustomButton(
+        title: "Sign Up",
         backgroundColor: .systemBackground,
         tintColor: .white,
         cornerRadius: 10,
@@ -87,26 +100,12 @@ final class LoginView: UIView {
             self?.buttonPressed()
         })
     
-    private lazy var signUpButton: UIButton = {
-        let signUpButton = UIButton()
-        signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        signUpButton.setTitle("Don’t have an account? Sign up", for: .normal)
-        signUpButton.setTitleColor(UIColor(named: "AccentColor"), for: .normal)
-        signUpButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .light)
-        signUpButton.tintColor = .systemGray
-        signUpButton.backgroundColor = .clear
-        signUpButton.configuration = .plain()
-        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-        return signUpButton
-    }()
-    
     init() {
         super.init(frame: .zero)
         setupView()
         addSubviews()
         setupConstraints()
         setupContentOfScrollView()
-        defaultLoginAndPassword()
     }
     
     required init?(coder: NSCoder) {
@@ -136,13 +135,13 @@ final class LoginView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
+                
     }
     
     private func setupContentOfScrollView() {
         
         contentView.addSubview(logo)
         contentView.addSubview(registerField)
-        contentView.addSubview(loginButton)
         contentView.addSubview(signUpButton)
         
         NSLayoutConstraint.activate([
@@ -151,33 +150,33 @@ final class LoginView: UIView {
             logo.heightAnchor.constraint(equalToConstant: 100),
             logo.widthAnchor.constraint(equalToConstant: 100),
             
-            registerField.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 120),
+            registerField.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 60),
             registerField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             registerField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            userName.topAnchor.constraint(equalTo: registerField.topAnchor),
-            userName.heightAnchor.constraint(equalToConstant: 49.75),
-            userName.widthAnchor.constraint(equalTo: registerField.widthAnchor),
+            userNameField.topAnchor.constraint(equalTo: registerField.topAnchor),
+            userNameField.heightAnchor.constraint(equalToConstant: 50),
+            userNameField.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             
-            separator.topAnchor.constraint(equalTo: userName.bottomAnchor),
-            separator.widthAnchor.constraint(equalTo: registerField.widthAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 0.5),
+            separator1.topAnchor.constraint(equalTo: userNameField.bottomAnchor),
+            separator1.widthAnchor.constraint(equalTo: registerField.widthAnchor),
+            separator1.heightAnchor.constraint(equalToConstant: 0.5),
             
-            passwordField.topAnchor.constraint(equalTo: separator.bottomAnchor),
-            passwordField.heightAnchor.constraint(equalToConstant: 49.75),
+            emailField.topAnchor.constraint(equalTo: separator1.bottomAnchor),
+            emailField.heightAnchor.constraint(equalToConstant: 50),
+            emailField.widthAnchor.constraint(equalTo: registerField.widthAnchor),
+            
+            separator2.topAnchor.constraint(equalTo: emailField.bottomAnchor),
+            separator2.widthAnchor.constraint(equalTo: registerField.widthAnchor),
+            separator2.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            passwordField.topAnchor.constraint(equalTo: separator2.bottomAnchor),
+            passwordField.heightAnchor.constraint(equalToConstant: 50),
             passwordField.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             
-            separator.topAnchor.constraint(equalTo: userName.bottomAnchor),
-            separator.bottomAnchor.constraint(equalTo: passwordField.topAnchor),
-            separator.widthAnchor.constraint(equalTo: registerField.widthAnchor),
-            
-            loginButton.topAnchor.constraint(equalTo: registerField.bottomAnchor, constant: 16),
-            loginButton.leadingAnchor.constraint(equalTo: registerField.leadingAnchor),
-            loginButton.widthAnchor.constraint(equalTo: registerField.widthAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
-            signUpButton.centerXAnchor.constraint(equalTo: registerField.centerXAnchor),
+            signUpButton.topAnchor.constraint(equalTo: registerField.bottomAnchor, constant: 16),
+            signUpButton.leadingAnchor.constraint(equalTo: registerField.leadingAnchor),
+            signUpButton.trailingAnchor.constraint(equalTo: registerField.trailingAnchor),
             signUpButton.heightAnchor.constraint(equalToConstant: 50),
         ])
         
@@ -185,27 +184,11 @@ final class LoginView: UIView {
         
     }
     
-    private func defaultLoginAndPassword() {
-        
-#if DEBUG
-        userName.text = CheckerService.shared.currentUser?.email ?? "testUser@mail.ru"
-        passwordField.text = CheckerService.shared.currentUser?.password ?? "TestUser"
- 
-#else
-        userName.text = CheckerService.shared.currentUser?.email ?? "groot@gmail.com"
-        passwordField.text = CheckerService.shared.currentUser?.password ?? "groot8"
-        
-#endif
-    }
-    
     private func buttonPressed() {
-        guard let login = userName.text else { return }
+        guard let username = userNameField.text else { return }
+        guard let email = emailField.text else { return }
         guard let password = passwordField.text else { return }
-        delegate?.loginButtonPressed(login: login, password: password)
-    }
-    
-    @objc private func signUpButtonTapped() {
-        delegate?.signUpButtonPressed()
+        delegate?.signedUpNewUser(username: username, email: email, password: password)
     }
     
 }

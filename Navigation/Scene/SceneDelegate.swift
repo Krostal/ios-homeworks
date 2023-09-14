@@ -1,5 +1,7 @@
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -7,6 +9,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var appConfiguration: AppConfiguration?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        FirebaseApp.configure()
         
         guard let scene = (scene as? UIWindowScene) else { return }
         
@@ -27,7 +31,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
-        
+        CheckerService.shared.signOut { result in
+            switch result {
+            case(.success()):
+                print("✅ LogOut is successful")
+            case(.failure(let error)):
+                print("❌", error.errorDescription)
+            }
+        }
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {

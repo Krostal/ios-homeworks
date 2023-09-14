@@ -21,9 +21,8 @@ final class TabBarFactory {
             let feedCoordinator = FeedCoordinator(navigationController: navigationController)
             feedCoordinator.start()
             viewController = navigationController.viewControllers.first
-            
         case .loginCoordinator:
-            let loginCoordinator = LoginCoordinator(navigationController: navigationController)
+            let loginCoordinator = LoginCoordinator(navigationController: navigationController, checkerService: CheckerService.shared)
             loginCoordinator.start()
             viewController = navigationController.viewControllers.first
         }

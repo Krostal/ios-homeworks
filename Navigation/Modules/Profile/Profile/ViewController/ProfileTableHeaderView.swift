@@ -10,10 +10,10 @@ class ProfileTableHeaderView: UIView {
     
     weak var delegate: ProfileTableHeaderViewDelegate?
     
-    var user: User? {
+    var user: UserModel? {
         didSet {
             if let currentUser = user {
-                fullNameLabel.text = currentUser.fullName
+                fullNameLabel.text = currentUser.name
                 statusLabel.text = currentUser.status
                 avatarImageView.image = currentUser.avatar
             }
@@ -219,9 +219,9 @@ class ProfileTableHeaderView: UIView {
         
     }
     
-    func updateUserInfo(_ user: User) {
+    func updateUserInfo(_ user: UserModel) {
         if self.user != nil {
-            fullNameLabel.text = user.fullName
+            fullNameLabel.text = user.name
             statusLabel.text = user.status
             avatarImageView.image = user.avatar
         }

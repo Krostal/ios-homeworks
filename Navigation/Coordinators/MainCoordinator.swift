@@ -19,9 +19,11 @@ final class MainCoordinator: MainCoordinatorProtocol {
         let feedNavigationController = TabBarFactory(flow: .feedCoordinator).navigationController
         let loginNavigationController = TabBarFactory(flow: .loginCoordinator).navigationController
         tabBarController.viewControllers = [feedNavigationController, loginNavigationController]
+
         tabBarController.tabBar.tintColor = UIColor(named: "AccentColor")
         tabBarController.tabBar.backgroundColor = .systemGray6
         return tabBarController
+        
     }()
     
     func startApp() -> UIViewController {
