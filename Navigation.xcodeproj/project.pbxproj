@@ -11,7 +11,6 @@
 		0909DBB92AC071CF00991688 /* FavoritePostsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909DBB82AC071CF00991688 /* FavoritePostsCoordinator.swift */; };
 		0909DBBB2AC08F1700991688 /* FavoritePostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909DBBA2AC08F1700991688 /* FavoritePostsTableViewCell.swift */; };
 		0909DBBF2AC1772100991688 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909DBBE2AC1772100991688 /* CoreDataService.swift */; };
-		0909DBC22AC1784600991688 /* Navigation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0909DBC02AC1784600991688 /* Navigation.xcdatamodeld */; };
 		090DA49E2A821DE300BF7338 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49D2A821DE300BF7338 /* LoginInspector.swift */; };
 		090DA4A02A822F5B00BF7338 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49F2A822F5B00BF7338 /* LoginFactory.swift */; };
 		093CFD982AA1AD0100C2D7BA /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD972AA1AD0100C2D7BA /* Alert.swift */; };
@@ -68,6 +67,7 @@
 		09B361D32A3433D2005979C8 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B361D22A3433D2005979C8 /* InfoViewController.swift */; };
 		09BD83032A9328160059DF3F /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD83022A9328160059DF3F /* ProfileCoordinator.swift */; };
 		09C2B77B2A8DF92500120A82 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C2B77A2A8DF92500120A82 /* FeedModel.swift */; };
+		09D4908B2AC1F83C00FF6C54 /* Navigation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09D490892AC1F83C00FF6C54 /* Navigation.xcdatamodeld */; };
 		09D6C0642A4C854A003C6DFB /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6C0632A4C854A003C6DFB /* PhotoGallery.swift */; };
 		09D6C0712A51E103003C6DFB /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6C0702A51E103003C6DFB /* PhotosTableViewCell.swift */; };
 		09D6C0732A52A153003C6DFB /* FirstFourPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6C0722A52A153003C6DFB /* FirstFourPhotosCell.swift */; };
@@ -135,7 +135,6 @@
 		0909DBB82AC071CF00991688 /* FavoritePostsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsCoordinator.swift; sourceTree = "<group>"; };
 		0909DBBA2AC08F1700991688 /* FavoritePostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsTableViewCell.swift; sourceTree = "<group>"; };
 		0909DBBE2AC1772100991688 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
-		0909DBC12AC1784600991688 /* Navigation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Navigation.xcdatamodel; sourceTree = "<group>"; };
 		090DA49D2A821DE300BF7338 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		090DA49F2A822F5B00BF7338 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		093CFD972AA1AD0100C2D7BA /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -190,6 +189,7 @@
 		09B361D22A3433D2005979C8 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		09BD83022A9328160059DF3F /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		09C2B77A2A8DF92500120A82 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		09D4908A2AC1F83C00FF6C54 /* Navigation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Navigation.xcdatamodel; sourceTree = "<group>"; };
 		09D6C0632A4C854A003C6DFB /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
 		09D6C0702A51E103003C6DFB /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		09D6C0722A52A153003C6DFB /* FirstFourPhotosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstFourPhotosCell.swift; sourceTree = "<group>"; };
@@ -662,8 +662,8 @@
 		09E485B72AC1ECB500DF26D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0909DBC02AC1784600991688 /* Navigation.xcdatamodeld */,
 				0973BD912AC1929B00BBAA8E /* FavoritePost.swift */,
+				09D490892AC1F83C00FF6C54 /* Navigation.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -877,7 +877,6 @@
 				0909DBB92AC071CF00991688 /* FavoritePostsCoordinator.swift in Sources */,
 				0909DBBB2AC08F1700991688 /* FavoritePostsTableViewCell.swift in Sources */,
 				095BF88B2A921B4E00CBD6B1 /* FeedCoordinator.swift in Sources */,
-				0909DBC22AC1784600991688 /* Navigation.xcdatamodeld in Sources */,
 				098595152AAC36E40049CDEF /* NetworkService.swift in Sources */,
 				0909DBBF2AC1772100991688 /* CoreDataService.swift in Sources */,
 				0942251B2AB1755C008BD01B /* SignUpViewController.swift in Sources */,
@@ -923,6 +922,7 @@
 				09DB0C282AA5DA0500D2C1F3 /* MusicViewController.swift in Sources */,
 				095BF8852A921B2100CBD6B1 /* MainCoordinator.swift in Sources */,
 				094225172AB16119008BD01B /* UserModel.swift in Sources */,
+				09D4908B2AC1F83C00FF6C54 /* Navigation.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1332,12 +1332,12 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		0909DBC02AC1784600991688 /* Navigation.xcdatamodeld */ = {
+		09D490892AC1F83C00FF6C54 /* Navigation.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				0909DBC12AC1784600991688 /* Navigation.xcdatamodel */,
+				09D4908A2AC1F83C00FF6C54 /* Navigation.xcdatamodel */,
 			);
-			currentVersion = 0909DBC12AC1784600991688 /* Navigation.xcdatamodel */;
+			currentVersion = 09D4908A2AC1F83C00FF6C54 /* Navigation.xcdatamodel */;
 			path = Navigation.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
