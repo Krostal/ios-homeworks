@@ -1,15 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G120" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="PostCoreDataModel" representedClassName="PostCoreDataModel" syncable="YES" codeGenerationType="class">
-        <attribute name="author" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="image" optional="YES" attributeType="String"/>
-<<<<<<< HEAD
-        <attribute name="text" optional="YES" attributeType="String"/>
-=======
-        <attribute name="likes" optional="YES" attributeType="String"/>
-        <attribute name="text" optional="YES" attributeType="String"/>
-        <attribute name="views" optional="YES" attributeType="String"/>
->>>>>>> 29e66efde8d99367488a1b6dc9578aef86757876
-    </entity>
-</model>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G120" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier=""/>
