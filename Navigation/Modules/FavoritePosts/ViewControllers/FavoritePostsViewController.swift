@@ -1,15 +1,14 @@
 import UIKit
-import StorageService
 
 final class FavoritePostsViewController: UIViewController {
     
     private enum Constants {
         static let separatorInset: CGFloat = 12.0
     }
+
+    private let coreDataService: CoreDataServiceProtocol = CoreDataService()
     
-    var currentUser: UserModel?
-    
-    fileprivate var dataSource = Post.make()
+    private var favoritePosts: [FavoritePost] = []
 
     private lazy var tableView: UITableView = {
        let tableView = UITableView()
@@ -21,8 +20,15 @@ final class FavoritePostsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.title = "Favorite posts"
         setupTableView()
         setupConstraints()
+        favoritePosts = coreDataService.fetchPosts()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchPostsAndUpdateTable()
     }
     
     private func setupTableView() {
@@ -31,8 +37,6 @@ final class FavoritePostsViewController: UIViewController {
         tableView.sectionHeaderTopPadding = 0
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
         tableView.separatorInset = UIEdgeInsets(
             top: Constants.separatorInset,
             left: Constants.separatorInset,
@@ -54,9 +58,9 @@ final class FavoritePostsViewController: UIViewController {
         ])
     }
     
-    @objc func reloadTableView() {
+    private func fetchPostsAndUpdateTable() {
+        favoritePosts = coreDataService.fetchPosts()
         tableView.reloadData()
-        tableView.refreshControl?.endRefreshing()
     }
     
 }
@@ -68,14 +72,38 @@ extension FavoritePostsViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return coreDataService.fetchPosts().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoritePostsTableViewCell.id, for: indexPath) as? FavoritePostsTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(dataSource[indexPath.row])
+        
+        let post = favoritePosts[indexPath.row]
+        
+        cell.configure(with: post)
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let favoritePost = favoritePosts[indexPath.row]
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: "Remove from favorites") { [weak self] _,_,_ in
+                guard let self else { return }
+                let success = self.coreDataService.removePost(withID: favoritePost.id)
+                if success {
+                    self.favoritePosts.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    NotificationCenter.default.post(name: NSNotification.Name("FavoritePostDeleted"), object: self, userInfo: ["postID": favoritePost.id])
+                } else {
+                    print("Error removing post from favorites")
+                }
+            }
+        deleteAction.image = UIImage(systemName: "star.slash")
+        deleteAction.backgroundColor = UIColor(named: "AccentColor")
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }

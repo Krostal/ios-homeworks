@@ -1,6 +1,10 @@
 
 import UIKit
-import StorageService
+
+protocol Configurable {
+    associatedtype Model
+    func configure(with model: Model)
+}
 
 class FavoritePostsTableViewCell: UITableViewCell {
     
@@ -9,9 +13,6 @@ class FavoritePostsTableViewCell: UITableViewCell {
     }
     
     static let id = "FavoritePostsTableViewCell"
-    
-    var currentLikes: Int = 0
-    var currentViews: Int = 0
     
     private lazy var postAuthor: UILabel = {
         let postAuthor = UILabel()
@@ -40,32 +41,6 @@ class FavoritePostsTableViewCell: UITableViewCell {
         return postImage
     }()
     
-    private lazy var postPopularity: UIStackView = {
-        let postPopularity = UIStackView()
-        postPopularity.translatesAutoresizingMaskIntoConstraints = false
-        postPopularity.spacing = 10
-        postPopularity.axis = .horizontal
-        postPopularity.addArrangedSubview(postLikes)
-        postPopularity.addArrangedSubview(postViews)
-        return postPopularity
-    }()
-    
-    private lazy var postLikes: UILabel = {
-        let postLikes = UILabel()
-        postLikes.translatesAutoresizingMaskIntoConstraints = false
-        postLikes.font = .systemFont(ofSize: 16, weight: .regular)
-        postLikes.tintColor = .black
-        return postLikes
-    }()
-    
-    private lazy var postViews: UILabel = {
-        let postViews = UILabel()
-        postViews.translatesAutoresizingMaskIntoConstraints = false
-        postViews.font = .systemFont(ofSize: 16, weight: .regular)
-        postViews.tintColor = .black
-        return postViews
-    }()
-    
     override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
@@ -86,7 +61,6 @@ class FavoritePostsTableViewCell: UITableViewCell {
         addSubview(postAuthor)
         addSubview(postDescription)
         addSubview(postImage)
-        addSubview(postPopularity)
     }
    
     private func setupConstraints() {
@@ -105,20 +79,17 @@ class FavoritePostsTableViewCell: UITableViewCell {
             postDescription.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: Constants.padding),
             postDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),
             postDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.padding),
+            postDescription.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.padding)
             
-            postPopularity.topAnchor.constraint(equalTo: postDescription.bottomAnchor, constant: Constants.padding),
-            postPopularity.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.padding),
-            postPopularity.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.padding),
-            postPopularity.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.padding)
         ])
     }
     
-    func configure(_ post: Post) {
-        postAuthor.text = post.author
-        postImage.image = UIImage(named: post.image)
-        postDescription.text = post.description
-        currentLikes = post.likes
-        currentViews = post.views
+}
+
+extension FavoritePostsTableViewCell: Configurable {
+    func configure(with model: FavoritePost) {
+        postAuthor.text = model.author
+        postDescription.text = model.text
+        postImage.image = UIImage(named: model.image)
     }
-    
 }

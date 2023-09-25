@@ -4,11 +4,13 @@ final class TabBarFactory {
     enum Flow {
         case feedCoordinator
         case loginCoordinator
+        case favoritePostCoordinator
     }
     
     private let flow: Flow
     private(set) var viewController: UIViewController?
     private(set) var navigationController = UINavigationController()
+    private(set) var postTitle: String?
     
     init(flow: Flow) {
         self.flow = flow
@@ -24,6 +26,10 @@ final class TabBarFactory {
         case .loginCoordinator:
             let loginCoordinator = LoginCoordinator(navigationController: navigationController, checkerService: CheckerService.shared)
             loginCoordinator.start()
+            viewController = navigationController.viewControllers.first
+        case .favoritePostCoordinator:
+            let favoritePostsCoordinator = FavoritePostsCoordinator(navigationController: navigationController)
+            favoritePostsCoordinator.start()
             viewController = navigationController.viewControllers.first
         }
     }
