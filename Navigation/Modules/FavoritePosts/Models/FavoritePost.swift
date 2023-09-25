@@ -7,12 +7,15 @@ struct FavoritePost {
     var author: String
     var text: String
     var image: String
+
     
     init(id: String, author: String, text: String, image: String) {
+
         self.id = id
         self.author = author
         self.text = text
         self.image = image
+
     }
     
     init(post: Post) {
@@ -20,6 +23,7 @@ struct FavoritePost {
         self.author = post.author
         self.text = post.text
         self.image = post.image
+
     }
     
     init(postCoreDataModel: PostCoreDataModel) {
@@ -27,6 +31,7 @@ struct FavoritePost {
         author = postCoreDataModel.author ?? ""
         text = postCoreDataModel.text ?? ""
         image = postCoreDataModel.image ?? ""
+
     }
     
 }

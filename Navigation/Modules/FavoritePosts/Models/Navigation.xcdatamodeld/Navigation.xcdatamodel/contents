@@ -4,6 +4,12 @@
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
+<<<<<<< HEAD
         <attribute name="text" optional="YES" attributeType="String"/>
+=======
+        <attribute name="likes" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="views" optional="YES" attributeType="String"/>
+>>>>>>> 29e66efde8d99367488a1b6dc9578aef86757876
     </entity>
 </model>
