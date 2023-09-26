@@ -19,6 +19,8 @@ class ProfileViewController: UIViewController {
     
     var currentUser: UserModel?
     
+    private let coreDataService: CoreDataServiceProtocol = CoreDataService()
+    
     private let sectionZeroHeader = ProfileTableHeaderView()
     
     fileprivate var dataSource = Post.make()
@@ -31,10 +33,15 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setupConstraints()
+        setupNotificationObserver()
         
         #if DEBUG
         view.backgroundColor = .lightGray
@@ -53,6 +60,7 @@ class ProfileViewController: UIViewController {
                 postCell.startTimer()
             }
         }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,8 +89,6 @@ class ProfileViewController: UIViewController {
         Self.tableView.sectionHeaderTopPadding = 0
         Self.tableView.delegate = self
         Self.tableView.dataSource = self
-        Self.tableView.refreshControl = UIRefreshControl()
-        Self.tableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
         Self.tableView.separatorInset = UIEdgeInsets(
             top: Constants.separatorInset,
             left: Constants.separatorInset,
@@ -104,9 +110,42 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    @objc func reloadTableView() {
-        Self.tableView.reloadData()
-        Self.tableView.refreshControl?.endRefreshing()
+    func setupNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleFavoritePostDeleted(_:)), name: NSNotification.Name("FavoritePostDeleted"), object: nil)
+    }
+    
+    @objc func handleFavoritePostDeleted(_ notification: Notification) {
+        if let postID = notification.userInfo?["postID"] as? String {
+            if let index = dataSource.firstIndex(where: { $0.id == postID }) {
+                let indexPath = IndexPath(row: index, section: 2)
+                if let cell = Self.tableView.cellForRow(at: indexPath) as? PostTableViewCell {
+                    cell.emptyStarMarkImage()
+                    cell.isUserInteractionEnabled = true
+                }
+            }
+        }
+    }
+    
+    @objc func doubleTappedOnFavoritePost(_ sender: UITapGestureRecognizer) {
+        if sender.state == .recognized {
+            let location = sender.location(in: Self.tableView)
+            
+            if let indexPath = Self.tableView.indexPathForRow(at: location) {
+                let post = dataSource[indexPath.row]
+                let favoritePost = FavoritePost(post: post)
+                
+                let saveSuccessful = coreDataService.savePost(favoritePost)
+                
+                if saveSuccessful {
+                    if let cell = Self.tableView.cellForRow(at: indexPath) as? PostTableViewCell {
+                        cell.fillStarMarkImage()
+                        cell.isUserInteractionEnabled = false
+                    }
+                } else {
+                    print("Error saving post")
+                }
+            }
+        }
     }
     
 }
@@ -139,7 +178,22 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else {
                 return UITableViewCell()
             }
-            cell.configure(dataSource[indexPath.row])
+            let post = dataSource[indexPath.row]
+            
+            cell.configure(post)
+            
+            let isPostFavorite = coreDataService.isPostFavorite(postId: post.id)
+                    
+            if isPostFavorite {
+                cell.fillStarMarkImage()
+                cell.isUserInteractionEnabled = false
+            } else {
+                let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTappedOnFavoritePost(_:)))
+                doubleTapGesture.numberOfTapsRequired = 2
+                cell.isUserInteractionEnabled = true
+                cell.addGestureRecognizer(doubleTapGesture)
+            }
+            
             return cell
         }
         return UITableViewCell()
@@ -162,6 +216,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
+
 }
 
 extension ProfileViewController: PhotosTableViewCellDelegate {
@@ -183,3 +238,4 @@ extension ProfileViewController: ProfileTableHeaderViewDelegate {
         delegate?.showMusicViewController()
     }
 }
+

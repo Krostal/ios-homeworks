@@ -1,6 +1,7 @@
 import UIKit
 
 final class LoginCoordinator: Coordinator {
+    
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
 
@@ -10,25 +11,31 @@ final class LoginCoordinator: Coordinator {
 
     func start() {
         
+        navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+        
+        if CheckerService.shared.isLogIn {
+            if let currentUser = CheckerService.shared.currentUser {
+                showProfile(forUser: currentUser)
+                return
+            }
+        } else {
+            showLogin()
+        }
+        
+    }
+    
+    func showLogin() {
         let loginFactory = MyLoginFactory()
         let loginInspector = loginFactory.makeLoginInspector()
 
         let loginViewController = LoginViewController(loginDelegate: loginInspector)
         loginViewController.loginCoordinator = self
 
-        navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
         navigationController.setViewControllers([loginViewController], animated: true)
 
         if let loginNavigationController = navigationController.viewControllers.first as? LoginViewController {
             loginNavigationController.loginDelegate = loginInspector
         }
-        
-        if CheckerService.shared.isLogIn {
-            if let currentUser = CheckerService.shared.currentUser {
-                showProfile(forUser: currentUser)
-            }
-        }
-        
     }
     
     func showProfile(forUser user: UserModel) {
@@ -44,6 +51,10 @@ final class LoginCoordinator: Coordinator {
         signUpCoordinator.delegate = self
         addChildCoordinator(signUpCoordinator)
         signUpCoordinator.start()
+    }
+    
+    func updateTabBar() {
+        MainCoordinator.shared.updateTabBarController()
     }
 }
 

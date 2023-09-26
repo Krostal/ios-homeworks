@@ -102,6 +102,7 @@ extension LoginViewController: LoginViewDelegate {
             switch result {
             case .success(let user):
                 self.loginCoordinator?.showProfile(forUser: user)
+                self.loginCoordinator?.updateTabBar()
             case .failure(let error):
                 Alert().showAlert(on: self, title: "Error ❌", message: error.errorDescription)
                 print("❌", error.errorDescription)

@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             NetworkService.request(for: configuration)
         }
 
-        let mainCoordinator = MainCoordinator()
+        let mainCoordinator = MainCoordinator.shared
         let rootViewController = mainCoordinator.startApp()
         
         window?.rootViewController = rootViewController
