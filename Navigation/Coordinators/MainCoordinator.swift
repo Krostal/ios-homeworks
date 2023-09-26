@@ -1,7 +1,7 @@
 import UIKit
 
 protocol MainCoordinatorProtocol: AnyObject {
-    func startApp() -> UIViewController
+    func startApp() -> UITabBarController
 }
 
 protocol Coordinator: AnyObject {
@@ -13,20 +13,51 @@ protocol Coordinator: AnyObject {
 
 final class MainCoordinator: MainCoordinatorProtocol {
     
+    static let shared = MainCoordinator()
+    
+    private init() {
+    }
+    
     private lazy var tabBarController: UITabBarController = {
         let tabBarController = UITabBarController()
         
         let feedNavigationController = TabBarFactory(flow: .feedCoordinator).navigationController
         let loginNavigationController = TabBarFactory(flow: .loginCoordinator).navigationController
-        tabBarController.viewControllers = [feedNavigationController, loginNavigationController]
+        
+        var viewControllers: [UIViewController] = [feedNavigationController, loginNavigationController]
+        
+        if CheckerService.shared.isLogIn {
+            let favoritePostsNavigationController = TabBarFactory(flow: .favoritePostCoordinator).navigationController
+            viewControllers.append(favoritePostsNavigationController)
+        }
+        
+        tabBarController.viewControllers = viewControllers
+
         tabBarController.tabBar.tintColor = UIColor(named: "AccentColor")
         tabBarController.tabBar.backgroundColor = .systemGray6
+        tabBarController.selectedIndex = 1
+        
         return tabBarController
+        
     }()
     
-    func startApp() -> UIViewController {
+    func updateTabBarController() {
+        let favoritePostsNavigationController = TabBarFactory(flow: .favoritePostCoordinator).navigationController
+        tabBarController.viewControllers?.append(favoritePostsNavigationController)
+//        tabBarController.viewControllers?.removeAll()
+//        let feedNavigationController = TabBarFactory(flow: .feedCoordinator).navigationController
+//        let loginNavigationController = TabBarFactory(flow: .loginCoordinator).navigationController
+//        let favoritePostsNavigationController = TabBarFactory(flow: .favoritePostCoordinator).navigationController
+//        let viewControllers: [UIViewController] = [feedNavigationController, loginNavigationController, favoritePostsNavigationController]
+//        tabBarController.viewControllers = viewControllers
+//        tabBarController.selectedIndex = 1
+    }
+    
+    
+    func startApp() -> UITabBarController {
         return tabBarController
     }
+    
 }
 
 extension Coordinator {
@@ -40,4 +71,3 @@ extension Coordinator {
         }
     }
 }
-

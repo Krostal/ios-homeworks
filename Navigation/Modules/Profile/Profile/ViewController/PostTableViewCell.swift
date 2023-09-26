@@ -49,6 +49,7 @@ class PostTableViewCell: UITableViewCell {
         postPopularity.axis = .horizontal
         postPopularity.addArrangedSubview(postLikes)
         postPopularity.addArrangedSubview(postViews)
+        postPopularity.addArrangedSubview(starMark)
         return postPopularity
     }()
     
@@ -66,6 +67,14 @@ class PostTableViewCell: UITableViewCell {
         postViews.font = .systemFont(ofSize: 16, weight: .regular)
         postViews.tintColor = .black
         return postViews
+    }()
+    
+    private lazy var starMark: UIImageView = {
+        let starMark = UIImageView()
+        starMark.image = UIImage(systemName: "star")
+        starMark.translatesAutoresizingMaskIntoConstraints = false
+        starMark.tintColor = .systemYellow
+        return starMark
     }()
     
     override init(
@@ -167,11 +176,19 @@ class PostTableViewCell: UITableViewCell {
     func configure(_ post: Post) {
         postAuthor.text = post.author
         postImage.image = UIImage(named: post.image)
-        postDescription.text = post.description
+        postDescription.text = post.text
         currentLikes = post.likes
         currentViews = post.views
         updateLikesAndViews()
         startTimer()
+    }
+    
+    func fillStarMarkImage() {
+        starMark.image = UIImage(systemName: "star.fill")
+    }
+    
+    func emptyStarMarkImage() {
+        starMark.image = UIImage(systemName: "star")
     }
     
 }

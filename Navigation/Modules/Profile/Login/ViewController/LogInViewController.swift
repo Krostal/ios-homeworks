@@ -1,13 +1,15 @@
-
 import UIKit
 
 protocol LoginViewControllerDelegate {
-    func check(_ sender: LoginViewController, login: String, password: String) throws -> Bool
+    
+    func checkCredentials(
+        email: String,
+        password: String,
+        completion: @escaping (Result<UserModel, AuthenticationError>) -> Void
+    )
 }
 
 class LoginViewController: UIViewController {
-    
-    let alert = Alert()
     
     var loginDelegate: LoginViewControllerDelegate
     
@@ -15,12 +17,9 @@ class LoginViewController: UIViewController {
     
     private var keyboardObserver: NSObjectProtocol?
     
-    private let userService: UserService
-    
     private var loginView: LoginView
     
-    init(userService: UserService, loginDelegate: LoginViewControllerDelegate) {
-        self.userService = userService
+    init(loginDelegate: LoginViewControllerDelegate) {
         self.loginDelegate = loginDelegate
         self.loginView = LoginView()
         super.init(nibName: nil, bundle: nil)
@@ -82,7 +81,7 @@ class LoginViewController: UIViewController {
         if intersection.isNull {
             loginView.scrollView.contentInset.bottom = 0
         } else {
-            loginView.scrollView.contentInset.bottom = intersection.height + 16
+            loginView.scrollView.contentInset.bottom = intersection.height + 5
         }
 
         loginView.scrollView.scrollIndicatorInsets = loginView.scrollView.contentInset
@@ -92,32 +91,27 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: LoginViewDelegate {
-    func loginButtonPressed(login: String, password: String) {
-        
-        do {
-            if login.isEmpty {
-                throw LoginError.emptyUserName
-            }
-            if password.isEmpty {
-                throw LoginError.emptyPassword
-            }
-            if let user = try userService.authorizeUser(login: login) {
-                if try loginDelegate.check(self, login: login, password: password) {
-                    loginCoordinator?.showProfile(forUser: user)
-                }
-            }
-        } catch LoginError.emptyUserName {
-            alert.showAlert(on: self, title: "Username is empty", message: "Please enter your username")
-        } catch LoginError.emptyPassword {
-            alert.showAlert(on: self, title: "Password is empty", message: "Enter your password, please")
-        } catch LoginError.invalidPassword {
-            alert.showAlert(on: self, title: "Invalid Password", message: "The entered password is invalid. Please check the password and try again")
-        } catch LoginError.invalidUserName {
-            alert.showAlert(on: self, title: "Invalid Username", message: "The entered username is invalid. Please check the spelling and try again")
-        } catch {
-            alert.showAlert(on: self, title: "Unknown Error", message: "Please try again later")
-        }
-            
+    
+    func signUpButtonPressed() {
+        loginCoordinator?.showSignUpCoordinator()
     }
     
+    func loginButtonPressed(login: String, password: String) {
+        loginDelegate.checkCredentials(email: login, password: password, completion: { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let user):
+                self.loginCoordinator?.showProfile(forUser: user)
+                self.loginCoordinator?.updateTabBar()
+            case .failure(let error):
+                Alert().showAlert(on: self, title: "Error ❌", message: error.errorDescription)
+                print("❌", error.errorDescription)
+            }
+        })
+    }
 }
+        
+
+            
+    
+

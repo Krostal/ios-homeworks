@@ -20,10 +20,10 @@ final class ProfileCoordinator: Coordinator {
        fatalError("ProfileCoordinator requires a user to start.")
     }
 
-    func start(forUser user: User) {
+    func start(forUser user: UserModel) {
         let profileViewController = ProfileViewController()
-        profileViewController.delegate = self
         profileViewController.currentUser = user
+        profileViewController.delegate = self
         navigationController.pushViewController(profileViewController, animated: true)
     }
     
@@ -58,7 +58,6 @@ final class ProfileCoordinator: Coordinator {
 }
 
 extension ProfileCoordinator: ProfileViewControllerDelegate {
-        
     func showPhotoGalleryViewController() {
         showPhotoGallery()
     }
@@ -78,7 +77,8 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
     func profileViewControllerDidDisappear() {
         delegate?.profileCoordinatorDidFinished(self)
     }
-
+    
+    
 }
 
 extension ProfileCoordinator: PhotoGalleryCoordinatorDelegate {
