@@ -23,10 +23,9 @@ final class FavoritePostsViewController: UIViewController {
         setupTableView()
         setupConstraints()
         setupNavigationBar()
-        coreDataService.fetchPosts(completion: { posts in
+        coreDataService.fetchPosts(withPredicate: nil) { posts in
             self.favoritePosts = posts
-        })
-        
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +61,7 @@ final class FavoritePostsViewController: UIViewController {
     }
     
     private func fetchPostsAndUpdateTable() {
-        coreDataService.fetchPosts { [weak self] posts in
+        coreDataService.fetchPosts(withPredicate: nil) { [weak self] posts in
             guard let self = self else { return }
             self.favoritePosts = posts
             DispatchQueue.main.async {
@@ -73,22 +72,44 @@ final class FavoritePostsViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = "Favorite posts"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "AccentColor") ?? .blue]
         
         let setFilterBarButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease"), style: .plain, target: self, action: #selector(setFilterAction))
-        let clearFilterButton = UIBarButtonItem(image: UIImage(systemName: "clear"), style: .plain, target: self, action: #selector(clearFilterAction))
+        let clearFilterButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(clearFilterAction))
         
         navigationItem.rightBarButtonItems = [setFilterBarButton, clearFilterButton]
         
     }
     
-    @objc private func setFilterAction(_ sender: UIBarButtonItem) {
+    private func showFilterByAuthorAlert() {
+        let alert = UIAlertController(title: "Enter Author Name", message: "Please enter the name of the author whose posts you want to filter by", preferredStyle: .alert)
         
+        alert.addTextField { textField in
+            textField.placeholder = "Enter Author Name"
+            textField.autocorrectionType = .yes
+            textField.autocapitalizationType = .words
+            textField.becomeFirstResponder()
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Apply", style: .default, handler: { [weak self] _ in
+            guard let self, let textField = alert.textFields?.first, let author = textField.text else { return }
+            coreDataService.fetchPosts(withPredicate: NSPredicate(format: "author == %@", author)) { posts in
+                self.favoritePosts = posts
+                self.tableView.reloadData()
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+                                      
+    
+    @objc private func setFilterAction(_ sender: UIBarButtonItem) {
+        showFilterByAuthorAlert()
     }
     
     @objc private func clearFilterAction(_ sender: UIBarButtonItem) {
-        
+        fetchPostsAndUpdateTable()
     }
-
     
 }
 
@@ -135,3 +156,4 @@ extension FavoritePostsViewController: UITableViewDelegate, UITableViewDataSourc
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
+
