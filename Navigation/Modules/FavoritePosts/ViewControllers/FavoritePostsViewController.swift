@@ -20,9 +20,9 @@ final class FavoritePostsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.title = "Favorite posts"
         setupTableView()
         setupConstraints()
+        setupNavigationBar()
         favoritePosts = coreDataService.fetchPosts()
     }
     
@@ -61,6 +61,11 @@ final class FavoritePostsViewController: UIViewController {
     private func fetchPostsAndUpdateTable() {
         favoritePosts = coreDataService.fetchPosts()
         tableView.reloadData()
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.title = "Favorite posts"
+        
     }
     
 }

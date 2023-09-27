@@ -11,39 +11,18 @@ final class LoginCoordinator: Coordinator {
 
     func start() {
         
-        navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
-        
-        if CheckerService.shared.isLogIn {
-            if let currentUser = CheckerService.shared.currentUser {
-                showProfile(forUser: currentUser)
-                return
-            }
-        } else {
-            showLogin()
-        }
-        
-    }
-    
-    func showLogin() {
         let loginFactory = MyLoginFactory()
         let loginInspector = loginFactory.makeLoginInspector()
 
         let loginViewController = LoginViewController(loginDelegate: loginInspector)
         loginViewController.loginCoordinator = self
-
+        
+        navigationController.tabBarItem = UITabBarItem(title: "LogIn", image: UIImage(systemName: "person.badge.key"), tag: 1)
         navigationController.setViewControllers([loginViewController], animated: true)
 
         if let loginNavigationController = navigationController.viewControllers.first as? LoginViewController {
             loginNavigationController.loginDelegate = loginInspector
         }
-    }
-    
-    func showProfile(forUser user: UserModel) {
-        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
-        profileCoordinator.delegate = self
-        addChildCoordinator(profileCoordinator)
-        profileCoordinator.start(forUser: user)
-        removeChildCoordinator(self)
     }
     
     func showSignUpCoordinator() {
@@ -58,16 +37,6 @@ final class LoginCoordinator: Coordinator {
     }
 }
 
-extension LoginCoordinator: ProfileCoordinatorDelegate {
-    func profileCoordinatorDidFinished(_ coordinator: ProfileCoordinator) {
-        if coordinator.childCoordinators.isEmpty {
-            if let topViewController = navigationController.topViewController,
-               !(topViewController is ProfileViewController) {
-                removeChildCoordinator(coordinator)
-            }
-        }
-    }
-}
 
 extension LoginCoordinator: SignUpCoordinatorDelegate {
     func signUpCoordinatorDidFinish(_ coordinator: SignUpCoordinator) {

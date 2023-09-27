@@ -6,7 +6,6 @@ protocol ProfileViewControllerDelegate: AnyObject {
     func showMusicViewController()
     func showVideoViewController()
     func showRecordViewController()
-    func profileViewControllerDidDisappear()
 }
 
 class ProfileViewController: UIViewController {
@@ -18,6 +17,8 @@ class ProfileViewController: UIViewController {
     weak var delegate: ProfileViewControllerDelegate?
     
     var currentUser: UserModel?
+    
+    let profileCoordinator: ProfileCoordinator?
     
     private let coreDataService: CoreDataServiceProtocol = CoreDataService()
     
@@ -32,6 +33,15 @@ class ProfileViewController: UIViewController {
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
         return tableView
     }()
+    
+    init(coordinator: ProfileCoordinator) {
+        self.profileCoordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -76,11 +86,6 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        delegate?.profileViewControllerDidDisappear()
     }
     
     private func setupTableView() {
