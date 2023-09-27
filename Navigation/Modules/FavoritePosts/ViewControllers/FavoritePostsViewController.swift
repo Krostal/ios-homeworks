@@ -23,7 +23,10 @@ final class FavoritePostsViewController: UIViewController {
         setupTableView()
         setupConstraints()
         setupNavigationBar()
-        favoritePosts = coreDataService.fetchPosts()
+        coreDataService.fetchPosts(completion: { posts in
+            self.favoritePosts = posts
+        })
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,14 +62,33 @@ final class FavoritePostsViewController: UIViewController {
     }
     
     private func fetchPostsAndUpdateTable() {
-        favoritePosts = coreDataService.fetchPosts()
-        tableView.reloadData()
+        coreDataService.fetchPosts { [weak self] posts in
+            guard let self = self else { return }
+            self.favoritePosts = posts
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     private func setupNavigationBar() {
         navigationItem.title = "Favorite posts"
         
+        let setFilterBarButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease"), style: .plain, target: self, action: #selector(setFilterAction))
+        let clearFilterButton = UIBarButtonItem(image: UIImage(systemName: "clear"), style: .plain, target: self, action: #selector(clearFilterAction))
+        
+        navigationItem.rightBarButtonItems = [setFilterBarButton, clearFilterButton]
+        
     }
+    
+    @objc private func setFilterAction(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    @objc private func clearFilterAction(_ sender: UIBarButtonItem) {
+        
+    }
+
     
 }
 
@@ -77,7 +99,7 @@ extension FavoritePostsViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coreDataService.fetchPosts().count
+        return favoritePosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,13 +120,14 @@ extension FavoritePostsViewController: UITableViewDelegate, UITableViewDataSourc
             style: .destructive,
             title: "Remove from favorites") { [weak self] _,_,_ in
                 guard let self else { return }
-                let success = self.coreDataService.removePost(withID: favoritePost.id)
-                if success {
-                    self.favoritePosts.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                    NotificationCenter.default.post(name: NSNotification.Name("FavoritePostDeleted"), object: self, userInfo: ["postID": favoritePost.id])
-                } else {
-                    print("Error removing post from favorites")
+                self.coreDataService.removePost(withID: favoritePost.id) { success in
+                    if success {
+                        self.favoritePosts.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                        NotificationCenter.default.post(name: NSNotification.Name("FavoritePostDeleted"), object: self, userInfo: ["postID": favoritePost.id])
+                    } else {
+                        print("Error removing post from favorites")
+                    }
                 }
             }
         deleteAction.image = UIImage(systemName: "star.slash")

@@ -139,15 +139,16 @@ class ProfileViewController: UIViewController {
                 let post = dataSource[indexPath.row]
                 let favoritePost = FavoritePost(post: post)
                 
-                let saveSuccessful = coreDataService.savePost(favoritePost)
-                
-                if saveSuccessful {
-                    if let cell = Self.tableView.cellForRow(at: indexPath) as? PostTableViewCell {
-                        cell.fillStarMarkImage()
-                        cell.isUserInteractionEnabled = false
+                coreDataService.savePost(favoritePost) { success in
+                    if success {
+                        if let cell = Self.tableView.cellForRow(at: indexPath) as? PostTableViewCell {
+                            cell.fillStarMarkImage()
+                            cell.isUserInteractionEnabled = false
+                        }
+                    } else {
+                        print(favoritePost.author)
+                        print("Error saving post")
                     }
-                } else {
-                    print("Error saving post")
                 }
             }
         }
@@ -187,16 +188,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.configure(post)
             
-            let isPostFavorite = coreDataService.isPostFavorite(postId: post.id)
-                    
-            if isPostFavorite {
-                cell.fillStarMarkImage()
-                cell.isUserInteractionEnabled = false
-            } else {
-                let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTappedOnFavoritePost(_:)))
-                doubleTapGesture.numberOfTapsRequired = 2
-                cell.isUserInteractionEnabled = true
-                cell.addGestureRecognizer(doubleTapGesture)
+            coreDataService.isPostFavorite(postId: post.id) { [weak self] isPostFavorite in
+                guard let self else { return }
+                if isPostFavorite {
+                    cell.fillStarMarkImage()
+                    cell.isUserInteractionEnabled = false
+                } else {
+                    let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.doubleTappedOnFavoritePost(_:)))
+                    doubleTapGesture.numberOfTapsRequired = 2
+                    cell.isUserInteractionEnabled = true
+                    cell.addGestureRecognizer(doubleTapGesture)
+                }
             }
             
             return cell
