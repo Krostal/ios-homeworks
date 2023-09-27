@@ -100,8 +100,7 @@ extension LoginViewController: LoginViewDelegate {
         loginDelegate.checkCredentials(email: login, password: password, completion: { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let user):
-                self.loginCoordinator?.showProfile(forUser: user)
+            case .success(_ ):
                 self.loginCoordinator?.updateTabBar()
             case .failure(let error):
                 Alert().showAlert(on: self, title: "Error ❌", message: error.errorDescription)
