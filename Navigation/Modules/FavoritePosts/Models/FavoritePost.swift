@@ -26,11 +26,11 @@ struct FavoritePost {
 
     }
     
-    init(postCoreDataModel: PostCoreDataModel) {
-        id = postCoreDataModel.id ?? ""
-        author = postCoreDataModel.author ?? ""
-        text = postCoreDataModel.text ?? ""
-        image = postCoreDataModel.image ?? ""
+    init(favoritePostCoreDataModel: FavoritePostCoreDataModel) {
+        id = favoritePostCoreDataModel.id ?? ""
+        author = favoritePostCoreDataModel.author ?? ""
+        text = favoritePostCoreDataModel.text ?? ""
+        image = favoritePostCoreDataModel.image ?? ""
 
     }
     

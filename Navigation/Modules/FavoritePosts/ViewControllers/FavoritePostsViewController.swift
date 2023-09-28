@@ -138,17 +138,18 @@ extension FavoritePostsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let favoritePost = favoritePosts[indexPath.row]
+        let predicate = NSPredicate(format: "id == %@", favoritePost.id)
         let deleteAction = UIContextualAction(
             style: .destructive,
             title: "Remove from favorites"
         ) { [weak self] _,_,_ in
                 guard let self else { return }
-                let predicate = NSPredicate(format: "id == %@", favoritePost.id)
                 self.coreDataService.removePost(withPredicate: predicate) { success in
                     if success {
                         self.favoritePosts.remove(at: indexPath.row)
                         self.tableView.deleteRows(at: [indexPath], with: .fade)
                         NotificationCenter.default.post(name: NSNotification.Name("FavoritePostDeleted"), object: self, userInfo: ["postID": favoritePost.id])
+                        print(favoritePost, "deleted")
                     } else {
                         print("Error removing post from favorites")
                     }

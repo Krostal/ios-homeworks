@@ -31,7 +31,7 @@ final class CoreDataService {
     init() {
         
         // 1. NSManagerObjectModel
-        guard let url = Bundle.main.url(forResource: "Navigation", withExtension: "momd") else {
+        guard let url = Bundle.main.url(forResource: "FavoritePostCoreDataModel", withExtension: "momd") else {
             fatalError("Can not fetch URL of Navigation.momd")
         }
         
@@ -84,7 +84,7 @@ extension CoreDataService: CoreDataServiceProtocol {
                         completion(false)
                     }
                 } else {
-                    let model = PostCoreDataModel(context: self.backgroundContext)
+                    let model = FavoritePostCoreDataModel(context: self.backgroundContext)
                     model.id = favoritePost.id
                     model.author = favoritePost.author
                     model.text = favoritePost.text
@@ -116,13 +116,13 @@ extension CoreDataService: CoreDataServiceProtocol {
         backgroundContext.perform { [weak self] in
             guard let self else { return }
             
-            let request = PostCoreDataModel.fetchRequest()
+            let request = FavoritePostCoreDataModel.fetchRequest()
             request.predicate = predicate
             
             do {
                 let models = try self.backgroundContext.fetch(request)
                 self.mainContext.perform {
-                    completion(models.map { FavoritePost(postCoreDataModel: $0) })
+                    completion(models.map { FavoritePost(favoritePostCoreDataModel: $0) })
                 }
             } catch {
                 self.mainContext.perform {
@@ -135,7 +135,7 @@ extension CoreDataService: CoreDataServiceProtocol {
     func removePost(withPredicate predicate: NSPredicate?, completion: @escaping (Bool) -> Void) {
         backgroundContext.perform { [weak self] in
             guard let self else { return }
-            let request = PostCoreDataModel.fetchRequest()
+            let request = FavoritePostCoreDataModel.fetchRequest()
             request.predicate = predicate
             
             do {
@@ -169,7 +169,7 @@ extension CoreDataService: CoreDataServiceProtocol {
         backgroundContext.perform { [weak self] in
             guard let self else { return }
         
-            let request = PostCoreDataModel.fetchRequest()
+            let request = FavoritePostCoreDataModel.fetchRequest()
         
             do {
                 let models = try self.backgroundContext.fetch(request)
@@ -205,7 +205,7 @@ extension CoreDataService: CoreDataServiceProtocol {
         backgroundContext.perform { [weak self] in
             guard let self else { return }
             
-            let request = PostCoreDataModel.fetchRequest()
+            let request = FavoritePostCoreDataModel.fetchRequest()
             let predicate = NSPredicate(format: "id == %@", postId)
             request.predicate = predicate
             
