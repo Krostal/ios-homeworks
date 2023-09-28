@@ -397,6 +397,7 @@
 				095BF88E2A92280600CBD6B1 /* TabBarFactory.swift */,
 				095BF8842A921B2100CBD6B1 /* MainCoordinator.swift */,
 				0978268E2A9608C4002096A2 /* Feed */,
+				09F3BF312AC41164009FABB6 /* Login */,
 				0978268F2A9608D0002096A2 /* Profile */,
 				0909DBB72AC071AD00991688 /* FavoritePosts */,
 			);
@@ -416,8 +417,6 @@
 		0978268F2A9608D0002096A2 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				095BF8862A921B3300CBD6B1 /* LoginCoordinator.swift */,
-				094225182AB174AE008BD01B /* SignUpCoordinator.swift */,
 				09BD83022A9328160059DF3F /* ProfileCoordinator.swift */,
 				0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */,
 				09DB0C342AA5E7CF00D2C1F3 /* MusicCoordinator.swift */,
@@ -595,6 +594,7 @@
 		09D6C06C2A51D53F003C6DFB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				09F3BF322AC4119D009FABB6 /* Login */,
 				0909DBB62AC0712600991688 /* FavoritePosts */,
 				09E98EB02A3852A200DE6940 /* Profile */,
 				09D6C06D2A51D54C003C6DFB /* Feed */,
@@ -671,8 +671,6 @@
 		09E98EB02A3852A200DE6940 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				097826902A962580002096A2 /* Login */,
-				0942251C2AB17573008BD01B /* SignUp */,
 				097826912A96258A002096A2 /* Profile */,
 				097826922A962596002096A2 /* PhotoGallery */,
 				09DB0C362AA5EF0A00D2C1F3 /* Music */,
@@ -680,6 +678,24 @@
 				09DB0C4F2AA73B6700D2C1F3 /* Recording */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		09F3BF312AC41164009FABB6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				095BF8862A921B3300CBD6B1 /* LoginCoordinator.swift */,
+				094225182AB174AE008BD01B /* SignUpCoordinator.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		09F3BF322AC4119D009FABB6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				097826902A962580002096A2 /* Login */,
+				0942251C2AB17573008BD01B /* SignUp */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

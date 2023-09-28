@@ -6,7 +6,6 @@ protocol ProfileViewControllerDelegate: AnyObject {
     func showMusicViewController()
     func showVideoViewController()
     func showRecordViewController()
-    func profileViewControllerDidDisappear()
 }
 
 class ProfileViewController: UIViewController {
@@ -18,6 +17,8 @@ class ProfileViewController: UIViewController {
     weak var delegate: ProfileViewControllerDelegate?
     
     var currentUser: UserModel?
+    
+    let profileCoordinator: ProfileCoordinator?
     
     private let coreDataService: CoreDataServiceProtocol = CoreDataService()
     
@@ -32,6 +33,15 @@ class ProfileViewController: UIViewController {
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
         return tableView
     }()
+    
+    init(coordinator: ProfileCoordinator) {
+        self.profileCoordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -76,11 +86,6 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        delegate?.profileViewControllerDidDisappear()
     }
     
     private func setupTableView() {
@@ -134,15 +139,15 @@ class ProfileViewController: UIViewController {
                 let post = dataSource[indexPath.row]
                 let favoritePost = FavoritePost(post: post)
                 
-                let saveSuccessful = coreDataService.savePost(favoritePost)
-                
-                if saveSuccessful {
-                    if let cell = Self.tableView.cellForRow(at: indexPath) as? PostTableViewCell {
-                        cell.fillStarMarkImage()
-                        cell.isUserInteractionEnabled = false
+                coreDataService.savePost(favoritePost) { success in
+                    if success {
+                        if let cell = Self.tableView.cellForRow(at: indexPath) as? PostTableViewCell {
+                            cell.fillStarMarkImage()
+                            cell.isUserInteractionEnabled = false
+                        }
+                    } else {
+                        print("Error saving post")
                     }
-                } else {
-                    print("Error saving post")
                 }
             }
         }
@@ -182,16 +187,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.configure(post)
             
-            let isPostFavorite = coreDataService.isPostFavorite(postId: post.id)
-                    
-            if isPostFavorite {
-                cell.fillStarMarkImage()
-                cell.isUserInteractionEnabled = false
-            } else {
-                let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTappedOnFavoritePost(_:)))
-                doubleTapGesture.numberOfTapsRequired = 2
-                cell.isUserInteractionEnabled = true
-                cell.addGestureRecognizer(doubleTapGesture)
+            coreDataService.isPostFavorite(postId: post.id) { [weak self] isPostFavorite in
+                guard let self else { return }
+                if isPostFavorite {
+                    cell.fillStarMarkImage()
+                    cell.isUserInteractionEnabled = false
+                } else {
+                    let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.doubleTappedOnFavoritePost(_:)))
+                    doubleTapGesture.numberOfTapsRequired = 2
+                    cell.isUserInteractionEnabled = true
+                    cell.addGestureRecognizer(doubleTapGesture)
+                }
             }
             
             return cell
