@@ -62,7 +62,7 @@ final class FavoritePostsViewController: UIViewController {
     
     private func fetchPostsAndUpdateTable() {
         coreDataService.fetchPosts(withPredicate: nil) { [weak self] posts in
-            guard let self = self else { return }
+            guard let self else { return }
             self.favoritePosts = posts
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -94,7 +94,8 @@ final class FavoritePostsViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Apply", style: .default, handler: { [weak self] _ in
             guard let self, let textField = alert.textFields?.first, let author = textField.text else { return }
-            coreDataService.fetchPosts(withPredicate: NSPredicate(format: "author == %@", author)) { posts in
+            let predicate = NSPredicate(format: "author CONTAINS[c] %@", author)
+            coreDataService.fetchPosts(withPredicate: predicate) { posts in
                 self.favoritePosts = posts
                 self.tableView.reloadData()
             }
@@ -139,12 +140,14 @@ extension FavoritePostsViewController: UITableViewDelegate, UITableViewDataSourc
         let favoritePost = favoritePosts[indexPath.row]
         let deleteAction = UIContextualAction(
             style: .destructive,
-            title: "Remove from favorites") { [weak self] _,_,_ in
+            title: "Remove from favorites"
+        ) { [weak self] _,_,_ in
                 guard let self else { return }
-                self.coreDataService.removePost(withID: favoritePost.id) { success in
+                let predicate = NSPredicate(format: "id == %@", favoritePost.id)
+                self.coreDataService.removePost(withPredicate: predicate) { success in
                     if success {
                         self.favoritePosts.remove(at: indexPath.row)
-                        tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
                         NotificationCenter.default.post(name: NSNotification.Name("FavoritePostDeleted"), object: self, userInfo: ["postID": favoritePost.id])
                     } else {
                         print("Error removing post from favorites")

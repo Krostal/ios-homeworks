@@ -4,10 +4,10 @@ import CoreData
 
 protocol CoreDataServiceProtocol {
     func savePost(_ favoritePost: FavoritePost, completion: @escaping (Bool) -> Void)
-    func removePost(withID id: String, completion: @escaping (Bool) -> Void)
+    func fetchPosts(withPredicate predicate: NSPredicate?, completion: @escaping ([FavoritePost]) -> Void)
+    func removePost(withPredicate predicate: NSPredicate?, completion: @escaping (Bool) -> Void)
     func updatePost(_ favoritePost: FavoritePost, completion: @escaping (Bool) -> Void)
     func isPostFavorite(postId: String, completion: @escaping (Bool) -> Void)
-    func fetchPosts(withPredicate predicate: NSPredicate?, completion: @escaping ([FavoritePost]) -> Void)
 }
 
 final class CoreDataService {
@@ -112,11 +112,30 @@ extension CoreDataService: CoreDataServiceProtocol {
         }
     }
     
-    func removePost(withID id: String, completion: @escaping (Bool) -> Void) {
+    func fetchPosts(withPredicate predicate: NSPredicate?, completion: @escaping ([FavoritePost]) -> Void) {
+        backgroundContext.perform { [weak self] in
+            guard let self else { return }
+            
+            let request = PostCoreDataModel.fetchRequest()
+            request.predicate = predicate
+            
+            do {
+                let models = try self.backgroundContext.fetch(request)
+                self.mainContext.perform {
+                    completion(models.map { FavoritePost(postCoreDataModel: $0) })
+                }
+            } catch {
+                self.mainContext.perform {
+                    completion([])
+                }
+            }
+        }
+    }
+    
+    func removePost(withPredicate predicate: NSPredicate?, completion: @escaping (Bool) -> Void) {
         backgroundContext.perform { [weak self] in
             guard let self else { return }
             let request = PostCoreDataModel.fetchRequest()
-            let predicate = NSPredicate(format: "id == %@", id)
             request.predicate = predicate
             
             do {
@@ -203,24 +222,6 @@ extension CoreDataService: CoreDataServiceProtocol {
         }
     }
     
-    func fetchPosts(withPredicate predicate: NSPredicate?, completion: @escaping ([FavoritePost]) -> Void) {
-        backgroundContext.perform { [weak self] in
-            guard let self else { return }
-            
-            let request = PostCoreDataModel.fetchRequest()
-            request.predicate = predicate
-            
-            do {
-                let models = try self.backgroundContext.fetch(request)
-                self.mainContext.perform {
-                    completion(models.map { FavoritePost(postCoreDataModel: $0) })
-                }
-            } catch {
-                self.mainContext.perform {
-                    completion([])
-                }
-            }
-        }
-    }
+    
     
 }

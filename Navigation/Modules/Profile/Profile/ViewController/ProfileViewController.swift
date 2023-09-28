@@ -146,7 +146,6 @@ class ProfileViewController: UIViewController {
                             cell.isUserInteractionEnabled = false
                         }
                     } else {
-                        print(favoritePost.author)
                         print("Error saving post")
                     }
                 }
