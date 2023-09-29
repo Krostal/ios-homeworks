@@ -1,6 +1,7 @@
 import UIKit
 import StorageService
 
+
 protocol ProfileViewControllerDelegate: AnyObject {
     func showPhotoGalleryViewController()
     func showMusicViewController()
@@ -17,10 +18,10 @@ class ProfileViewController: UIViewController {
     weak var delegate: ProfileViewControllerDelegate?
     
     var currentUser: UserModel?
-    
+        
     let profileCoordinator: ProfileCoordinator?
     
-    private let coreDataService: CoreDataServiceProtocol = CoreDataService()
+    let context = CoreDataService.shared.setContext()
     
     private let sectionZeroHeader = ProfileTableHeaderView()
     
@@ -71,6 +72,8 @@ class ProfileViewController: UIViewController {
             }
         }
         
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -120,15 +123,7 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func handleFavoritePostDeleted(_ notification: Notification) {
-        if let postID = notification.userInfo?["postID"] as? String {
-            if let index = dataSource.firstIndex(where: { $0.id == postID }) {
-                let indexPath = IndexPath(row: index, section: 2)
-                if let cell = Self.tableView.cellForRow(at: indexPath) as? PostTableViewCell {
-                    cell.emptyStarMarkImage()
-                    cell.isUserInteractionEnabled = true
-                }
-            }
-        }
+        Self.tableView.reloadData()
     }
     
     @objc func doubleTappedOnFavoritePost(_ sender: UITapGestureRecognizer) {
@@ -137,19 +132,25 @@ class ProfileViewController: UIViewController {
             
             if let indexPath = Self.tableView.indexPathForRow(at: location) {
                 let post = dataSource[indexPath.row]
-                let favoritePost = FavoritePost(post: post)
                 
-                coreDataService.savePost(favoritePost) { success in
-                    if success {
-                        if let cell = Self.tableView.cellForRow(at: indexPath) as? PostTableViewCell {
-                            cell.fillStarMarkImage()
-                            cell.isUserInteractionEnabled = false
-                        }
-                    } else {
-                        print("Error saving post")
+                let favoritePost = FavoritePostCoreDataModel(context: self.context)
+                favoritePost.id = post.id
+                favoritePost.author = post.author
+                favoritePost.text = post.text
+                favoritePost.image = post.image
+                
+                do {
+                    try context.save()
+                    
+                    if let cell = Self.tableView.cellForRow(at: indexPath) as? PostTableViewCell {
+                        cell.fillStarMarkImage()
+                        cell.isUserInteractionEnabled = false
                     }
+                } catch {
+                    print("Error saving post: \(error.localizedDescription)")
                 }
             }
+            
         }
     }
     
@@ -184,22 +185,20 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             let post = dataSource[indexPath.row]
+            let favoritePosts = CoreDataService.shared.fetchFavoritePosts()
             
-            cell.configure(post)
-            
-            coreDataService.isPostFavorite(postId: post.id) { [weak self] isPostFavorite in
-                guard let self else { return }
-                if isPostFavorite {
-                    cell.fillStarMarkImage()
-                    cell.isUserInteractionEnabled = false
-                } else {
-                    let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.doubleTappedOnFavoritePost(_:)))
-                    doubleTapGesture.numberOfTapsRequired = 2
-                    cell.isUserInteractionEnabled = true
-                    cell.addGestureRecognizer(doubleTapGesture)
-                }
+            if favoritePosts.contains(where: { $0.id == post.id }) {
+                cell.configure(post)
+                cell.fillStarMarkImage()
+                cell.isUserInteractionEnabled = false
+            } else {
+                cell.configure(post)
+                cell.emptyStarMarkImage()
+                let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.doubleTappedOnFavoritePost(_:)))
+                doubleTapGesture.numberOfTapsRequired = 2
+                cell.isUserInteractionEnabled = true
+                cell.addGestureRecognizer(doubleTapGesture)
             }
-            
             return cell
         }
         return UITableViewCell()

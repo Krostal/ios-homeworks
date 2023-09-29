@@ -87,9 +87,9 @@ class FavoritePostsTableViewCell: UITableViewCell {
 }
 
 extension FavoritePostsTableViewCell: Configurable {
-    func configure(with model: FavoritePost) {
+    func configure(with model: FavoritePostCoreDataModel) {
         postAuthor.text = model.author
         postDescription.text = model.text
-        postImage.image = UIImage(named: model.image)
+        postImage.image = UIImage(named: model.image ?? "apple.logo")
     }
 }
