@@ -40,8 +40,9 @@ final class MainCoordinator: MainCoordinatorProtocol {
         let feedNavigationController = TabBarFactory(flow: .feedCoordinator).navigationController
         let profileNavigationController = TabBarFactory(flow: .profileCoordinator).navigationController
         let favoritePostsNavigationController = TabBarFactory(flow: .favoritePostCoordinator).navigationController
+        let mapNavigationController = TabBarFactory(flow: .mapCoordinator).navigationController
         
-        tabBarController.viewControllers = [feedNavigationController, profileNavigationController, favoritePostsNavigationController]
+        tabBarController.viewControllers = [feedNavigationController, profileNavigationController, favoritePostsNavigationController, mapNavigationController]
 
         tabBarController.tabBar.tintColor = UIColor(named: "AccentColor")
         tabBarController.tabBar.backgroundColor = .systemGray6
@@ -54,8 +55,10 @@ final class MainCoordinator: MainCoordinatorProtocol {
     func updateTabBarController() {
         let profileNavigationController = TabBarFactory(flow: .profileCoordinator).navigationController
         let favoritePostsNavigationController = TabBarFactory(flow: .favoritePostCoordinator).navigationController
+        let mapNavigationController = TabBarFactory(flow: .mapCoordinator).navigationController
         tabBarControllerAuth.viewControllers?[1] = profileNavigationController
         tabBarControllerAuth.viewControllers?.append(favoritePostsNavigationController)
+        tabBarControllerAuth.viewControllers?.append(mapNavigationController)
     }
     
     

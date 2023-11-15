@@ -6,6 +6,7 @@ final class TabBarFactory {
         case loginCoordinator
         case profileCoordinator
         case favoritePostCoordinator
+        case mapCoordinator
     }
     
     private let flow: Flow
@@ -42,6 +43,10 @@ final class TabBarFactory {
             } else {
                 fatalError("CheckerService.shared.currentUser is not exist")
             }
+            viewController = navigationController.viewControllers.first
+        case .mapCoordinator:
+            let mapCoordinator = MapCoordinator(navigationController: navigationController)
+            mapCoordinator.start()
             viewController = navigationController.viewControllers.first
         }
     }

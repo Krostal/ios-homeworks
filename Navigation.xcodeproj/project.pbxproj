@@ -27,6 +27,8 @@
 		094225192AB174AE008BD01B /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094225182AB174AE008BD01B /* SignUpCoordinator.swift */; };
 		0942251B2AB1755C008BD01B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0942251A2AB1755C008BD01B /* SignUpViewController.swift */; };
 		0942251E2AB176C0008BD01B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0942251D2AB176C0008BD01B /* SignUpView.swift */; };
+		094A6A442B04728F00001D85 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094A6A432B04728F00001D85 /* MapCoordinator.swift */; };
+		094A6A472B04733400001D85 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094A6A462B04733400001D85 /* MapViewController.swift */; };
 		095988902AADE01C007608F4 /* JsonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0959888F2AADE01C007608F4 /* JsonModel.swift */; };
 		095988922AAE068B007608F4 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095988912AAE068B007608F4 /* Planet.swift */; };
 		095988942AAE19CB007608F4 /* Resident.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095988932AAE19CB007608F4 /* Resident.swift */; };
@@ -149,6 +151,8 @@
 		094225182AB174AE008BD01B /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
 		0942251A2AB1755C008BD01B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		0942251D2AB176C0008BD01B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		094A6A432B04728F00001D85 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
+		094A6A462B04733400001D85 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		0959888F2AADE01C007608F4 /* JsonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonModel.swift; sourceTree = "<group>"; };
 		095988912AAE068B007608F4 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		095988932AAE19CB007608F4 /* Resident.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resident.swift; sourceTree = "<group>"; };
@@ -297,6 +301,22 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		094A6A422B04726100001D85 /* MapCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				094A6A432B04728F00001D85 /* MapCoordinator.swift */,
+			);
+			path = MapCoordinator;
+			sourceTree = "<group>";
+		};
+		094A6A452B04731700001D85 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				094A6A462B04733400001D85 /* MapViewController.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		095988972AAE2B75007608F4 /* Info */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +420,7 @@
 				09F3BF312AC41164009FABB6 /* Login */,
 				0978268F2A9608D0002096A2 /* Profile */,
 				0909DBB72AC071AD00991688 /* FavoritePosts */,
+				094A6A422B04726100001D85 /* MapCoordinator */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -597,6 +618,7 @@
 				09F3BF322AC4119D009FABB6 /* Login */,
 				0909DBB62AC0712600991688 /* FavoritePosts */,
 				09E98EB02A3852A200DE6940 /* Profile */,
+				094A6A452B04731700001D85 /* Map */,
 				09D6C06D2A51D54C003C6DFB /* Feed */,
 			);
 			path = Modules;
@@ -923,12 +945,14 @@
 				09DB0C3E2AA60F8E00D2C1F3 /* VideoCoordinator.swift in Sources */,
 				094225092AB03AE3008BD01B /* FetchDataError.swift in Sources */,
 				09C2B77B2A8DF92500120A82 /* FeedModel.swift in Sources */,
+				094A6A442B04728F00001D85 /* MapCoordinator.swift in Sources */,
 				090DA49E2A821DE300BF7338 /* LoginInspector.swift in Sources */,
 				09D6C07C2A5303F7003C6DFB /* PhotosCollectionViewCell.swift in Sources */,
 				0961796A2A8DDF8A002F106E /* CustomButton.swift in Sources */,
 				097826872A94C032002096A2 /* PostCoordinator.swift in Sources */,
 				09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */,
 				095BF88F2A92280600CBD6B1 /* TabBarFactory.swift in Sources */,
+				094A6A472B04733400001D85 /* MapViewController.swift in Sources */,
 				095988902AADE01C007608F4 /* JsonModel.swift in Sources */,
 				0978268D2A9608AB002096A2 /* PhotoGalleryCoordinator.swift in Sources */,
 				0942251E2AB176C0008BD01B /* SignUpView.swift in Sources */,

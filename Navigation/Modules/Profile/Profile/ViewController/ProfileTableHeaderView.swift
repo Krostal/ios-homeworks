@@ -24,6 +24,7 @@ class ProfileTableHeaderView: UIView {
         static let horizontalPadding: CGFloat = 16.0
         static let avatarWidth: CGFloat = 130.0
         static let returnButtonPadding: CGFloat = 16.0
+        static let fullNameSize: CGFloat = 18.0
     }
     
     private lazy var avatarImageView: UIImageView = {
@@ -45,22 +46,37 @@ class ProfileTableHeaderView: UIView {
         return fullName
     }()
     
+    private lazy var mediaStackView: UIStackView = {
+        let mediaStackView = UIStackView()
+        mediaStackView.translatesAutoresizingMaskIntoConstraints = false
+        mediaStackView.axis = .horizontal
+//        mediaStackView.spacing = 1
+        mediaStackView.alignment = .fill
+        mediaStackView.distribution = .equalSpacing
+        mediaStackView.addArrangedSubview(musicButton)
+        mediaStackView.addArrangedSubview(videoButton)
+        mediaStackView.addArrangedSubview(recordButton)
+        return mediaStackView
+    }()
+    
     private lazy var musicButton: UIButton = {
         let musicButton = UIButton(type: .system)
         musicButton.translatesAutoresizingMaskIntoConstraints = false
         musicButton.setImage(UIImage(systemName: "airpodsmax"), for: .normal)
         musicButton.setTitle("Music", for: .normal)
         musicButton.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
+        musicButton.adjustsImageSizeForAccessibilityContentSizeCategory = true
         return musicButton
     }()
     
     private lazy var videoButton: UIButton = {
-        let musicButton = UIButton(type: .system)
-        musicButton.translatesAutoresizingMaskIntoConstraints = false
-        musicButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
-        musicButton.setTitle("Video", for: .normal)
-        musicButton.addTarget(self, action: #selector(videoButtonTapped), for: .touchUpInside)
-        return musicButton
+        let videoButton = UIButton(type: .system)
+        videoButton.translatesAutoresizingMaskIntoConstraints = false
+        videoButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
+        videoButton.setTitle("Video", for: .normal)
+        videoButton.addTarget(self, action: #selector(videoButtonTapped), for: .touchUpInside)
+        videoButton.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        return videoButton
     }()
     
     private lazy var recordButton: UIButton = {
@@ -69,6 +85,7 @@ class ProfileTableHeaderView: UIView {
         recordButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
         recordButton.setTitle("Rec", for: .normal)
         recordButton.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
+        recordButton.adjustsImageSizeForAccessibilityContentSizeCategory = true
         return recordButton
     }()
     
@@ -137,9 +154,7 @@ class ProfileTableHeaderView: UIView {
         
         addSubview(avatarImageView)
         addSubview(fullNameLabel)
-        addSubview(musicButton)
-        addSubview(videoButton)
-        addSubview(recordButton)
+        addSubview(mediaStackView)
         addSubview(setStatusButton)
         addSubview(statusLabel)
         addSubview(statusTextField)
@@ -154,20 +169,12 @@ class ProfileTableHeaderView: UIView {
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: Constants.horizontalPadding),
             fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
-            fullNameLabel.heightAnchor.constraint(equalToConstant: 18),
+            fullNameLabel.heightAnchor.constraint(equalToConstant: Constants.fullNameSize),
             
-            musicButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
-            musicButton.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            musicButton.heightAnchor.constraint(equalToConstant: 20),
-            
-            videoButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
-            videoButton.leadingAnchor.constraint(equalTo: musicButton.trailingAnchor, constant: 3),
-            videoButton.heightAnchor.constraint(equalToConstant: 20),
-            
-            recordButton.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
-            recordButton.leadingAnchor.constraint(equalTo: videoButton.trailingAnchor, constant: 3),
-            recordButton.trailingAnchor.constraint(lessThanOrEqualTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
-            recordButton.heightAnchor.constraint(equalToConstant: 20),
+            mediaStackView.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 10),
+            mediaStackView.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            mediaStackView.trailingAnchor.constraint(lessThanOrEqualTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
+            mediaStackView.heightAnchor.constraint(equalToConstant: Constants.fullNameSize),
             
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -54),
