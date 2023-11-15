@@ -71,7 +71,7 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var starMark: UIImageView = {
         let starMark = UIImageView()
-        starMark.image = UIImage(systemName: "star")
+        starMark.image = UIImage(systemName: "")
         starMark.translatesAutoresizingMaskIntoConstraints = false
         starMark.tintColor = .systemYellow
         return starMark

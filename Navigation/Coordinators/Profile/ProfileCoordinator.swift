@@ -1,13 +1,7 @@
 
 import UIKit
 
-protocol ProfileCoordinatorDelegate: AnyObject {
-    func profileCoordinatorDidFinished(_ coordinator: ProfileCoordinator)
-}
-
 final class ProfileCoordinator: Coordinator {
-    
-    weak var delegate: ProfileCoordinatorDelegate?
     
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -21,10 +15,11 @@ final class ProfileCoordinator: Coordinator {
     }
 
     func start(forUser user: UserModel) {
-        let profileViewController = ProfileViewController()
+        let profileViewController = ProfileViewController(coordinator: self)
         profileViewController.currentUser = user
         profileViewController.delegate = self
-        navigationController.pushViewController(profileViewController, animated: true)
+        navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+        navigationController.setViewControllers([profileViewController], animated: true)
     }
     
     func showPhotoGallery() {
@@ -72,19 +67,13 @@ extension ProfileCoordinator: ProfileViewControllerDelegate {
     
     func showRecordViewController() {
         showRecordView()
-    }
-    
-    func profileViewControllerDidDisappear() {
-        delegate?.profileCoordinatorDidFinished(self)
-    }
-    
+    }    
     
 }
 
 extension ProfileCoordinator: PhotoGalleryCoordinatorDelegate {
     func photoGalleryCoordinatorDidFinish(_ coordinator: PhotoGalleryCoordinator) {
         removeChildCoordinator(coordinator)
-        
     }
 }
 

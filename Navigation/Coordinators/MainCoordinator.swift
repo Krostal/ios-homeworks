@@ -18,20 +18,31 @@ final class MainCoordinator: MainCoordinatorProtocol {
     private init() {
     }
     
-    private lazy var tabBarController: UITabBarController = {
+    private lazy var tabBarControllerAuth: UITabBarController = {
         let tabBarController = UITabBarController()
         
         let feedNavigationController = TabBarFactory(flow: .feedCoordinator).navigationController
         let loginNavigationController = TabBarFactory(flow: .loginCoordinator).navigationController
+                
+        tabBarController.viewControllers = [feedNavigationController, loginNavigationController]
+
+        tabBarController.tabBar.tintColor = UIColor(named: "AccentColor")
+        tabBarController.tabBar.backgroundColor = .systemGray6
+        tabBarController.selectedIndex = 1
         
-        var viewControllers: [UIViewController] = [feedNavigationController, loginNavigationController]
+        return tabBarController
         
-        if CheckerService.shared.isLogIn {
-            let favoritePostsNavigationController = TabBarFactory(flow: .favoritePostCoordinator).navigationController
-            viewControllers.append(favoritePostsNavigationController)
-        }
+    }()
+    
+    private lazy var tabBarControllerProfile: UITabBarController = {
+        let tabBarController = UITabBarController()
         
-        tabBarController.viewControllers = viewControllers
+        let feedNavigationController = TabBarFactory(flow: .feedCoordinator).navigationController
+        let profileNavigationController = TabBarFactory(flow: .profileCoordinator).navigationController
+        let favoritePostsNavigationController = TabBarFactory(flow: .favoritePostCoordinator).navigationController
+        let mapNavigationController = TabBarFactory(flow: .mapCoordinator).navigationController
+        
+        tabBarController.viewControllers = [feedNavigationController, profileNavigationController, favoritePostsNavigationController, mapNavigationController]
 
         tabBarController.tabBar.tintColor = UIColor(named: "AccentColor")
         tabBarController.tabBar.backgroundColor = .systemGray6
@@ -42,22 +53,23 @@ final class MainCoordinator: MainCoordinatorProtocol {
     }()
     
     func updateTabBarController() {
+        let profileNavigationController = TabBarFactory(flow: .profileCoordinator).navigationController
         let favoritePostsNavigationController = TabBarFactory(flow: .favoritePostCoordinator).navigationController
-        tabBarController.viewControllers?.append(favoritePostsNavigationController)
-//        tabBarController.viewControllers?.removeAll()
-//        let feedNavigationController = TabBarFactory(flow: .feedCoordinator).navigationController
-//        let loginNavigationController = TabBarFactory(flow: .loginCoordinator).navigationController
-//        let favoritePostsNavigationController = TabBarFactory(flow: .favoritePostCoordinator).navigationController
-//        let viewControllers: [UIViewController] = [feedNavigationController, loginNavigationController, favoritePostsNavigationController]
-//        tabBarController.viewControllers = viewControllers
-//        tabBarController.selectedIndex = 1
+        let mapNavigationController = TabBarFactory(flow: .mapCoordinator).navigationController
+        tabBarControllerAuth.viewControllers?[1] = profileNavigationController
+        tabBarControllerAuth.viewControllers?.append(favoritePostsNavigationController)
+        tabBarControllerAuth.viewControllers?.append(mapNavigationController)
     }
     
     
     func startApp() -> UITabBarController {
-        return tabBarController
+        
+        if CheckerService.shared.isLogIn {
+            return tabBarControllerProfile
+        } else {
+            return tabBarControllerAuth
+        }
     }
-    
 }
 
 extension Coordinator {
