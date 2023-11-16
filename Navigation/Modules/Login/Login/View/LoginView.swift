@@ -88,14 +88,12 @@ final class LoginView: UIView {
         })
     
     private lazy var signUpButton: UIButton = {
-        let signUpButton = UIButton()
+        let signUpButton = UIButton(type: .system)
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.setTitle("Don’t have an account? Sign up", for: .normal)
         signUpButton.setTitleColor(UIColor(named: "AccentColor"), for: .normal)
         signUpButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .light)
-        signUpButton.tintColor = .systemGray
         signUpButton.backgroundColor = .clear
-        signUpButton.configuration = .plain()
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         return signUpButton
     }()
