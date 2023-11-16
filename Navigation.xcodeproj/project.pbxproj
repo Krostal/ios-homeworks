@@ -49,6 +49,8 @@
 		097826892A94C03F002096A2 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097826882A94C03F002096A2 /* InfoCoordinator.swift */; };
 		0978268D2A9608AB002096A2 /* PhotoGalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */; };
 		0978269B2A9712D3002096A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978269A2A9712D3002096A2 /* LoginView.swift */; };
+		097D555A2B05B0AD00435B9F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D55592B05B0AD00435B9F /* LocationService.swift */; };
+		097D555C2B05B56900435B9F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D555B2B05B56900435B9F /* MapView.swift */; };
 		098595152AAC36E40049CDEF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098595142AAC36E40049CDEF /* NetworkService.swift */; };
 		098595172AAC39C40049CDEF /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098595162AAC39C40049CDEF /* AppConfiguration.swift */; };
 		099A07452AC56A3200650301 /* FavoritePostCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 099A07432AC56A3200650301 /* FavoritePostCoreDataModel.xcdatamodeld */; };
@@ -172,6 +174,8 @@
 		097826882A94C03F002096A2 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCoordinator.swift; sourceTree = "<group>"; };
 		0978269A2A9712D3002096A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		097D55592B05B0AD00435B9F /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		097D555B2B05B56900435B9F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		098595142AAC36E40049CDEF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		098595162AAC39C40049CDEF /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		099A07442AC56A3200650301 /* FavoritePostCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoritePostCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -313,6 +317,8 @@
 			isa = PBXGroup;
 			children = (
 				094A6A462B04733400001D85 /* MapViewController.swift */,
+				097D555B2B05B56900435B9F /* MapView.swift */,
+				097D55592B05B0AD00435B9F /* LocationService.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -906,6 +912,8 @@
 				094225072AB039F2008BD01B /* DataService.swift in Sources */,
 				09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */,
 				09D6C0642A4C854A003C6DFB /* PhotoGallery.swift in Sources */,
+				097D555C2B05B56900435B9F /* MapView.swift in Sources */,
+				097D555A2B05B0AD00435B9F /* LocationService.swift in Sources */,
 				09DB0C3B2AA60D5500D2C1F3 /* VideoViewController.swift in Sources */,
 				095988922AAE068B007608F4 /* Planet.swift in Sources */,
 				0978269B2A9712D3002096A2 /* LoginView.swift in Sources */,
