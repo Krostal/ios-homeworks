@@ -23,7 +23,7 @@ final class FeedViewModel {
                 case .isEmpty:
                     message = "Please enter the secret word"
                 case .incorrect:
-                    message = "Incorrect!"
+                    message = "Incorrect".localized + "!"
                 }
             }
         }

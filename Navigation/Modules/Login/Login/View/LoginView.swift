@@ -55,19 +55,19 @@ final class LoginView: UIView {
     }()
     
     private lazy var userName: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Username", fontSize: 16)
+        let textField = CustomTextField(placeholder: "Username".localized, fontSize: 16)
         textField.keyboardType = .emailAddress
         return textField
     }()
     
     private lazy var passwordField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Password", fontSize: 16)
+        let textField = CustomTextField(placeholder: "Password".localized, fontSize: 16)
         textField.isSecureTextEntry = true
         return textField
     }()
     
     private lazy var loginButton = CustomButton(
-        title: "Log In",
+        title: "Log In".localized,
         backgroundColor: .systemBackground,
         tintColor: .white,
         cornerRadius: 10,
@@ -90,7 +90,7 @@ final class LoginView: UIView {
     private lazy var signUpButton: UIButton = {
         let signUpButton = UIButton(type: .system)
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        signUpButton.setTitle("Don’t have an account? Sign up", for: .normal)
+        signUpButton.setTitle("Don’t have an account".localized + "? " + "Sign Up".localized, for: .normal)
         signUpButton.setTitleColor(UIColor(named: "AccentColor"), for: .normal)
         signUpButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .light)
         signUpButton.backgroundColor = .clear

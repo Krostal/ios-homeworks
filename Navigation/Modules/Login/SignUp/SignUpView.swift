@@ -63,24 +63,24 @@ final class SignUpView: UIView {
     }()
     
     private lazy var userNameField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Username", fontSize: 16)
+        let textField = CustomTextField(placeholder: "Username".localized, fontSize: 16)
         return textField
     }()
     
     private lazy var emailField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Email", fontSize: 16)
+        let textField = CustomTextField(placeholder: "Email".localized, fontSize: 16)
         textField.keyboardType = .emailAddress
         return textField
     }()
     
     private lazy var passwordField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Password", fontSize: 16)
+        let textField = CustomTextField(placeholder: "Password".localized, fontSize: 16)
         return textField
     }()
     
     
     private lazy var signUpButton = CustomButton(
-        title: "Sign Up",
+        title: "Sign Up".localized,
         backgroundColor: .systemBackground,
         tintColor: .white,
         cornerRadius: 10,

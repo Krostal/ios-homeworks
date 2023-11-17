@@ -103,8 +103,8 @@ extension LoginViewController: LoginViewDelegate {
             case .success(_ ):
                 self.loginCoordinator?.updateTabBar()
             case .failure(let error):
-                Alert().showAlert(on: self, title: "Error ❌", message: error.errorDescription)
-                print("❌", error.errorDescription)
+                Alert().showAlert(on: self, title: "Error".localized + " ❌", message: error.localizedDescription)
+                print("❌", error.localizedDescription)
             }
         })
     }

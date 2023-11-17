@@ -9,7 +9,7 @@ class FeedView: UIView {
     private let viewModel: FeedViewModel
 
     private lazy var firstButton = CustomButton(
-        title: "Open the news",
+        title: "Open the news".localized,
         cornerRadius: Constants.spacing,
         action: { [ weak self ] in
             self?.showPostViewController()
@@ -17,7 +17,7 @@ class FeedView: UIView {
     )
     
     private lazy var secondButton = CustomButton(
-        title: "Show the news",
+        title: "Show the news".localized,
         cornerRadius: Constants.spacing,
         action: { [ weak self ] in
             self?.showPostViewController()
@@ -26,15 +26,15 @@ class FeedView: UIView {
     
     private lazy var textField: CustomTextField = {
         let textField = CustomTextField(
-            placeholder: "Enter the secret word (hint: \"secret\")",
-            fontSize: 17
+            placeholder: "Enter the secret word (hint".localized + ": \"secret\")",
+            fontSize: 16
         )
         textField.borderStyle = .roundedRect
         return textField
     }()
     
     private lazy var checkGuessButton = CustomButton(
-        title: "Check Guess",
+        title: "Check Guess".localized,
         backgroundColor: .systemGreen,
         cornerRadius: Constants.spacing,
         action: { [weak self] in
@@ -43,7 +43,7 @@ class FeedView: UIView {
             self.viewModel.validateSecretWord(word: word) {message  in
                 DispatchQueue.main.async {
                     self.resultLabel.text = message
-                    self.resultLabel.textColor = message == "Correct!" ? .green : .red
+                    self.resultLabel.textColor = message == "Correct".localized + "!" ? .green : .red
                 }
             }
         })

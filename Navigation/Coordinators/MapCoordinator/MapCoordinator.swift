@@ -14,7 +14,7 @@ final class MapCoordinator: Coordinator {
     
     func start() {
         let mapViewController = MapViewController()
-        navigationController.tabBarItem = UITabBarItem(title: "Map", image: UIImage(systemName: "mappin.and.ellipse.circle"), tag: 3)
+        navigationController.tabBarItem = UITabBarItem(title: "Map".localized, image: UIImage(systemName: "mappin.and.ellipse.circle"), tag: 3)
         navigationController.setViewControllers([mapViewController], animated: true)
     }
 }

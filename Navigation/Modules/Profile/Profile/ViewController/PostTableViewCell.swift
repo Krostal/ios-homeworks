@@ -164,8 +164,8 @@ class PostTableViewCell: UITableViewCell {
     }
         
     private func updateLikesAndViews() {
-        postLikes.text = "Likes: \(currentLikes)"
-        postViews.text = "Views: \(currentViews)"
+        postLikes.text = String.localizedStringWithFormat("Likes".localized, currentLikes)
+        postViews.text = String.localizedStringWithFormat("Views".localized, currentViews)
     }
     
     func stopTimer() {

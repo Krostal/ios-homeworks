@@ -44,7 +44,7 @@ class PhotoGalleryViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Photo Gallery"
+        title = "Photo Gallery".localized
     }
     
     private func setupCollectionView() {

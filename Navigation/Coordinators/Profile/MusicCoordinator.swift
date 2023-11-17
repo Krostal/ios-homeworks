@@ -19,7 +19,7 @@ final class MusicCoordinator: Coordinator {
     func start() {
         let musicViewController = MusicViewController()
         musicViewController.delegate = self
-        musicViewController.title = "My music"
+        musicViewController.title = "My music".localized
         navigationController.pushViewController(musicViewController, animated: true)
     }
 }

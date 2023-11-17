@@ -5,7 +5,7 @@ final class FeedCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     
-    private let postTitle: News = News(title: "My Post")
+    private let postTitle: News = News(title: "My Post".localized)
     
     private let navigationController: UINavigationController
 
@@ -18,7 +18,7 @@ final class FeedCoordinator: Coordinator {
         let feedViewModel = FeedViewModel(model: feedModel, coordinator: self)
         let feedViewController = FeedViewController(viewModel: feedViewModel)
 
-        navigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "doc.richtext"), tag: 0)
+        navigationController.tabBarItem = UITabBarItem(title: "Feed".localized, image: UIImage(systemName: "doc.richtext"), tag: 0)
         navigationController.setViewControllers([feedViewController], animated: true)
     }
 

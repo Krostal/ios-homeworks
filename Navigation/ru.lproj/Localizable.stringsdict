@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>days</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@VARIABLE@</string>
+		<key>VARIABLE</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d день</string>
+			<key>few</key>
+			<string>%d дня</string>
+			<key>many</key>
+			<string>%d дней</string>
+			<key>other</key>
+			<string>%d дней</string>
+		</dict>
+	</dict>
+	<key>Views</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@VARIABLE@</string>
+		<key>VARIABLE</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>Просмотр: %d</string>
+			<key>few</key>
+			<string>Просмотра: %d</string>
+			<key>many</key>
+			<string>Просмотров: %d</string>
+			<key>other</key>
+			<string>Просмотров: %d</string>
+		</dict>
+	</dict>
+	<key>Likes</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@VARIABLE@</string>
+		<key>VARIABLE</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>Лайк: %d</string>
+			<key>few</key>
+			<string>Лайка: %d</string>
+			<key>many</key>
+			<string>Лайков: %d</string>
+			<key>other</key>
+			<string>Лайков: %d</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

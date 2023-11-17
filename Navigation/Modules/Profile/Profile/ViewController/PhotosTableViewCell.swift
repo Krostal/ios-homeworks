@@ -26,7 +26,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var photosLabel: UILabel = {
         let photosLabel = UILabel()
         photosLabel.translatesAutoresizingMaskIntoConstraints = false
-        photosLabel.text = "Photos"
+        photosLabel.text = "Photos".localized
         photosLabel.textColor = .black
         photosLabel.font = .systemFont(ofSize: 24, weight: .bold)
         return photosLabel
