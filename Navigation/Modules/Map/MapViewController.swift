@@ -4,9 +4,9 @@ import UIKit
 
 final class MapViewController: UIViewController {
     
-    private let locationService: LocationService = LocationService()
     private let mapView: CustomMapView = CustomMapView()
 
+    private var locationService: LocationService?
     private var annotationSource: MKPointAnnotation?
     private var annotationDestination: MKPointAnnotation?
     private var isRouteBuilded: Bool = false
@@ -18,10 +18,12 @@ final class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let locationService else { return }
         locationService.updateauthorizationStatus()
     }
     
     private func setupView() {
+        locationService = LocationService()
         mapView.customDelegate = self
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         longPressGesture.minimumPressDuration = 1
@@ -96,13 +98,13 @@ final class MapViewController: UIViewController {
     
     private func showLocationServicesAlert() {
         let alertController = UIAlertController(
-            title: "Разрешение местоположения",
-            message: "Для использования местоположения необходимо разрешение. Пожалуйста, разрешите в настройках приложения",
+            title: "Location permisson",
+            message: "Permission is required to use location. Please allow in the application settings",
             preferredStyle: .alert
         )
         
         let settingsAction = UIAlertAction(
-            title: "Настройки приложения",
+            title: "Application settings",
             style: .default
         ) { _ in
             if let bundleIdentifier = Bundle.main.bundleIdentifier, let settingsURL = URL(string: UIApplication.openSettingsURLString + bundleIdentifier) {
@@ -111,7 +113,7 @@ final class MapViewController: UIViewController {
         }
         
         let cancelAction = UIAlertAction(
-            title: "Отмена",
+            title: "Cancel",
             style: .cancel
         )
         
@@ -157,6 +159,7 @@ extension MapViewController: CustomMapViewDelegate {
     }
     
     func locationButtonTapped() {
+        guard let locationService else { return }
         if locationService.isLocationAuthorized {
             mapView.showsUserLocation = true
             mapView.setUserTrackingMode(.follow, animated: true)
