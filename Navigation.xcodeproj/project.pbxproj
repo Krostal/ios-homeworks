@@ -94,6 +94,8 @@
 		09E677422A45EF8000A36ED1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E677412A45EF8000A36ED1 /* LogInViewController.swift */; };
 		09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */; };
 		09E98EB22A3852D000DE6940 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */; };
+		09FCDC0B2B07318B00725A0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09FCDC0D2B07318B00725A0D /* InfoPlist.strings */; };
+		09FCDC102B07373600725A0D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09FCDC122B07373600725A0D /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +221,8 @@
 		09E677412A45EF8000A36ED1 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		09E6774B2A499AD400A36ED1 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		09E98EB12A3852D000DE6940 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
+		09FCDC0C2B07318B00725A0D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		09FCDC112B07373600725A0D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -605,6 +609,8 @@
 				09B361C02A336E8B005979C8 /* LaunchScreen.storyboard */,
 				09B361C32A336E8B005979C8 /* Info.plist */,
 				0942250A2AB063C4008BD01B /* GoogleService-Info.plist */,
+				09FCDC0D2B07318B00725A0D /* InfoPlist.strings */,
+				09FCDC122B07373600725A0D /* Localizable.strings */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -808,7 +814,7 @@
 		09B361AA2A336E8A005979C8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
@@ -831,6 +837,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 09B361A92A336E8A005979C8;
 			packageReferences = (
@@ -873,8 +880,10 @@
 				09DB0C2F2AA5DA6500D2C1F3 /* The xx Night Time.mp3 in Resources */,
 				09B361C22A336E8B005979C8 /* LaunchScreen.storyboard in Resources */,
 				09B361BF2A336E8B005979C8 /* Assets.xcassets in Resources */,
+				09FCDC102B07373600725A0D /* Localizable.strings in Resources */,
 				09DB0C322AA5DA6500D2C1F3 /* Imagine Dragons Bones.mp3 in Resources */,
 				09DB0C312AA5DA6500D2C1F3 /* OneRepublic Secrets.mp3 in Resources */,
+				09FCDC0B2B07318B00725A0D /* InfoPlist.strings in Resources */,
 				09DB0C302AA5DA6500D2C1F3 /* Sting Shape Of My Heart.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1003,6 +1012,22 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		09FCDC0D2B07318B00725A0D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09FCDC0C2B07318B00725A0D /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		09FCDC122B07373600725A0D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09FCDC112B07373600725A0D /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1112,6 +1137,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1172,6 +1198,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
