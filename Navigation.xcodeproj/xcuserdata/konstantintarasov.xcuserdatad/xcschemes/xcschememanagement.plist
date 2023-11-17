@@ -13,6 +13,8 @@
 		</dict>
 		<key>Navigation-Release.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
@@ -21,21 +23,21 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>6</integer>
 		</dict>
 		<key>Promises (Playground) 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>7</integer>
 		</dict>
 		<key>Promises (Playground).xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>5</integer>
 		</dict>
 		<key>StorageService.xcscheme_^#shared#^_</key>
 		<dict>
@@ -48,6 +50,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>09AA93522A6BEA25005896DB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>09AA935B2A6BEA25005896DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
