@@ -8,7 +8,7 @@ final class FeedModel {
     func check(word: String, completion: @escaping (Result<String, SecretWordError>) -> Void) {
         
         if word == secretWord {
-            completion(.success("Correct!"))
+            completion(.success("Correct".localized + "!"))
         } else if word.isEmpty {
             completion(.failure(.isEmpty))
         } else {
