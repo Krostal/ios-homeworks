@@ -16,7 +16,7 @@ final class InfoView: UIView {
     
     lazy var buttonDelete: CustomButton = {
         let button = CustomButton(
-            title: "Delete this new",
+            title: "Delete this new".localized,
             backgroundColor: .systemCyan,
             action: { [weak self] in
                 self?.showAlert()

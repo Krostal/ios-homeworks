@@ -25,7 +25,7 @@ final class RecordViewController: UIViewController {
     private lazy var playButton: UIButton = {
         let playButton = UIButton(type: .system)
         playButton.translatesAutoresizingMaskIntoConstraints = false
-        playButton.setTitle("PLAY", for: .normal)
+        playButton.setTitle("PLAY".localized, for: .normal)
         playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         return playButton
     }()
@@ -95,9 +95,9 @@ final class RecordViewController: UIViewController {
     private func checkMicrophonePermission() {
         switch AVAudioSession.sharedInstance().recordPermission {
         case .granted:
-            permissionLabel.text = "Press record button to record your audio"
+            permissionLabel.text = "Press record button to record your audio".localized
         case .denied:
-            permissionLabel.text = "Microphone access denied. Please enable access in the app settings"
+            permissionLabel.text = "Microphone access denied. Please enable access in the app settings".localized
             playButton.isHidden = true
             recordButton.isHidden = true
         case .undetermined:
@@ -106,7 +106,7 @@ final class RecordViewController: UIViewController {
                     if granted {
                         self?.permissionLabel.isHidden = true
                     } else {
-                        self?.permissionLabel.text = "Microphone access denied. Please enable access in the app settings"
+                        self?.permissionLabel.text = "Microphone access denied. Please enable access in the app settings".localized
                     }
                 }
             }
@@ -136,7 +136,7 @@ final class RecordViewController: UIViewController {
             recordButton.setImage(UIImage(systemName: "record.circle.fill"), for: .normal)
             recordButton.tintColor = .systemRed
             playButton.isEnabled = true
-            permissionLabel.text = "Press record button to record your audio"
+            permissionLabel.text = "Press record button to record your audio".localized
             permissionLabel.textColor = UIColor(named: "AccentColor")
                 
         } else {
@@ -156,7 +156,7 @@ final class RecordViewController: UIViewController {
                 recordButton.setImage(UIImage(systemName: "stop.circle.fill"), for: .normal)
                 recordButton.tintColor = .gray
                 playButton.isEnabled = false
-                permissionLabel.text = "Audio recording is in progress"
+                permissionLabel.text = "Audio recording is in progress".localized
                 permissionLabel.textColor = .gray
             } catch {
                 print("Failed to start recording: \(error.localizedDescription)")

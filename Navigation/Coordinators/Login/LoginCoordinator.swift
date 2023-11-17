@@ -17,7 +17,7 @@ final class LoginCoordinator: Coordinator {
         let loginViewController = LoginViewController(loginDelegate: loginInspector)
         loginViewController.loginCoordinator = self
         
-        navigationController.tabBarItem = UITabBarItem(title: "LogIn", image: UIImage(systemName: "person.badge.key"), tag: 1)
+        navigationController.tabBarItem = UITabBarItem(title: "LogIn".localized, image: UIImage(systemName: "person.badge.key"), tag: 1)
         navigationController.setViewControllers([loginViewController], animated: true)
 
         if let loginNavigationController = navigationController.viewControllers.first as? LoginViewController {

@@ -4,9 +4,9 @@ import UIKit
 
 final class MapViewController: UIViewController {
     
-    private let locationService: LocationService = LocationService()
     private let mapView: CustomMapView = CustomMapView()
 
+    private var locationService: LocationService?
     private var annotationSource: MKPointAnnotation?
     private var annotationDestination: MKPointAnnotation?
     private var isRouteBuilded: Bool = false
@@ -18,10 +18,12 @@ final class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let locationService else { return }
         locationService.updateauthorizationStatus()
     }
     
     private func setupView() {
+        locationService = LocationService()
         mapView.customDelegate = self
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         longPressGesture.minimumPressDuration = 1
@@ -34,10 +36,10 @@ final class MapViewController: UIViewController {
         annotation.coordinate = coordinate
         annotation.title = title
         
-        if title == "Source" {
+        if title == "Source".localized {
             annotationSource = annotation
             isRouteBuilded = false
-        } else if title == "Destination" {
+        } else if title == "Destination".localized {
             if let existingDestination = annotationDestination {
                 mapView.removeAnnotation(existingDestination)
             }
@@ -69,7 +71,7 @@ final class MapViewController: UIViewController {
         direction.calculate { [weak self] response, error in
             guard let self else { return }
             if let error {
-                Alert().showAlert(on: self, title: "Error", message: error.localizedDescription)
+                Alert().showAlert(on: self, title: "Error".localized, message: error.localizedDescription)
                 removeAllAnnotations(sender)
                 return
             }
@@ -79,7 +81,7 @@ final class MapViewController: UIViewController {
                 mapView.addOverlay(route.polyline)
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                 
-                sender.setTitle("Reset Route", for: .normal)
+                sender.setTitle("Reset Route".localized, for: .normal)
                 sender.setImage(UIImage(systemName: "xmark"), for: .normal)
                 isRouteBuilded = true
             }
@@ -90,19 +92,19 @@ final class MapViewController: UIViewController {
         mapView.removeOverlays(mapView.overlays)
         removeAllAnnotations(sender)
         isRouteBuilded = false
-        sender.setTitle("Build the Route", for: .normal)
+        sender.setTitle("Build the Route".localized, for: .normal)
         sender.setImage(UIImage(systemName: "point.bottomleft.forward.to.arrowtriangle.uturn.scurvepath"), for: .normal)
     }
     
     private func showLocationServicesAlert() {
         let alertController = UIAlertController(
-            title: "Разрешение местоположения",
-            message: "Для использования местоположения необходимо разрешение. Пожалуйста, разрешите в настройках приложения",
+            title: "Location permisson".localized,
+            message: "Permission is required to use location. Please allow in the application settings".localized,
             preferredStyle: .alert
         )
         
         let settingsAction = UIAlertAction(
-            title: "Настройки приложения",
+            title: "Application settings".localized,
             style: .default
         ) { _ in
             if let bundleIdentifier = Bundle.main.bundleIdentifier, let settingsURL = URL(string: UIApplication.openSettingsURLString + bundleIdentifier) {
@@ -111,7 +113,7 @@ final class MapViewController: UIViewController {
         }
         
         let cancelAction = UIAlertAction(
-            title: "Отмена",
+            title: "Cancel".localized,
             style: .cancel
         )
         
@@ -130,10 +132,10 @@ final class MapViewController: UIViewController {
         }
         
         if annotationSource == nil {
-            addAnnotation(coordinate: coordinate, title: "Source")
+            addAnnotation(coordinate: coordinate, title: "Source".localized)
             return
         } else {
-            addAnnotation(coordinate: coordinate, title: "Destination")
+            addAnnotation(coordinate: coordinate, title: "Destination".localized)
             if annotationDestination != nil {
                 mapView.routeButton.isHidden = false
             }
@@ -157,6 +159,7 @@ extension MapViewController: CustomMapViewDelegate {
     }
     
     func locationButtonTapped() {
+        guard let locationService else { return }
         if locationService.isLocationAuthorized {
             mapView.showsUserLocation = true
             mapView.setUserTrackingMode(.follow, animated: true)

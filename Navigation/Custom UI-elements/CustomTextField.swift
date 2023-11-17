@@ -41,6 +41,7 @@ class CustomTextField: UITextField {
         returnKeyType = .done
         clearButtonMode = .whileEditing
         contentVerticalAlignment = .center
+        adjustsFontSizeToFitWidth = true
         delegate = self
     }
 }

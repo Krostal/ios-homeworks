@@ -19,7 +19,7 @@ final class RecordCoordinator: Coordinator {
     func start() {
         let recordViewController = RecordViewController()
         recordViewController.delegate = self
-        recordViewController.title = "My record studio"
+        recordViewController.title = "My record studio".localized
         navigationController.pushViewController(recordViewController, animated: true)
     }
     

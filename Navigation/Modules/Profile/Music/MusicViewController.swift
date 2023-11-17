@@ -31,7 +31,7 @@ final class MusicViewController: UIViewController {
     private lazy var stopButton: UIButton = {
         let stopButton = UIButton(type: .system)
         stopButton.translatesAutoresizingMaskIntoConstraints = false
-        stopButton.setTitle("STOP", for: .normal)
+        stopButton.setTitle("STOP".localized, for: .normal)
         stopButton.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
         return stopButton
     }()
