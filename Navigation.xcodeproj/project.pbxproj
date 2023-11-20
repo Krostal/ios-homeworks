@@ -48,6 +48,7 @@
 		097826892A94C03F002096A2 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097826882A94C03F002096A2 /* InfoCoordinator.swift */; };
 		0978268D2A9608AB002096A2 /* PhotoGalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */; };
 		0978269B2A9712D3002096A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978269A2A9712D3002096A2 /* LoginView.swift */; };
+		097B4ADB2B0B18760029B5F5 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097B4ADA2B0B18760029B5F5 /* ColorPalette.swift */; };
 		097D555A2B05B0AD00435B9F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D55592B05B0AD00435B9F /* LocationService.swift */; };
 		097D555C2B05B56900435B9F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D555B2B05B56900435B9F /* MapView.swift */; };
 		098595152AAC36E40049CDEF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098595142AAC36E40049CDEF /* NetworkService.swift */; };
@@ -176,6 +177,7 @@
 		097826882A94C03F002096A2 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCoordinator.swift; sourceTree = "<group>"; };
 		0978269A2A9712D3002096A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		097B4ADA2B0B18760029B5F5 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		097D55592B05B0AD00435B9F /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		097D555B2B05B56900435B9F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		098595142AAC36E40049CDEF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 				09D6C0772A52CA17003C6DFB /* Reusable.swift */,
 				093CFD972AA1AD0100C2D7BA /* Alert.swift */,
 				094225042AB038E0008BD01B /* ExtensionURLSession.swift */,
+				097B4ADA2B0B18760029B5F5 /* ColorPalette.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -985,6 +988,7 @@
 				09DB0C282AA5DA0500D2C1F3 /* MusicViewController.swift in Sources */,
 				095BF8852A921B2100CBD6B1 /* MainCoordinator.swift in Sources */,
 				094225172AB16119008BD01B /* UserModel.swift in Sources */,
+				097B4ADB2B0B18760029B5F5 /* ColorPalette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1280,7 +1284,6 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1316,7 +1319,6 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -11,6 +11,7 @@ final class VideoTableViewCell: UITableViewCell {
         let player = YTPlayerView()
         player.translatesAutoresizingMaskIntoConstraints = false
         player.contentMode = .scaleAspectFit
+        player.backgroundColor = ColorPalette.profileBackgroundColor
         return player
     }()
     

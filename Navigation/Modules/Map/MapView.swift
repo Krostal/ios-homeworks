@@ -34,7 +34,7 @@ final class CustomMapView: MKMapView {
         locationButton.translatesAutoresizingMaskIntoConstraints = false
         locationButton.setTitle("Find me".localized, for: .normal)
         locationButton.setImage(UIImage(systemName: "location.fill"), for: .normal)
-        locationButton.tintColor = .black
+        locationButton.tintColor = ColorPalette.textColor
         locationButton.addTarget(self, action: #selector(getCurrentLocation), for: .touchUpInside)
         return locationButton
     }()
@@ -44,7 +44,7 @@ final class CustomMapView: MKMapView {
         routeButton.translatesAutoresizingMaskIntoConstraints = false
         routeButton.setTitle("Build the Route".localized, for: .normal)
         routeButton.setImage(UIImage(systemName: "point.bottomleft.forward.to.arrowtriangle.uturn.scurvepath"), for: .normal)
-        routeButton.tintColor = .black
+        routeButton.tintColor = ColorPalette.textColor
         routeButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         routeButton.isHidden = true
         return routeButton

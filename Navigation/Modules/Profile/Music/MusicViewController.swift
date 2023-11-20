@@ -73,7 +73,7 @@ final class MusicViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = ColorPalette.profileBackgroundColor
     }
     
     private func setupSubviews() {

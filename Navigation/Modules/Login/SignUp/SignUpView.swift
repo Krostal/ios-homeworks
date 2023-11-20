@@ -19,7 +19,7 @@ final class SignUpView: UIView {
     private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = ColorPalette.profileBackgroundColor
         return contentView
     }()
     
@@ -51,14 +51,14 @@ final class SignUpView: UIView {
     private lazy var separator1: UIView = {
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = .lightGray
+        separator.backgroundColor = .systemGray2
         return separator
     }()
     
     private lazy var separator2: UIView = {
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = .lightGray
+        separator.backgroundColor = .systemGray2
         return separator
     }()
     
@@ -113,7 +113,7 @@ final class SignUpView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = ColorPalette.profileBackgroundColor
     }
     
     private func addSubviews() {

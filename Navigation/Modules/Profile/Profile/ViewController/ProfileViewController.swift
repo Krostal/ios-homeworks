@@ -57,7 +57,7 @@ class ProfileViewController: UIViewController {
         #if DEBUG
         view.backgroundColor = .lightGray
         #else
-        view.backgroundColor = .white
+        view.backgroundColor = ColorPalette.profileBackgroundColor
         #endif
         
     }
@@ -220,6 +220,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             return 0
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.estimatedRowHeight
     }
 
 }

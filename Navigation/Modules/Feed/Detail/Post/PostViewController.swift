@@ -14,8 +14,8 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemIndigo
         self.navigationItem.title = titleNews
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-        self.navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ColorPalette.labelColor]
+        self.navigationController?.navigationBar.tintColor = ColorPalette.labelColor
         
         let barButtonItem = UIBarButtonItem(title: "Edit".localized, style: .plain, target: self, action: #selector(barButtonItemTapped(_:)))
         self.navigationItem.rightBarButtonItem = barButtonItem

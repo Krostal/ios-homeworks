@@ -43,7 +43,7 @@ class FeedView: UIView {
             self.viewModel.validateSecretWord(word: word) {message  in
                 DispatchQueue.main.async {
                     self.resultLabel.text = message
-                    self.resultLabel.textColor = message == "Correct".localized + "!" ? .green : .red
+                    self.resultLabel.textColor = message == "Correct".localized + "!" ? ColorPalette.resultTextColor : .systemRed
                 }
             }
         })
@@ -68,6 +68,7 @@ class FeedView: UIView {
     init(viewModel: FeedViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
+        backgroundColor = ColorPalette.feedViewBackgroundColor
         setupSubviews()
         setupConstraints()
     }

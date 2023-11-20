@@ -38,7 +38,7 @@ class PostTableViewCell: UITableViewCell {
         let postImage = UIImageView()
         postImage.translatesAutoresizingMaskIntoConstraints = false
         postImage.contentMode = .scaleAspectFit
-        postImage.backgroundColor = .black
+        postImage.backgroundColor = ColorPalette.profileBackgroundColor
         return postImage
     }()
     

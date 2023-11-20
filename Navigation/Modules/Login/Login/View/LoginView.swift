@@ -20,7 +20,7 @@ final class LoginView: UIView {
     private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = ColorPalette.profileBackgroundColor
         return contentView
     }()
     
@@ -112,7 +112,7 @@ final class LoginView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = ColorPalette.profileBackgroundColor
     }
     
     private func addSubviews() {

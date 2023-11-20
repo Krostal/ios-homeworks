@@ -5,14 +5,10 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     private lazy var photos: UIImageView = {
         let photos = UIImageView(frame: .zero)
         photos.translatesAutoresizingMaskIntoConstraints = false
-        photos.backgroundColor = .black
+        photos.backgroundColor = ColorPalette.profileBackgroundColor
         photos.contentMode = .scaleAspectFit
         return photos
     }()
-    
-    private func setupView() {
-        contentView.backgroundColor = .white
-    }
 
     private func setupSubviews() {
         contentView.addSubview(photos)
@@ -33,8 +29,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        
-        setupView()
         setupSubviews()
         setupLayouts()
     }
