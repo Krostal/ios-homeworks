@@ -31,7 +31,6 @@ class ProfileTableHeaderView: UIView {
         let avatar = UIImageView()
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.layer.borderWidth = 3
-        avatar.layer.borderColor = UIColor.white.cgColor
         avatar.layer.cornerRadius = 65
         avatar.clipsToBounds = true
         avatar.contentMode = .scaleAspectFit
@@ -41,7 +40,7 @@ class ProfileTableHeaderView: UIView {
     private lazy var fullNameLabel: UILabel = {
         let fullName = UILabel()
         fullName.translatesAutoresizingMaskIntoConstraints = false
-        fullName.textColor = .black
+        fullName.textColor = ColorPalette.textColor
         fullName.font = .systemFont(ofSize: 18, weight: .bold)
         return fullName
     }()
@@ -82,7 +81,7 @@ class ProfileTableHeaderView: UIView {
     private lazy var statusLabel: UILabel = {
         let status = UILabel()
         status.translatesAutoresizingMaskIntoConstraints = false
-        status.textColor = .gray
+        status.textColor = .systemGray
         status.font = .systemFont(ofSize: 14, weight: .regular)
         return status
     }()
@@ -92,9 +91,7 @@ class ProfileTableHeaderView: UIView {
             placeholder: "Set your status".localized,
             fontSize: 15
         )
-        textField.backgroundColor = .white
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.cornerRadius = 12
         textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         return textField
@@ -109,7 +106,6 @@ class ProfileTableHeaderView: UIView {
             button.layer.shadowOffset = CGSize(width: 4, height: 4)
             button.layer.shadowOpacity = 0.7
             button.layer.shadowRadius = 4
-            button.layer.shadowColor = UIColor.black.cgColor
         },
         action: { [weak self] in
             if let newStatus = self?.statusTextField.text {
@@ -133,10 +129,6 @@ class ProfileTableHeaderView: UIView {
         button.adjustsImageSizeForAccessibilityContentSizeCategory = true
     }
     
-    override var intrinsicContentSize: CGSize {
-        CGSize(width: frame.width, height: 220.0)
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
@@ -147,7 +139,21 @@ class ProfileTableHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var intrinsicContentSize: CGSize {
+        CGSize(width: frame.width, height: 220.0)
+    }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+       if #available(iOS 13.0, *) {
+           if (traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection)) {
+               avatarImageView.layer.borderColor = ColorPalette.borderColor.cgColor
+               setStatusButton.layer.shadowColor = ColorPalette.shadowColor.cgColor
+               statusTextField.layer.borderColor = ColorPalette.borderColor.cgColor
+
+           }
+       }
+    }
+
     private func setupConstraints() {
         
         let safeAreaGuide = safeAreaLayoutGuide
@@ -288,7 +294,7 @@ class ProfileTableHeaderView: UIView {
             self.avatarImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.width / 2
             self.avatarImageView.layer.borderWidth = 3
-            self.avatarImageView.layer.borderColor = UIColor.white.cgColor
+            self.avatarImageView.layer.borderColor = ColorPalette.borderColor.cgColor
             self.avatarBackground.alpha = 0
         } completion: { _ in
             ProfileViewController.tableView.isScrollEnabled = true

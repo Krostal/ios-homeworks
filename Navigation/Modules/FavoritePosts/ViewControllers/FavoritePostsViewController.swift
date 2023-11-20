@@ -20,7 +20,7 @@ final class FavoritePostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = ColorPalette.profileBackgroundColor
         setupTableView()
         setupConstraints()
         setupNavigationBar()

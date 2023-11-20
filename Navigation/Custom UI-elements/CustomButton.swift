@@ -20,7 +20,7 @@ public class CustomButton: UIButton {
         super.init(frame: .zero)
         
         setTitle(title, for: .normal)
-        setTitleColor(.darkText, for: .normal)
+        setTitleColor(ColorPalette.textColor, for: .normal)
         self.backgroundColor = backgroundColor
         self.tintColor = tintColor
         self.setupButton = setupButton

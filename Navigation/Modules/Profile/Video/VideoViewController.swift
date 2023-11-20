@@ -41,7 +41,7 @@ final class VideoViewController: UIViewController {
     
     private func setupTableView() {
         view.addSubview(tableView)
-        view.backgroundColor = .white
+        view.backgroundColor = ColorPalette.profileBackgroundColor
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorInset = UIEdgeInsets(

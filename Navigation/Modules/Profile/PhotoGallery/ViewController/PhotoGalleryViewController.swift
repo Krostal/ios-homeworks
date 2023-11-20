@@ -34,7 +34,7 @@ class PhotoGalleryViewController: UIViewController {
         setupLayouts()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
-        photoGalleryHandler()
+//        photoGalleryHandler()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

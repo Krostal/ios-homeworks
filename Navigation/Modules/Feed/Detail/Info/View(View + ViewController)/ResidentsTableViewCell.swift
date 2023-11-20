@@ -8,6 +8,7 @@ final class ResidentsTableViewCell: UITableViewCell {
     private lazy var resident: UILabel = {
         let resident = UILabel()
         resident.translatesAutoresizingMaskIntoConstraints = false
+        resident.textColor = ColorPalette.textColor
         return resident
     }()
     
