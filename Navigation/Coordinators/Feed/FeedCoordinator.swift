@@ -1,6 +1,10 @@
 
 import UIKit
 
+protocol FeedCoordinatorProtocol {
+    func showPost()
+}
+
 final class FeedCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
@@ -21,13 +25,6 @@ final class FeedCoordinator: Coordinator {
         navigationController.tabBarItem = UITabBarItem(title: "Feed".localized, image: UIImage(systemName: "doc.richtext"), tag: 0)
         navigationController.setViewControllers([feedViewController], animated: true)
     }
-
-    func showPost() {
-        let postCoordinator = PostCoordinator(navigationController: navigationController, postTitle: postTitle.title)
-        postCoordinator.delegatePostCoordinator = self
-        addChildCoordinator(postCoordinator)
-        postCoordinator.start()
-    }
 }
 
 extension FeedCoordinator: PostCoordinatorDelegate {
@@ -35,5 +32,14 @@ extension FeedCoordinator: PostCoordinatorDelegate {
         if coordinator.childCoordinators.isEmpty {
             removeChildCoordinator(coordinator)
         }
+    }
+}
+
+extension FeedCoordinator: FeedCoordinatorProtocol {
+    func showPost() {
+        let postCoordinator = PostCoordinator(navigationController: navigationController, postTitle: postTitle.title)
+        postCoordinator.delegatePostCoordinator = self
+        addChildCoordinator(postCoordinator)
+        postCoordinator.start()
     }
 }
