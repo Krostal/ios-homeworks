@@ -1,14 +1,14 @@
 
-import Foundation
 
-final class FeedViewModel {
+@testable import Navigation
+import XCTest
+
+final class FeedViewModelMock {
     
     private let feedModel: FeedModelProtocol
-    private let feedCoordinator: FeedCoordinatorProtocol
     
-    init(model: FeedModelProtocol, coordinator: FeedCoordinatorProtocol) {
+    init(model: FeedModelProtocol) {
         self.feedModel = model
-        self.feedCoordinator = coordinator
     }
     
     func validateSecretWord(word: String, completion: @escaping (String) -> Void) {
@@ -29,9 +29,4 @@ final class FeedViewModel {
             completion(message)
         }
     }
-    
-    func buttonTapped() {
-        feedCoordinator.showPost()
-    }
-
 }
