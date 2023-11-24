@@ -1,7 +1,11 @@
 
 import Foundation
 
-final class FeedModel {
+protocol FeedModelProtocol {
+    func check(word: String, completion: @escaping (Result<String, SecretWordError>) -> Void)
+}
+
+final class FeedModel: FeedModelProtocol {
     
     let secretWord = "secret"
     
@@ -15,6 +19,5 @@ final class FeedModel {
             completion(.failure(.incorrect))
         }
     }
-    
 }
 
