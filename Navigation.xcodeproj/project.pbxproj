@@ -44,6 +44,7 @@
 		095BF88F2A92280600CBD6B1 /* TabBarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095BF88E2A92280600CBD6B1 /* TabBarFactory.swift */; };
 		096179682A8CC91C002F106E /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 096179672A8CC91C002F106E /* iOSIntPackage */; };
 		0961796A2A8DDF8A002F106E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096179692A8DDF8A002F106E /* CustomButton.swift */; };
+		096BB7BD2B105C0B006150BC /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096BB7BC2B105C0B006150BC /* LocalNotificationsService.swift */; };
 		097826872A94C032002096A2 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097826862A94C032002096A2 /* PostCoordinator.swift */; };
 		097826892A94C03F002096A2 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097826882A94C03F002096A2 /* InfoCoordinator.swift */; };
 		0978268D2A9608AB002096A2 /* PhotoGalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */; };
@@ -189,6 +190,7 @@
 		095BF88A2A921B4E00CBD6B1 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		095BF88E2A92280600CBD6B1 /* TabBarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFactory.swift; sourceTree = "<group>"; };
 		096179692A8DDF8A002F106E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		096BB7BC2B105C0B006150BC /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		097826862A94C032002096A2 /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		097826882A94C03F002096A2 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		0978268C2A9608AB002096A2 /* PhotoGalleryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCoordinator.swift; sourceTree = "<group>"; };
@@ -473,6 +475,14 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		096BB7BB2B105BED006150BC /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				096BB7BC2B105C0B006150BC /* LocalNotificationsService.swift */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
 		0978268E2A9608C4002096A2 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +652,7 @@
 				09D6C06B2A51D4E1003C6DFB /* Scene */,
 				095BF8832A921B0C00CBD6B1 /* Coordinators */,
 				09D6C06C2A51D53F003C6DFB /* Modules */,
+				096BB7BB2B105BED006150BC /* NotificationService */,
 				098595182AAC50EA0049CDEF /* NetworkService */,
 				09D6C06F2A51D63B003C6DFB /* Common */,
 				095BF8752A908F7300CBD6B1 /* Custom UI-elements */,
@@ -1028,6 +1039,7 @@
 				09B361CA2A337411005979C8 /* FeedViewController.swift in Sources */,
 				094225072AB039F2008BD01B /* DataService.swift in Sources */,
 				09E6774C2A499AD400A36ED1 /* PostTableViewCell.swift in Sources */,
+				096BB7BD2B105C0B006150BC /* LocalNotificationsService.swift in Sources */,
 				09D6C0642A4C854A003C6DFB /* PhotoGallery.swift in Sources */,
 				097D555C2B05B56900435B9F /* MapView.swift in Sources */,
 				097D555A2B05B0AD00435B9F /* LocationService.swift in Sources */,
