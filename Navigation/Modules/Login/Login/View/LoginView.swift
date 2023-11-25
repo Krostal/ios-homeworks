@@ -3,6 +3,7 @@ import UIKit
 protocol LoginViewDelegate: AnyObject {
     func loginButtonPressed(login: String, password: String)
     func signUpButtonPressed()
+    func loginWithBiometry(login: String, password: String)
 }
 
 final class LoginView: UIView {
@@ -69,7 +70,6 @@ final class LoginView: UIView {
     private lazy var loginButton = CustomButton(
         title: "Log In".localized,
         backgroundColor: .systemBackground,
-        tintColor: .white,
         cornerRadius: 10,
         setupButton: { button in
             button.configurationUpdateHandler = { btn in
@@ -85,6 +85,25 @@ final class LoginView: UIView {
         },
         action: { [weak self] in
             self?.buttonPressed()
+        })
+    
+    lazy var biometryButton = CustomButton(
+        title: "Log in using biometrics".localized,
+        cornerRadius: 10,
+        setupButton: { button in
+            button.configurationUpdateHandler = { btn in
+                switch btn.state {
+                case .highlighted, .disabled, .selected:
+                    btn.configuration?.background.image = UIImage(named: "bluePixel")
+                    btn.alpha = 0.8
+                default:
+                    btn.configuration?.background.image = UIImage(named: "bluePixel")
+                    btn.alpha = 1
+                }
+            }
+        },
+        action: { [weak self] in
+            self?.biometryButtonPressed()
         })
     
     private lazy var signUpButton: UIButton = {
@@ -141,6 +160,7 @@ final class LoginView: UIView {
         contentView.addSubview(logo)
         contentView.addSubview(registerField)
         contentView.addSubview(loginButton)
+        contentView.addSubview(biometryButton)
         contentView.addSubview(signUpButton)
         
         NSLayoutConstraint.activate([
@@ -174,13 +194,16 @@ final class LoginView: UIView {
             loginButton.widthAnchor.constraint(equalTo: registerField.widthAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             
-            signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            biometryButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            biometryButton.leadingAnchor.constraint(equalTo: registerField.leadingAnchor),
+            biometryButton.widthAnchor.constraint(equalTo: registerField.widthAnchor),
+            biometryButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            signUpButton.topAnchor.constraint(greaterThanOrEqualTo: biometryButton.bottomAnchor, constant: 16),
             signUpButton.centerXAnchor.constraint(equalTo: registerField.centerXAnchor),
             signUpButton.heightAnchor.constraint(equalToConstant: 50),
         ])
-        
         signUpButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
     }
     
     private func defaultLoginAndPassword() {
@@ -200,6 +223,12 @@ final class LoginView: UIView {
         guard let login = userName.text else { return }
         guard let password = passwordField.text else { return }
         delegate?.loginButtonPressed(login: login, password: password)
+    }
+    
+    private func biometryButtonPressed() {
+        guard let login = userName.text else { return }
+        guard let password = passwordField.text else { return }
+        delegate?.loginWithBiometry(login: login, password: password)
     }
     
     @objc private func signUpButtonTapped() {

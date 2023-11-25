@@ -82,7 +82,6 @@ final class SignUpView: UIView {
     private lazy var signUpButton = CustomButton(
         title: "Sign Up".localized,
         backgroundColor: .systemBackground,
-        tintColor: .white,
         cornerRadius: 10,
         setupButton: { button in
             button.configurationUpdateHandler = { btn in

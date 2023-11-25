@@ -13,6 +13,7 @@
 		0909DBBF2AC1772100991688 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909DBBE2AC1772100991688 /* CoreDataService.swift */; };
 		090DA49E2A821DE300BF7338 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49D2A821DE300BF7338 /* LoginInspector.swift */; };
 		090DA4A02A822F5B00BF7338 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA49F2A822F5B00BF7338 /* LoginFactory.swift */; };
+		091630F02B11D7CE007E193E /* LocalAuthentificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091630EF2B11D7CE007E193E /* LocalAuthentificationService.swift */; };
 		093CFD982AA1AD0100C2D7BA /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD972AA1AD0100C2D7BA /* Alert.swift */; };
 		093CFD9A2AA1CD7A00C2D7BA /* SecretWordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093CFD992AA1CD7A00C2D7BA /* SecretWordError.swift */; };
 		094225052AB038E0008BD01B /* ExtensionURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094225042AB038E0008BD01B /* ExtensionURLSession.swift */; };
@@ -162,6 +163,7 @@
 		0909DBBE2AC1772100991688 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		090DA49D2A821DE300BF7338 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		090DA49F2A822F5B00BF7338 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		091630EF2B11D7CE007E193E /* LocalAuthentificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthentificationService.swift; sourceTree = "<group>"; };
 		093CFD972AA1AD0100C2D7BA /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		093CFD992AA1CD7A00C2D7BA /* SecretWordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretWordError.swift; sourceTree = "<group>"; };
 		094225042AB038E0008BD01B /* ExtensionURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionURLSession.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			children = (
 				094225122AB15F00008BD01B /* CheckerService.swift */,
 				090DA49D2A821DE300BF7338 /* LoginInspector.swift */,
+				091630EF2B11D7CE007E193E /* LocalAuthentificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1088,6 +1091,7 @@
 				0961796A2A8DDF8A002F106E /* CustomButton.swift in Sources */,
 				097826872A94C032002096A2 /* PostCoordinator.swift in Sources */,
 				09B361CF2A341C7A005979C8 /* PostViewController.swift in Sources */,
+				091630F02B11D7CE007E193E /* LocalAuthentificationService.swift in Sources */,
 				095BF88F2A92280600CBD6B1 /* TabBarFactory.swift in Sources */,
 				094A6A472B04733400001D85 /* MapViewController.swift in Sources */,
 				095988902AADE01C007608F4 /* JsonModel.swift in Sources */,
@@ -1409,6 +1413,7 @@
 				DEVELOPMENT_TEAM = F72FD6J9GL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use Face ID for secure access to your account";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your geolocation is used to display your location on the map";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone Access Permission Request";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1444,6 +1449,7 @@
 				DEVELOPMENT_TEAM = F72FD6J9GL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use Face ID for secure access to your account";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your geolocation is used to display your location on the map";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone Access Permission Request";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -13,12 +13,6 @@ final class LocalNotificationsService: NSObject {
         center.requestAuthorization(options: [.alert, .sound, .badge, .provisional]) { (granted, error) in
             if granted {
                 self.addNotification()
-                self.center.getPendingNotificationRequests { array in
-                    array.forEach {
-                        print($0.content)
-                        print($0.content.body)
-                    }
-                }
             } else {
                 print("Access to notifications not granted")
             }
@@ -28,8 +22,8 @@ final class LocalNotificationsService: NSObject {
     private func addNotification() {
         
         let content = UNMutableNotificationContent()
-        content.title = "'Navigation' updates"
-        content.body = "Check out the latest updates"
+        content.title = "'Navigation' " + "updates".localized
+        content.body = "Check out the latest updates".localized
         content.categoryIdentifier = "updates"
         content.sound = .default
         content.badge = 1
@@ -46,7 +40,7 @@ final class LocalNotificationsService: NSObject {
         
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
-                print("Ошибка при добавлении уведомления: \(error.localizedDescription)")
+                print("Error adding notification: \(error.localizedDescription)")
             }
         }
     }
@@ -72,7 +66,7 @@ final class LocalNotificationsService: NSObject {
     
     func registerUpdatesCategory() {
         
-        let actionDelete = UNNotificationAction(identifier: "actionDelete", title: "delete", options: [])
+        let actionDelete = UNNotificationAction(identifier: "actionDelete", title: "delete".localized, options: [])
         
         let updatesCategory = UNNotificationCategory(identifier: "updates", actions: [actionDelete], intentIdentifiers: [], options: [])
         
