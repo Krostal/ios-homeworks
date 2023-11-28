@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     
     var loginCoordinator: LoginCoordinator?
     
+    private let localAuthorizationService: BiometryClient = LocalAuthorizationService()
+    
     private var keyboardObserver: NSObjectProtocol?
     
     private var loginView: LoginView
@@ -32,6 +34,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLoginView()
+        setupBiometryButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,10 +90,39 @@ class LoginViewController: UIViewController {
         loginView.scrollView.scrollIndicatorInsets = loginView.scrollView.contentInset
         
     }
+    
+    private func setupBiometryButton() {
+        switch localAuthorizationService.availableBiometricType {
+        case .faceID:
+            loginView.biometryButton.setImage(UIImage(systemName: "faceid"), for: .normal)
+            loginView.biometryButton.setTitle("Log in with".localized + " Face ID", for: .normal)
+        case .touchID:
+            loginView.biometryButton.setImage(UIImage(systemName: "touchid"), for: .normal)
+            loginView.biometryButton.setTitle("Войти с помощью".localized + " Touch ID", for: .normal)
+        case .none:
+            loginView.biometryButton.isHidden = true
+        }
+    }
 
 }
 
 extension LoginViewController: LoginViewDelegate {
+    
+    func loginWithBiometry(login: String, password: String) {
+        
+        localAuthorizationService.authorizeIfPossible { result in
+            switch result {
+            case .success:
+                print("Authorization successful!")
+                // симуляция соответствия биометрии
+                self.loginButtonPressed(login: login, password: password)
+            case .failure(let error):
+                print("Biometric authorization error: \(error.localizedDescription)")
+                
+                Alert().showAlert(on: self, title: "Error".localized, message: "Failed to log in using biometrics".localized + ": \(error.localizedDescription)")
+            }
+        }
+    }
     
     func signUpButtonPressed() {
         loginCoordinator?.showSignUpCoordinator()

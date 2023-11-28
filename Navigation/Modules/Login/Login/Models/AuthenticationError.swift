@@ -5,6 +5,7 @@ enum AuthenticationError: Error, Equatable {
     case custom(Error)
     case registrationError
     case notAuthorized
+    case biometricsNotAvailable
     
     var errorDescription: String {
         switch self {
@@ -14,6 +15,8 @@ enum AuthenticationError: Error, Equatable {
             return "Registration Error"
         case .notAuthorized:
             return "User is not authorized"
+        case .biometricsNotAvailable:
+            return "Biometrics is not available"
         }
     }
     

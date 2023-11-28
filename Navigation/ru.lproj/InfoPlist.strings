@@ -4,3 +4,4 @@
 
 "NSMicrophoneUsageDescription" = "Запрос разрешения на доступ к микрофону";
 
+"NSFaceIDUsageDescription" = "Мы используем Face ID для обеспечения безопасного доступа к вашему аккаунту";
