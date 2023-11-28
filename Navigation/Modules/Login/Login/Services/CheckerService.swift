@@ -1,6 +1,5 @@
 
 import FirebaseAuth
-import Foundation
 
 protocol CheckerServiceProtocol {
     

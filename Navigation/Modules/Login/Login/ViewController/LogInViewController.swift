@@ -11,11 +11,11 @@ protocol LoginViewControllerDelegate {
 
 class LoginViewController: UIViewController {
     
-    let localAuthorizationService = LocalAuthorizationService()
-    
     var loginDelegate: LoginViewControllerDelegate
     
     var loginCoordinator: LoginCoordinator?
+    
+    private let localAuthorizationService: BiometryClient = LocalAuthorizationService()
     
     private var keyboardObserver: NSObjectProtocol?
     
@@ -109,17 +109,17 @@ class LoginViewController: UIViewController {
 extension LoginViewController: LoginViewDelegate {
     
     func loginWithBiometry(login: String, password: String) {
-        localAuthorizationService.authorizeIfPossible { success, error in
-            if success {
+        
+        localAuthorizationService.authorizeIfPossible { result in
+            switch result {
+            case .success:
                 print("Authorization successful!")
                 // симуляция соответствия биометрии
                 self.loginButtonPressed(login: login, password: password)
-            } else {
-                if let error = error {
-                    print("Biometric authorization error: \(error.localizedDescription)")
-                    
-                    Alert().showAlert(on: self, title: "Error".localized, message: "Failed to log in using biometrics".localized + ": \(error.localizedDescription)")
-                }
+            case .failure(let error):
+                print("Biometric authorization error: \(error.localizedDescription)")
+                
+                Alert().showAlert(on: self, title: "Error".localized, message: "Failed to log in using biometrics".localized + ": \(error.localizedDescription)")
             }
         }
     }

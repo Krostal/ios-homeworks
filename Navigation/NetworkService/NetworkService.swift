@@ -16,16 +16,9 @@ struct NetworkService {
                 else {
                     return
                 }
-                print("⚠️ URL: \(response.url!)")
-                print("⚠️ Status Code: \(response.statusCode)")
-                for (key, value) in response.allHeaderFields {
-                    if let keyStr = key as? String, let valueStr = value as? String {
-                        print("⚠️ \(keyStr): \(valueStr)")
-                    }
-                }
-                
+              
                 guard let data else { return }
-                print("✅", data)
+             
             }.resume()
         }
     }
