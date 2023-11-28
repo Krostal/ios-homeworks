@@ -175,7 +175,7 @@ class PostTableViewCell: UITableViewCell {
     
     func configure(_ post: Post) {
         postAuthor.text = post.author
-        postImage.image = UIImage(named: post.image)
+        postImage.image = post.image
         postDescription.text = post.text
         currentLikes = post.likes
         currentViews = post.views
