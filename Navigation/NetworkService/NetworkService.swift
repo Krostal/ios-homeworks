@@ -17,7 +17,7 @@ struct NetworkService {
                     return
                 }
               
-                guard let data else { return }
+                guard data != nil else { return }
              
             }.resume()
         }
