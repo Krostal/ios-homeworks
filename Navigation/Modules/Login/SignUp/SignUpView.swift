@@ -19,7 +19,7 @@ final class SignUpView: UIView {
     private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = ColorPalette.profileBackgroundColor
         return contentView
     }()
     
@@ -51,38 +51,37 @@ final class SignUpView: UIView {
     private lazy var separator1: UIView = {
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = .lightGray
+        separator.backgroundColor = .systemGray2
         return separator
     }()
     
     private lazy var separator2: UIView = {
         let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = .lightGray
+        separator.backgroundColor = .systemGray2
         return separator
     }()
     
     private lazy var userNameField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Username", fontSize: 16)
+        let textField = CustomTextField(placeholder: "Username".localized, fontSize: 16)
         return textField
     }()
     
     private lazy var emailField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Email", fontSize: 16)
+        let textField = CustomTextField(placeholder: "Email".localized, fontSize: 16)
         textField.keyboardType = .emailAddress
         return textField
     }()
     
     private lazy var passwordField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Password", fontSize: 16)
+        let textField = CustomTextField(placeholder: "Password".localized, fontSize: 16)
         return textField
     }()
     
     
     private lazy var signUpButton = CustomButton(
-        title: "Sign Up",
+        title: "Sign Up".localized,
         backgroundColor: .systemBackground,
-        tintColor: .white,
         cornerRadius: 10,
         setupButton: { button in
             button.configurationUpdateHandler = { btn in
@@ -113,7 +112,7 @@ final class SignUpView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = ColorPalette.profileBackgroundColor
     }
     
     private func addSubviews() {

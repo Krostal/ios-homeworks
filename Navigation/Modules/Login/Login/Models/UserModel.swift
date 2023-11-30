@@ -20,12 +20,12 @@ final class UserModel {
 #if DEBUG
         self.name = firUser.displayName ?? "TestUser"
         self.avatar = UIImage(systemName: "person.fill.questionmark")
-        self.status = "Test is done"
+        self.status = "Test is done".localized
         self.password = "TestUser"
 #else
         self.name = firUser.displayName ?? "I am Groot"
         self.avatar = UIImage(named: "Groot")
-        self.status = "Happy :)"
+        self.status = "Happy".localized + " :)"
         self.password = "groot8"
 #endif
         

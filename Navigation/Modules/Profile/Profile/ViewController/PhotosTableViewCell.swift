@@ -17,17 +17,18 @@ class PhotosTableViewCell: UITableViewCell {
         let viewLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: viewLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = ColorPalette.profileBackgroundColor
         collectionView.register(FirstFourPhotosCell.self, forCellWithReuseIdentifier: FirstFourPhotosCell.identifier)
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
         return collectionView
     }()
     
     private lazy var photosLabel: UILabel = {
         let photosLabel = UILabel()
         photosLabel.translatesAutoresizingMaskIntoConstraints = false
-        photosLabel.text = "Photos"
-        photosLabel.textColor = .black
+        photosLabel.text = "Photos".localized
+        photosLabel.textColor = ColorPalette.textColor
         photosLabel.font = .systemFont(ofSize: 24, weight: .bold)
         return photosLabel
     }()
@@ -37,7 +38,7 @@ class PhotosTableViewCell: UITableViewCell {
         arrowClickLabel.translatesAutoresizingMaskIntoConstraints = false
         arrowClickLabel.text = "→"
         arrowClickLabel.font = .systemFont(ofSize: 24)
-        arrowClickLabel.textColor = .black
+        arrowClickLabel.textColor = ColorPalette.textColor
         return arrowClickLabel
     }()
     
@@ -46,7 +47,7 @@ class PhotosTableViewCell: UITableViewCell {
         titleForSection.translatesAutoresizingMaskIntoConstraints = false
         titleForSection.axis = .horizontal
         titleForSection.spacing = 10
-        titleForSection.backgroundColor = .white
+        titleForSection.backgroundColor = ColorPalette.profileBackgroundColor
         titleForSection.addArrangedSubview(photosLabel)
         titleForSection.addArrangedSubview(arrowClickLabel)
         return titleForSection
@@ -81,8 +82,8 @@ class PhotosTableViewCell: UITableViewCell {
             collectionView.topAnchor.constraint(equalTo: titlePhotoSectionView.bottomAnchor, constant: 12),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            collectionView.heightAnchor.constraint(equalToConstant: frame.width / 4 + 8)
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: frame.width / 4 + 36)
         ])
     }
     
@@ -130,7 +131,7 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

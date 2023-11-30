@@ -19,7 +19,7 @@ final class VideoCoordinator: Coordinator {
     func start() {
         let videoViewController = VideoViewController()
         videoViewController.delegate = self
-        videoViewController.title = "My video"
+        videoViewController.title = "My video".localized
         navigationController.pushViewController(videoViewController, animated: true)
     }
     

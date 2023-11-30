@@ -17,15 +17,17 @@ class ProfileViewController: UIViewController {
     
     weak var delegate: ProfileViewControllerDelegate?
     
-    var currentUser: UserModel?
-        
     let profileCoordinator: ProfileCoordinator?
     
     let context = CoreDataService.shared.setContext()
     
+    var currentUser: UserModel?
+    
+    private var postDragAtIndex: Int = 0
+        
     private let sectionZeroHeader = ProfileTableHeaderView()
     
-    fileprivate var dataSource = Post.make()
+    fileprivate var dataSource = PostStorage.shared.getAllPosts()
     
     static let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -57,7 +59,7 @@ class ProfileViewController: UIViewController {
         #if DEBUG
         view.backgroundColor = .lightGray
         #else
-        view.backgroundColor = .white
+        view.backgroundColor = ColorPalette.profileBackgroundColor
         #endif
         
     }
@@ -71,9 +73,6 @@ class ProfileViewController: UIViewController {
                 postCell.startTimer()
             }
         }
-        
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,6 +96,9 @@ class ProfileViewController: UIViewController {
         Self.tableView.sectionHeaderTopPadding = 0
         Self.tableView.delegate = self
         Self.tableView.dataSource = self
+        Self.tableView.dragInteractionEnabled = true
+        Self.tableView.dragDelegate = self
+        Self.tableView.dropDelegate = self
         Self.tableView.separatorInset = UIEdgeInsets(
             top: Constants.separatorInset,
             left: Constants.separatorInset,
@@ -137,7 +139,7 @@ class ProfileViewController: UIViewController {
                 favoritePost.id = post.id
                 favoritePost.author = post.author
                 favoritePost.text = post.text
-                favoritePost.image = post.image
+                favoritePost.image = post.imageName
                 
                 do {
                     try context.save()
@@ -221,8 +223,156 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
-
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.estimatedRowHeight
+    }
 }
+
+extension ProfileViewController: UITableViewDragDelegate, UITableViewDropDelegate {
+
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        guard indexPath.row != 0 else { return [] }
+        
+        postDragAtIndex = indexPath.row
+        let post = dataSource[postDragAtIndex]
+        
+        let imageProvider = NSItemProvider(object: post.image as UIImage)
+        let imageDragItem = UIDragItem(itemProvider: imageProvider)
+        imageDragItem.localObject = post.image
+        
+        let textProvider = NSItemProvider(object: post.text as NSString)
+        let textDragItem = UIDragItem(itemProvider: textProvider)
+        textDragItem.localObject = post.text
+        
+        return [imageDragItem, textDragItem]
+    }
+
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: UIImage.self) && session.canLoadObjects(ofClass: NSString.self)
+    }
+
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        guard session.items.count == 2 else {
+            return UITableViewDropProposal(operation: .cancel)
+        }
+
+        if tableView.hasActiveDrag {
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        } else {
+            return UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        let destinationIndexPath: IndexPath
+
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            let section = tableView.numberOfSections - 1
+            let row = tableView.numberOfRows(inSection: section)
+            destinationIndexPath = IndexPath(row: row, section: section)
+        }
+                
+        let rowInd = destinationIndexPath.row
+        
+        let group = DispatchGroup()
+        
+        var postText = String()
+        group.enter()
+        coordinator.session.loadObjects(ofClass: NSString.self) { objects in
+            let uStrings = objects as! [String]
+            for uString in uStrings {
+                postText = uString
+                break
+            }
+            group.leave()
+        }
+        
+        var postImage = UIImage()
+        group.enter()
+        coordinator.session.loadObjects(ofClass: UIImage.self) { objects in
+            let uImages = objects as! [UIImage]
+            for uImage in uImages {
+                postImage = uImage
+                break
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            if coordinator.proposal.operation == .move {
+                self.dataSource.remove(at: self.postDragAtIndex)
+            }
+            let newPost = Post(id: UUID().uuidString, author: "Drag&Drop", text: postText, image: postImage, imageName: "", likes: 0, views: 0)
+            self.dataSource.insert(newPost, at: rowInd)
+            
+            tableView.reloadData()
+        }
+    }
+}
+
+//extension ProfileViewController: UITableViewDragDelegate {
+//    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+//        let post = dataSource[indexPath.row]
+//        
+//        var dragItems: [UIDragItem] = []
+//        
+//        if let image = post.image {
+//            let imageItemProvider = NSItemProvider(object: image)
+//            let imageDragItem = UIDragItem(itemProvider: imageItemProvider)
+//            dragItems.append(imageDragItem)
+//        }
+//        
+//        if let text = post.text as NSString? {
+//            let textItemProvider = NSItemProvider(object: text)
+//            let textDragItem = UIDragItem(itemProvider: textItemProvider)
+//            dragItems.append(textDragItem)
+//        }
+//        
+//        return dragItems
+//    }
+//}
+//
+//extension ProfileViewController: UITableViewDropDelegate {
+//    
+//    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+//        return session.canLoadObjects(ofClass: UIImage.self) || session.canLoadObjects(ofClass: NSString.self)
+//    }
+//    
+//    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+//        return UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+//    }
+//    
+//    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+//        guard let destinationIndexPath = coordinator.destinationIndexPath else { return }
+//        
+//        let insertIndex = min(destinationIndexPath.row, PostStorage.shared.getAllPosts().count)
+//        
+//        coordinator.session.loadObjects(ofClass: UIImage.self) { items in
+//            guard let images = items as? [UIImage] else { return }
+//            
+//            coordinator.session.loadObjects(ofClass: NSString.self) { descriptionItems in
+//                
+//                guard let strings = descriptionItems as? [NSString] else { return }
+//                
+//                for (index, image) in images.enumerated() {
+//                    let description = strings.indices.contains(index) ? strings[index] as String : ""
+//                    print("Description for image \(index): \(description)")
+//                    
+//                    let newPost = Post(id: UUID().uuidString, author: "Drag&Drop", text: description, image: image, imageName: "", likes: 0, views: 0)
+//                    PostStorage.shared.addPost(newPost)
+//                }
+//                
+//                self.dataSource = PostStorage.shared.getAllPosts()
+//                
+//                let indexPathsToInsert = (0..<images.count).map { IndexPath(row: insertIndex + $0, section: 2) }
+//                tableView.insertRows(at: indexPathsToInsert, with: .automatic)
+//            }
+//        }
+//    }
+//}
 
 extension ProfileViewController: PhotosTableViewCellDelegate {
     func tapArrowClickLabel() {

@@ -34,13 +34,15 @@ class CustomTextField: UITextField {
         translatesAutoresizingMaskIntoConstraints = false
         self.placeholder = placeholder
         font = .systemFont(ofSize: fontSize, weight: .regular)
-        textColor = .black
+        textColor = ColorPalette.textColor
+        backgroundColor = .systemGray6
         autocapitalizationType = .none
         autocorrectionType = .no
         keyboardType = .default
         returnKeyType = .done
         clearButtonMode = .whileEditing
         contentVerticalAlignment = .center
+        adjustsFontSizeToFitWidth = true
         delegate = self
     }
 }

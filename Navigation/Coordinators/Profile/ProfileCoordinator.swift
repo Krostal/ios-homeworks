@@ -18,7 +18,7 @@ final class ProfileCoordinator: Coordinator {
         let profileViewController = ProfileViewController(coordinator: self)
         profileViewController.currentUser = user
         profileViewController.delegate = self
-        navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+        navigationController.tabBarItem = UITabBarItem(title: "Profile".localized, image: UIImage(systemName: "person.circle"), tag: 1)
         navigationController.setViewControllers([profileViewController], animated: true)
     }
     

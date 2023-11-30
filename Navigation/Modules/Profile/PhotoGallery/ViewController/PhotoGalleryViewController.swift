@@ -34,7 +34,7 @@ class PhotoGalleryViewController: UIViewController {
         setupLayouts()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = UIColor(named: "AccentColor")
-        photoGalleryHandler()
+//        photoGalleryHandler()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -44,7 +44,7 @@ class PhotoGalleryViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Photo Gallery"
+        title = "Photo Gallery".localized
     }
     
     private func setupCollectionView() {

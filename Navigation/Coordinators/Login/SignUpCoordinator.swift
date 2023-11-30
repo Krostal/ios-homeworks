@@ -19,7 +19,7 @@ final class SignUpCoordinator: Coordinator {
     func start() {
         let signUpViewController = SignUpViewController()
         signUpViewController.delegate = self
-        signUpViewController.title = "Sign Up"
+        signUpViewController.title = "Sign Up".localized
         navigationController.present(signUpViewController, animated: true)
     }
 }

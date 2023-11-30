@@ -20,7 +20,7 @@ final class PhotoGalleryCoordinator: Coordinator {
     func start() {
         let photoGalleryViewController = PhotoGalleryViewController()
         photoGalleryViewController.delegate = self
-        photoGalleryViewController.title = "Photo Gallery"
+        photoGalleryViewController.title = "Photo Gallery".localized
         navigationController.pushViewController(photoGalleryViewController, animated: true)
     }
 }

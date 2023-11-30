@@ -11,7 +11,6 @@ public class CustomButton: UIButton {
     init(
         title: String,
         backgroundColor: UIColor = UIColor(named: "AccentColor") ?? .systemBlue,
-        tintColor: UIColor = .white,
         cornerRadius: CGFloat = 0,
         setupButton: ((CustomButton) -> Void)? = nil,
         action: @escaping Action
@@ -20,9 +19,9 @@ public class CustomButton: UIButton {
         super.init(frame: .zero)
         
         setTitle(title, for: .normal)
-        setTitleColor(.darkText, for: .normal)
+        setTitleColor(ColorPalette.textColor, for: .normal)
         self.backgroundColor = backgroundColor
-        self.tintColor = tintColor
+        self.tintColor = ColorPalette.textColor
         self.setupButton = setupButton
         
         configureButton()

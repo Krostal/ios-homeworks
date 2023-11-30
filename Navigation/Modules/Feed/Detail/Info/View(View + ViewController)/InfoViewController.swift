@@ -40,14 +40,14 @@ class InfoViewController: UIViewController {
     
     private func showAlert() {
         let alert = UIAlertController(
-            title: "Attention!",
-            message: "Are you sure you want to delete this new?",
+            title: "Attention".localized + "!",
+            message: "Are you sure you want to delete this new".localized + "?",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { _ in
             print("The new successfully deleted")
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: { _ in
             print("Deletion canceled")
         }))
         
@@ -60,7 +60,7 @@ class InfoViewController: UIViewController {
             case .success(let jsonObject):
                 if let title = jsonObject["title"] as? String {
                     DispatchQueue.main.async {
-                        self.infoView.updateTitleLabel(text: "Exercise 1: \(title)")
+                        self.infoView.updateTitleLabel(text: title)
                     }
                 }
             case .failure(let error):
@@ -77,8 +77,10 @@ class InfoViewController: UIViewController {
                 self.planetName = planet.name
                 
                 DispatchQueue.main.async {
-                    self.infoView.updatePlanetLabel(text: "Exercise 2: Orbital Period is \(planet.orbitalPeriod) days")
-                    self.infoView.tableView.reloadData()
+                    if let orbitalPeriod = Int(planet.orbitalPeriod) {
+                        self.infoView.updatePlanetLabel(text: "Orbital Period is".localized + " " + String.localizedStringWithFormat("days".localized, orbitalPeriod))
+                        self.infoView.tableView.reloadData()
+                    }
                 }
                 
                 self.fetchResidents(residentsURLs: planet.residents)
@@ -134,7 +136,7 @@ extension InfoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let header = "Exercise 3. Residents of planet \(planetName ?? "Error"):"
+        let header = "Residents of planet".localized + " \(planetName ?? "Error".localized):"
         return header
     }
     

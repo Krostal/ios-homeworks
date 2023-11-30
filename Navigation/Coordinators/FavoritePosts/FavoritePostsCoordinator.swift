@@ -13,7 +13,7 @@ final class FavoritePostsCoordinator: Coordinator {
     
     func start() {
         let favoritePostsViewController = FavoritePostsViewController()
-        navigationController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star.fill"), tag: 2)
+        navigationController.tabBarItem = UITabBarItem(title: "Favorites".localized, image: UIImage(systemName: "star.fill"), tag: 2)
         navigationController.setViewControllers([favoritePostsViewController], animated: true)
     }
 }

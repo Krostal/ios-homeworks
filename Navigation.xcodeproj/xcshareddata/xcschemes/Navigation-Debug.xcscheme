@@ -34,9 +34,9 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09AA935B2A6BEA25005896DB"
-               BuildableName = "StorageServiceTests.xctest"
-               BlueprintName = "StorageServiceTests"
+               BlueprintIdentifier = "09B561362B0E00B7004CB839"
+               BuildableName = "NavigationTests.xctest"
+               BlueprintName = "NavigationTests"
                ReferencedContainer = "container:Navigation.xcodeproj">
             </BuildableReference>
          </TestableReference>

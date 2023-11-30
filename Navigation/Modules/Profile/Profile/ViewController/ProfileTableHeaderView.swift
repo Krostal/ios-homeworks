@@ -31,7 +31,6 @@ class ProfileTableHeaderView: UIView {
         let avatar = UIImageView()
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.layer.borderWidth = 3
-        avatar.layer.borderColor = UIColor.white.cgColor
         avatar.layer.cornerRadius = 65
         avatar.clipsToBounds = true
         avatar.contentMode = .scaleAspectFit
@@ -41,7 +40,7 @@ class ProfileTableHeaderView: UIView {
     private lazy var fullNameLabel: UILabel = {
         let fullName = UILabel()
         fullName.translatesAutoresizingMaskIntoConstraints = false
-        fullName.textColor = .black
+        fullName.textColor = ColorPalette.textColor
         fullName.font = .systemFont(ofSize: 18, weight: .bold)
         return fullName
     }()
@@ -50,7 +49,6 @@ class ProfileTableHeaderView: UIView {
         let mediaStackView = UIStackView()
         mediaStackView.translatesAutoresizingMaskIntoConstraints = false
         mediaStackView.axis = .horizontal
-//        mediaStackView.spacing = 1
         mediaStackView.alignment = .fill
         mediaStackView.distribution = .equalSpacing
         mediaStackView.addArrangedSubview(musicButton)
@@ -61,50 +59,39 @@ class ProfileTableHeaderView: UIView {
     
     private lazy var musicButton: UIButton = {
         let musicButton = UIButton(type: .system)
-        musicButton.translatesAutoresizingMaskIntoConstraints = false
-        musicButton.setImage(UIImage(systemName: "airpodsmax"), for: .normal)
-        musicButton.setTitle("Music", for: .normal)
+        configureButton(musicButton, title: "Music".localized, imageName: "airpodsmax")
         musicButton.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
-        musicButton.adjustsImageSizeForAccessibilityContentSizeCategory = true
         return musicButton
     }()
     
     private lazy var videoButton: UIButton = {
         let videoButton = UIButton(type: .system)
-        videoButton.translatesAutoresizingMaskIntoConstraints = false
-        videoButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
-        videoButton.setTitle("Video", for: .normal)
+        configureButton(videoButton, title: "Video".localized, imageName: "video.fill")
         videoButton.addTarget(self, action: #selector(videoButtonTapped), for: .touchUpInside)
-        videoButton.adjustsImageSizeForAccessibilityContentSizeCategory = true
         return videoButton
     }()
     
     private lazy var recordButton: UIButton = {
         let recordButton = UIButton(type: .system)
-        recordButton.translatesAutoresizingMaskIntoConstraints = false
-        recordButton.setImage(UIImage(systemName: "record.circle"), for: .normal)
-        recordButton.setTitle("Rec", for: .normal)
+        configureButton(recordButton, title: "Rec".localized, imageName: "record.circle")
         recordButton.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
-        recordButton.adjustsImageSizeForAccessibilityContentSizeCategory = true
         return recordButton
     }()
     
     private lazy var statusLabel: UILabel = {
         let status = UILabel()
         status.translatesAutoresizingMaskIntoConstraints = false
-        status.textColor = .gray
+        status.textColor = .systemGray
         status.font = .systemFont(ofSize: 14, weight: .regular)
         return status
     }()
     
     private lazy var statusTextField: CustomTextField = {
         let textField = CustomTextField(
-            placeholder: "Set your status",
+            placeholder: "Set your status".localized,
             fontSize: 15
         )
-        textField.backgroundColor = .white
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.cornerRadius = 12
         textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         return textField
@@ -112,14 +99,13 @@ class ProfileTableHeaderView: UIView {
     
     
     private lazy var setStatusButton = CustomButton(
-        title: "Set status",
+        title: "Set status".localized,
         backgroundColor: .systemBlue,
         cornerRadius: 14,
         setupButton: { button in
             button.layer.shadowOffset = CGSize(width: 4, height: 4)
             button.layer.shadowOpacity = 0.7
             button.layer.shadowRadius = 4
-            button.layer.shadowColor = UIColor.black.cgColor
         },
         action: { [weak self] in
             if let newStatus = self?.statusTextField.text {
@@ -133,10 +119,16 @@ class ProfileTableHeaderView: UIView {
     private lazy var avatarOriginPoint = CGPoint()
     private lazy var newStatus = ""
     
-    override var intrinsicContentSize: CGSize {
-        CGSize(width: frame.width, height: 220.0)
+    func configureButton(_ button: UIButton, title: String, imageName: String) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: imageName), for: .normal)
+        button.setTitle(title.localized, for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.5
+        button.imageView?.contentMode = .scaleAspectFit
+        button.adjustsImageSizeForAccessibilityContentSizeCategory = true
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
@@ -147,7 +139,21 @@ class ProfileTableHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var intrinsicContentSize: CGSize {
+        CGSize(width: frame.width, height: 220.0)
+    }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+       if #available(iOS 13.0, *) {
+           if (traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection)) {
+               avatarImageView.layer.borderColor = ColorPalette.borderColor.cgColor
+               setStatusButton.layer.shadowColor = ColorPalette.shadowColor.cgColor
+               statusTextField.layer.borderColor = ColorPalette.borderColor.cgColor
+
+           }
+       }
+    }
+
     private func setupConstraints() {
         
         let safeAreaGuide = safeAreaLayoutGuide
@@ -190,6 +196,9 @@ class ProfileTableHeaderView: UIView {
             setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -Constants.horizontalPadding),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
+        musicButton.widthAnchor.constraint(equalTo: videoButton.widthAnchor).isActive = true
+        videoButton.widthAnchor.constraint(equalTo: recordButton.widthAnchor).isActive = true
         
     }
     
@@ -285,7 +294,7 @@ class ProfileTableHeaderView: UIView {
             self.avatarImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.width / 2
             self.avatarImageView.layer.borderWidth = 3
-            self.avatarImageView.layer.borderColor = UIColor.white.cgColor
+            self.avatarImageView.layer.borderColor = ColorPalette.borderColor.cgColor
             self.avatarBackground.alpha = 0
         } completion: { _ in
             ProfileViewController.tableView.isScrollEnabled = true

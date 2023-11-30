@@ -38,7 +38,7 @@ class PostTableViewCell: UITableViewCell {
         let postImage = UIImageView()
         postImage.translatesAutoresizingMaskIntoConstraints = false
         postImage.contentMode = .scaleAspectFit
-        postImage.backgroundColor = .black
+        postImage.backgroundColor = ColorPalette.profileBackgroundColor
         return postImage
     }()
     
@@ -164,8 +164,8 @@ class PostTableViewCell: UITableViewCell {
     }
         
     private func updateLikesAndViews() {
-        postLikes.text = "Likes: \(currentLikes)"
-        postViews.text = "Views: \(currentViews)"
+        postLikes.text = String.localizedStringWithFormat("Likes".localized, currentLikes)
+        postViews.text = String.localizedStringWithFormat("Views".localized, currentViews)
     }
     
     func stopTimer() {
@@ -175,7 +175,7 @@ class PostTableViewCell: UITableViewCell {
     
     func configure(_ post: Post) {
         postAuthor.text = post.author
-        postImage.image = UIImage(named: post.image)
+        postImage.image = post.image
         postDescription.text = post.text
         currentLikes = post.likes
         currentViews = post.views

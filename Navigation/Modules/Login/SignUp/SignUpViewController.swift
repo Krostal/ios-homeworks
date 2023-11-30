@@ -83,15 +83,15 @@ extension SignUpViewController: SignUpViewDelegate {
             guard let self else { return }
             switch result {
             case .success(_):
-                Alert().showAlert(on: self, title: "Success ✅", message: "User '\(username)' successfully registered") {
+                Alert().showAlert(on: self, title: "Success".localized + " ✅", message: "User".localized + " \(username) " + "successfully registered".localized) {
                     self.dismiss(animated: true)
                 }
             case .failure(let error):
                 if username.isEmpty {
-                    Alert().showAlert(on: self, title: "Error ❌", message: "Username is empty")
+                    Alert().showAlert(on: self, title: "Error".localized + " ❌", message: "Username is empty".localized)
                 } else {
-                    Alert().showAlert(on: self, title: "Error ❌", message: error.errorDescription)
-                    print("❌", error.errorDescription)
+                    Alert().showAlert(on: self, title: "Error".localized + " ❌", message: error.localizedDescription)
+                    print("❌", error.localizedDescription)
                 }
             }
         }

@@ -3,10 +3,10 @@ import Foundation
 
 final class FeedViewModel {
     
-    private let feedModel: FeedModel
-    private let feedCoordinator: FeedCoordinator
+    private let feedModel: FeedModelProtocol
+    private let feedCoordinator: FeedCoordinatorProtocol
     
-    init(model: FeedModel, coordinator: FeedCoordinator) {
+    init(model: FeedModelProtocol, coordinator: FeedCoordinatorProtocol) {
         self.feedModel = model
         self.feedCoordinator = coordinator
     }
@@ -23,11 +23,11 @@ final class FeedViewModel {
                 case .isEmpty:
                     message = "Please enter the secret word"
                 case .incorrect:
-                    message = "Incorrect!"
+                    message = "Incorrect".localized + "!"
                 }
             }
+            completion(message)
         }
-        completion(message)
     }
     
     func buttonTapped() {

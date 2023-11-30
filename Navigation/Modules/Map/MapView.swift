@@ -22,9 +22,9 @@ final class CustomMapView: MKMapView {
     private lazy var segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl()
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentControl.insertSegment(withTitle: "Standard", at: 0, animated: true)
-        segmentControl.insertSegment(withTitle: "Satelite", at: 1, animated: true)
-        segmentControl.insertSegment(withTitle: "Hybrid", at: 2, animated: true)
+        segmentControl.insertSegment(withTitle: "Standard".localized, at: 0, animated: true)
+        segmentControl.insertSegment(withTitle: "Satelite".localized, at: 1, animated: true)
+        segmentControl.insertSegment(withTitle: "Hybrid".localized, at: 2, animated: true)
         segmentControl.addTarget(self, action: #selector(mapTypeChanged(_:)), for: .valueChanged)
         return segmentControl
     }()
@@ -32,9 +32,9 @@ final class CustomMapView: MKMapView {
     private lazy var locationButton: UIButton = {
         let locationButton = UIButton(type: .system)
         locationButton.translatesAutoresizingMaskIntoConstraints = false
-        locationButton.setTitle("Find me", for: .normal)
+        locationButton.setTitle("Find me".localized, for: .normal)
         locationButton.setImage(UIImage(systemName: "location.fill"), for: .normal)
-        locationButton.tintColor = .black
+        locationButton.tintColor = ColorPalette.textColor
         locationButton.addTarget(self, action: #selector(getCurrentLocation), for: .touchUpInside)
         return locationButton
     }()
@@ -42,9 +42,9 @@ final class CustomMapView: MKMapView {
     lazy var routeButton: UIButton = {
         let routeButton = UIButton(type: .system)
         routeButton.translatesAutoresizingMaskIntoConstraints = false
-        routeButton.setTitle("Build the Route", for: .normal)
+        routeButton.setTitle("Build the Route".localized, for: .normal)
         routeButton.setImage(UIImage(systemName: "point.bottomleft.forward.to.arrowtriangle.uturn.scurvepath"), for: .normal)
-        routeButton.tintColor = .black
+        routeButton.tintColor = ColorPalette.textColor
         routeButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         routeButton.isHidden = true
         return routeButton

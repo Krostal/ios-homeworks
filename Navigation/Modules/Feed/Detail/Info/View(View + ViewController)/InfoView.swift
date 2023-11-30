@@ -16,7 +16,7 @@ final class InfoView: UIView {
     
     lazy var buttonDelete: CustomButton = {
         let button = CustomButton(
-            title: "Delete this new",
+            title: "Delete this new".localized,
             backgroundColor: .systemCyan,
             action: { [weak self] in
                 self?.showAlert()
@@ -38,8 +38,8 @@ final class InfoView: UIView {
         let planetLabel = UILabel()
         planetLabel.translatesAutoresizingMaskIntoConstraints = false
         planetLabel.textAlignment = .center
-        planetLabel.textColor = .black
-        planetLabel.backgroundColor = .systemBlue
+        planetLabel.textColor = ColorPalette.labelColor
+        planetLabel.backgroundColor = ColorPalette.textColor
         planetLabel.numberOfLines = 0
         return planetLabel
     }()
@@ -64,7 +64,7 @@ final class InfoView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .systemGray
+        backgroundColor = ColorPalette.feedViewBackgroundColor
     }
     
     private func addSubviews() {
@@ -75,7 +75,7 @@ final class InfoView: UIView {
     }
     
     private func setupTableView() {
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = ColorPalette.feedViewBackgroundColor
         tableView.separatorInset = UIEdgeInsets(
             top: Constants.spacing,
             left: Constants.spacing,

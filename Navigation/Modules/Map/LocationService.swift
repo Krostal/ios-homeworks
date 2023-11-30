@@ -35,7 +35,7 @@ extension LocationService: CLLocationManagerDelegate {
         case .denied, .restricted, .notDetermined:
             isLocationAuthorized = false
         @unknown default:
-            fatalError("Неизвестный статус разрешения использования местоположения")
+            fatalError("Location permission status unknown")
         }
     }
 }
